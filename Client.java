@@ -1,6 +1,6 @@
 import java.rmi.registry.LocateRegistry; 
 import java.rmi.registry.Registry;  
-//mod2
+//mod333
 public class Client {  
 	
    private Client() {}  
