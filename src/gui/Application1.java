@@ -2,16 +2,16 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-class MyFrame extends JFrame
+class MyFrame1 extends JFrame
 {
 	JButton uno=new JButton("Uno");
 	JButton due=new JButton("Due");
 	JButton tre=new JButton("Tre");
 	JButton quattro=new JButton("Quattro");
 	JButton cinque = new JButton("Cinque");
-	public MyFrame()
+	public MyFrame1()
 	{
-		super("Flow√Layout");
+		super("Flow Layout");
 		Container c = this.getContentPane();
 		c.setLayout(new FlowLayout());
 		c.add(uno);
@@ -27,6 +27,6 @@ public class Application1
 {
 	public static void main(String args[])
 	{
-		MyFrame MyFrame = new MyFrame();
+		MyFrame1 MyFrame = new MyFrame1();
 	}
 }
