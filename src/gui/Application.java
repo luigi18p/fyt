@@ -18,7 +18,6 @@ public class Application
 		win.setVisible(true); //permette di visualizzare e di nascondere la finestra
 
 		Container c = win.getContentPane();
-		Container c1 = win.getContentPane();
 		c.add(new JLabel("Buona Lezione"));
 		
 	}
