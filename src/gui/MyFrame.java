@@ -44,6 +44,25 @@ class MyFrameGL extends JFrame
 	}
 }
 
+//classe frame creata utilizzando un Bolder Layout
+class MyFrameBL extends JFrame
+{
+	JButton nord = new JButton("Nord");
+	JButton centro = new JButton("Centro");
+	JButton ovest=new JButton("Ovest");
+	public MyFrameBL()
+	{
+		super("Border Layout");
+		Container c = this.getContentPane();
+		c.setLayout(new BorderLayout());
+		c.add(nord,BorderLayout.NORTH);
+		c.add(centro,BorderLayout.CENTER);
+		c.add(ovest,BorderLayout.WEST);
+		setSize(300,300);
+		setVisible(true);
+	}
+}
+
 class RadioDemo1 extends JFrame {
     //========================================================== constructor
     RadioDemo1() {
@@ -72,12 +91,43 @@ class RadioDemo1 extends JFrame {
         setContentPane(radioPanel);  // Button panel is only content.
         pack();                      // Layout window.
         
+        //setSize(300,300);
+		setVisible(true);
+    }
+}
+
+class checkBox extends JFrame {
+    //========================================================== constructor
+    public checkBox() {
+        //... Create the buttons.
+    	JCheckBox check1=new JCheckBox("JCheck1");
+    	JCheckBox check2=new JCheckBox("JCheck2");
+    	JCheckBox check3=new JCheckBox("JCheck3");
+    	JCheckBox check4=new JCheckBox("JCheck4");
+    	JCheckBox check5=new JCheckBox("JCheck5");
+        
+        //... Arrange buttons vertically in a panel
+        JPanel radioPanel = new JPanel();
+        //radioPanel.setLayout(new GridLayout(3, 1));
+        radioPanel.setLayout(new FlowLayout());
+        radioPanel.add(check1);
+        radioPanel.add(check2);
+        radioPanel.add(check3);
+        
+        //... Add a titled border to the button panel.
+        radioPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Seleziona piu campi"));
+
+        //... Set window attributes.
+        setContentPane(radioPanel);  // Button panel is only content.
+        pack();                      // Layout window.
+        
         setSize(300,300);
 		setVisible(true);
     }
 }
-		
-public class Application1
+
+	
+public class MyFrame
 {
 	public static void main(String args[])
 	{
@@ -85,7 +135,14 @@ public class Application1
 		MyFrameGL MyFrameGL = new MyFrameGL();
 		MyFrameGL.setLocation(200,200);
 		RadioDemo1 RadioDemo1 = new RadioDemo1();
-		RadioDemo1.setTitle("CheckBox");
+		RadioDemo1.setTitle("RadioButton");
 		RadioDemo1.setLocation(500,200);
+		
+		checkBox checkBox = new checkBox();
+		checkBox.setTitle("checkBox");
+		checkBox.setLocation(700,200);
+		
+		MyFrameBL MyFrameBL=new MyFrameBL();
+		MyFrameBL.setLocation(800, 0);
 	}
 }

@@ -2,10 +2,10 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-class MyFrame extends JFrame
+class MyFrame1 extends JFrame
 {
 	JLabel jl = new JLabel("Buona Lezione");
-	public MyFrame()	//costruttore
+	public MyFrame1()	//costruttore
 	{
 		super("Prima finestra");	//titolo della finestra
 		Container c = this.getContentPane();
@@ -20,6 +20,6 @@ public class Application
 {
 	public static void main(String args[])
 	{
-		MyFrame frame1 = new MyFrame();
+		MyFrame1 frame1 = new MyFrame1();
 	}
 }
