@@ -105,6 +105,8 @@ class checkBox extends JFrame {
     	JCheckBox check3=new JCheckBox("JCheck3");
     	JCheckBox check4=new JCheckBox("JCheck4");
     	JCheckBox check5=new JCheckBox("JCheck5");
+    	//per sapere lo stato di una casella utilizziamo il seguente comendo 
+    	//boolean isSelected();
         
         //... Arrange buttons vertically in a panel
         JPanel radioPanel = new JPanel();
@@ -126,6 +128,26 @@ class checkBox extends JFrame {
     }
 }
 
+class MyFrameMENU extends JFrame {
+	JMenuBar bar = new JMenuBar();
+	JMenu fileMenu = new JMenu("File");
+	JMenu editMenu = new JMenu("Edit");
+	JMenu moveMenu = new JMenu("Move");
+	public MyFrameMENU() {
+
+		setJMenuBar(bar);
+		bar.add(fileMenu);
+		bar.add(editMenu);
+		editMenu.add(moveMenu);
+		editMenu.add(new JMenuItem("Random"));
+		moveMenu.add(new JMenuItem("Up"));
+		moveMenu.add(new JMenuItem("Down"));
+		
+	    setSize(300,300);
+		setVisible(true);
+		setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+	}
+}
 	
 public class Application1
 {
@@ -144,5 +166,7 @@ public class Application1
 		
 		MyFrameBL MyFrameBL=new MyFrameBL();
 		MyFrameBL.setLocation(800, 0);
+		
+		MyFrameMENU MyFrameMENU = new MyFrameMENU();
 	}
 }
