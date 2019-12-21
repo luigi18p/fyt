@@ -5,6 +5,7 @@ import java.awt.*;
 public class checkbox {
 	public static void main(String args[])
 		{
+		//_____________________________________________________________________________JcheckBox
 			JFrame win;
 			win = new JFrame("Esempio di button");
 			Container c = win.getContentPane();
