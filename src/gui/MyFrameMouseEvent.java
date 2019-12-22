@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.swing.*;
+
 class MouseSpy implements MouseListener
 {
 	public void mouseClicked(MouseEvent e) {
