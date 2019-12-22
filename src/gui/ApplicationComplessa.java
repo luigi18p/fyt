@@ -124,7 +124,7 @@ public class ApplicationComplessa
 		FrameComplesso.setSize(400, 400);
 		
 		FrameComplesso2 FrameComplesso2 = new FrameComplesso2();
-		//FrameComplesso.setTitle("calcolatrice");
+		//FrameComplesso.setTitle("selezionare");
 		FrameComplesso2.setSize(230, 230);
 		
 	}
