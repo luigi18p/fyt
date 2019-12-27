@@ -10,13 +10,6 @@ class FrameComplesso extends JFrame{
 	JPanel centroPnl = new JPanel();
 	JPanel sudPnl = new JPanel();
 
-	JButton btn1 = new JButton("1");
-	JButton btn2 = new JButton("2");
-	JButton btn3 = new JButton("3");
-	JButton btn4 = new JButton("4");
-	JButton btn5 = new JButton("5");
-	JButton btn6 = new JButton("6");
-	
 	JButton calcola = new JButton("calcola");
 	JButton annulla = new JButton("annulla");
 	
@@ -122,6 +115,9 @@ public class ApplicationComplessa
 		FrameComplesso FrameComplesso = new FrameComplesso();
 		FrameComplesso.setTitle("calcolatrice");
 		FrameComplesso.setSize(400, 400);
+		
+		//SOLO CHECKBOX SENZA MENU
+		//FrameComplesso1 FrameComplesso1 = new FrameComplesso1();
 		
 		FrameComplesso2 FrameComplesso2 = new FrameComplesso2();
 		//FrameComplesso.setTitle("selezionare");

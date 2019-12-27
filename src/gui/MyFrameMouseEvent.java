@@ -22,7 +22,7 @@ class MouseSpy implements MouseListener
 		("Rilasciato su ("+e.getX()+","+e.getY()+")");
 	}
 	// La ragione per cui `e stata comunque dichiarata la gestione di tali eventi (mouseEntered, mouseExited) 
-	// `e legata al linguaggio Java: affinch´e una classe implementi una interfaccia, tale classe deve implentare
+	// `e legata al linguaggio Java: affinche una classe implementi una interfaccia, tale classe deve implentare
 	// tutti i metodi dell’interfaccia.
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
@@ -60,7 +60,9 @@ class Ascoltatore implements ActionListener
 	}
 }
 
-// ho copiato il FrameComplesso2 e ho aggiunto l'ActionListener
+// ho copiato il FrameComplesso2 e MOFICIATO aggiungendo l'ActionListener
+//	QUESTO METODO è STATO REALIZZATO CON L'USO DI UNA CLASSE INTERNA MA è POCO LEGGIBILE QUINDI USATO PER PICCOLE COSE
+//	SI PREFERISCE IL METODO CON CLASSE ESTERNA (MYFRAMEMOUSEEVENT2)
 class FrameComplesso3 extends JFrame
 {
 	JPanel nordPnl = new JPanel();
