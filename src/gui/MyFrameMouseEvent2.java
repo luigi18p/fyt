@@ -8,6 +8,10 @@ import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.swing.*;
 
+//creare una classe “ascoltatore” per ogni oggetto e per ogni classe di eventi da gestire per quello oggetto.
+// NON SI USA QUESTO MOTODO
+//VEDI MYFRAME_EVENTFINALE
+
 class FrameComplesso4 extends JFrame {
 	JPanel centro = new JPanel();
 	JPanel sud = new JPanel();
@@ -34,13 +38,13 @@ class FrameComplesso4 extends JFrame {
 }
 
 class Listen implements ActionListener {
-	FrameComplesso4 frame;
+	FrameComplesso4 finestra;
 	
 	public Listen(FrameComplesso4 aFrame)
-	{ frame = aFrame; }
+	{ finestra = aFrame; }
 	
 	public void actionPerformed(ActionEvent e) {
-		JTextField text = frame.txt;
+		JTextField text = finestra.txt;
 		JOptionPane.showMessageDialog(
 		null,text.getText());
 	}
