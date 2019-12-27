@@ -1,6 +1,6 @@
 import java.rmi.registry.LocateRegistry; 
 import java.rmi.registry.Registry;  
-
+//db version
 public class Client {  
 	
    private Client() {}  
