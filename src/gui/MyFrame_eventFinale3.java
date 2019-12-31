@@ -58,7 +58,7 @@ class Listener implements ActionListener
 	{ System.out.println("downOpt"); }
 }
 
-public class MyFrame_eventFinale {
+public class MyFrame_eventFinale3 {
 	
 	public static void main(String args[])
 	{

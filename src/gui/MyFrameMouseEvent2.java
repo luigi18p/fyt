@@ -45,8 +45,7 @@ class Listen implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		JTextField text = finestra.txt;
-		JOptionPane.showMessageDialog(
-		null,text.getText());
+		JOptionPane.showMessageDialog(null,text.getText());
 	}
 }
 
