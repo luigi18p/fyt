@@ -1,5 +1,5 @@
 //listato 14
-package gui;
+package learning;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

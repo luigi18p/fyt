@@ -1,4 +1,4 @@
-package gui;
+package learning;
 
 import java.awt.*;
 import java.awt.event.*;

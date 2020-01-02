@@ -1,4 +1,4 @@
-package gui;
+package learning;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package gui;
+package learning;
 import java.sql.*;
 
 public class ConnessioneMysql {
