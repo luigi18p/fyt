@@ -26,7 +26,7 @@ public class UtenteDAO {
     	ResultSet result = null;
     	
     	try {
-    		conn = ConnessioneDB.createConnection();
+    		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(READ_ALL_QUERY);
     		preparedStatement.execute();
     		result = preparedStatement.getResultSet();

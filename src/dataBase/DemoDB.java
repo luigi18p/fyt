@@ -1,6 +1,12 @@
 package dataBase;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Date;
+import java.text.DateFormat;
+import java.time.LocalDate;
+
+
 
 public class DemoDB {
 
@@ -13,6 +19,12 @@ public class DemoDB {
 		for(Utente u : listaUtenti) {
 			System.out.format("%s, %s\n",u.getNome(),u.getCognome());
 		}
+		
+		
+		
+	
 	}
 
 }
+
+
