@@ -1,6 +1,7 @@
 package dataBase;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class Utente {
 
@@ -9,10 +10,10 @@ public class Utente {
 	private String email;
 	private String password;
 	private Date dataNascita;
-	private int cellulare;
+	private double cellulare;
 	private String username;
 	
-	public Utente(String nome,String cognome,String email,String password,Date dataNascita,int cellulare,String username) {
+	public Utente(String nome,String cognome,String email,String password,Date dataNascita,double cellulare,String username) {
 		super();
 		this.nome=nome;
 		this.cognome=cognome;
@@ -63,11 +64,11 @@ public class Utente {
 		this.dataNascita = dataNascita;
 	}
 
-	public int getCellulare() {
+	public double getCellulare() {
 		return cellulare;
 	}
 
-	public void setCellulare(int cellulare) {
+	public void setCellulare(double cellulare) {
 		this.cellulare = cellulare;
 	}
 
