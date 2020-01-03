@@ -28,7 +28,7 @@ public class UtenteDAO {
     	ResultSet result = null;
     	
     	try {
-    		conn = ConnessioneDB.createConnection();
+    		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(READ_ALL_QUERY);
     		preparedStatement.execute();
     		result = preparedStatement.getResultSet();
@@ -58,7 +58,7 @@ public class UtenteDAO {
     	ResultSet result = null;
 
     	try {
-    		conn = ConnessioneDB.createConnection();
+    		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, u.getNome());
             preparedStatement.setString(2, u.getCognome());
@@ -106,7 +106,7 @@ public class UtenteDAO {
     	ResultSet result = null;
 
     	try {
-    		conn = ConnessioneDB.createConnection();
+    		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(UPDATE_QUERY, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, u.getNome());
             preparedStatement.setString(2, u.getCognome());
@@ -151,7 +151,7 @@ public class UtenteDAO {
 		Connection conn = null;
         PreparedStatement preparedStatement = null;
         try {
-        	conn = ConnessioneDB.createConnection();
+        	conn = DBManager.createConnection();
             preparedStatement = conn.prepareStatement(DELETE_QUERY);
             preparedStatement.setString(1, u.getUsername());
             preparedStatement.execute();
@@ -180,7 +180,7 @@ public Utente getUtente(String username) {
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
         try {
-            conn = ConnessioneDB.createConnection();
+            conn = DBManager.createConnection();
             preparedStatement = conn.prepareStatement(READ_QUERY);
             preparedStatement.setString(1, username);
             preparedStatement.execute();

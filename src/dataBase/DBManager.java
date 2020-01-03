@@ -1,7 +1,7 @@
 package dataBase;
 import java.sql.*;
 
-public class ConnessioneDB {
+public class DBManager {
 				
 		public static Connection createConnection() {
 			Connection conn=null;
