@@ -6,9 +6,6 @@ import java.util.Locale;
 import java.text.DateFormat;
 import java.time.LocalDate;
 
-//post merge
-//15.00
-
 public class DemoDB {
 
 	public static void main(String[] args) {
