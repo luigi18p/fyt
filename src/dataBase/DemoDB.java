@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import domain.Utente;
+import domain.Profilo;
 
 import java.text.DateFormat;
 import java.time.LocalDate;
@@ -45,10 +46,20 @@ public class DemoDB {
 */	
 /*		TEST RICHIESTA INFORMAZIONI UTENTE DATO L'USERNAME
 		Utente u;
-		u=utenteDAO.getUtente(listaUtenti.get(1).getUsername());
+		u=utenteDAO.readUtente(listaUtenti.get(1).getUsername());
 		System.out.print(u.getCellulare());
 */
-
+/*		System.out.println(listaUtenti.get(1).getUsername());
+		Profilo p;
+		ProfiloDAO profiloDAO = new ProfiloDAO();
+		p=profiloDAO.readProfilo(listaUtenti.get(1).getUsername());
+		System.out.print(p.getnVisite());
+*/
+/*		//CREATEPROFILO FUNZIONA E VA UTILIZZATO NEL CONTROLLORE
+		Profilo p=new Profilo("leomessi");
+		ProfiloDAO profiloDAO = new ProfiloDAO();
+		profiloDAO.createProfilo(p);
+*/
 	}
 
 }

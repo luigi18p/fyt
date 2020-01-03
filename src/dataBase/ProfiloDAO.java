@@ -9,61 +9,18 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.List;
 
+import domain.Profilo;
 import domain.Utente;
 
-public class UtenteDAO {
+public class ProfiloDAO {
+	
+	private static final String CREATE_QUERY = "INSERT INTO profilo (username,totaleBigliettiInVendita,mediaFeedback,nVisite) VALUES (?,?,?,?)";
+    private static final String READ_QUERY = "SELECT username,totaleBigliettiInVendita,mediaFeedback,nVisite FROM profilo WHERE username = ?";
+    //private static final String READ_ALL_QUERY = "SELECT * FROM utente";
+    private static final String UPDATE_QUERY = "UPDATE profilo SET totaleBigliettiInVendita=?,mediaFeedback=?,nVisite=? WHERE username = ?";
+    private static final String DELETE_QUERY = "DELETE FROM profilo WHERE username = ?";
 
-    private static final String CREATE_QUERY = "INSERT INTO utente (nome,cognome,email,password,dataNascita,cellulare,username) VALUES (?,?,?,?,?,?,?)";
-    private static final String READ_QUERY = "SELECT nome,cognome,email,password,dataNascita,cellulare,username FROM utente WHERE username = ?";
-    private static final String READ_ALL_QUERY = "SELECT * FROM utente";
-    private static final String UPDATE_QUERY = "UPDATE utente SET nome=?,cognome=?,email=?,password=?,dataNascita=?,cellulare=? WHERE username = ?";
-    private static final String DELETE_QUERY = "DELETE FROM utente WHERE username = ?";
-    
-    //da eliminare getallutenti
-    public List getAllUtenti() {
-    	
-    	List<Utente> listaUtenti = new ArrayList<Utente>();
-    	Utente utente = null;
-    	Connection conn = null;
-    	PreparedStatement preparedStatement = null;
-    	ResultSet result = null;
-    	
-    	try {
-    		conn = DBManager.createConnection();
-    		preparedStatement = conn.prepareStatement(READ_ALL_QUERY);
-    		preparedStatement.execute();
-    		result = preparedStatement.getResultSet();
-    		while (result.next() == true) {
-    			utente = new Utente(result.getString(1),result.getString(2),result.getString(3),result.getString(4),result.getDate(5),result.getDouble(6),result.getString(7));
-    			
-    			listaUtenti.add(utente);
-    			//System.out.println(utente.getCognome());
-    		}
-    	} catch (SQLException e) {
-    		e.printStackTrace();
-    	} finally {
-            try {
-                result.close();
-            } catch (Exception rse) {
-                rse.printStackTrace();
-            }
-            try {
-                preparedStatement.close();
-            } catch (Exception sse) {
-                sse.printStackTrace();
-            }
-            try {
-                conn.close();
-            } catch (Exception cse) {
-                cse.printStackTrace();
-            }
-        }
-    	
-		return listaUtenti;
-    	
-    }
-    
-    public int createUtente(Utente u) {
+    public int createProfilo(Profilo p) {
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
     	ResultSet result = null;
@@ -71,13 +28,10 @@ public class UtenteDAO {
     	try {
     		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, u.getNome());
-            preparedStatement.setString(2, u.getCognome());
-            preparedStatement.setString(3, u.getEmail());
-            preparedStatement.setString(4, u.getPassword());
-            preparedStatement.setDate(5,  u.getDataNascita());
-            preparedStatement.setDouble(6, u.getCellulare());
-            preparedStatement.setString(7, u.getUsername());
+            preparedStatement.setString(1, p.getUsername());
+            preparedStatement.setInt(2, p.getTotaleBigliettiInVendita());
+            preparedStatement.setInt(3, p.getMediaFeedback());
+            preparedStatement.setInt(4, p.getnVisite());
             
             preparedStatement.execute();
             result = preparedStatement.getGeneratedKeys();
@@ -108,10 +62,10 @@ public class UtenteDAO {
         }
     }
 		return 0;
-		
+    	
     }
-
-    public int updateUtente(Utente u) {
+    
+    public int updateProfilo(Profilo p) {
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
     	ResultSet result = null;
@@ -119,13 +73,10 @@ public class UtenteDAO {
     	try {
     		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(UPDATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, u.getNome());
-            preparedStatement.setString(2, u.getCognome());
-            preparedStatement.setString(3, u.getEmail());
-            preparedStatement.setString(4, u.getPassword());
-            preparedStatement.setDate(5,  u.getDataNascita());
-            preparedStatement.setDouble(6, u.getCellulare());
-            preparedStatement.setString(7, u.getUsername());
+            preparedStatement.setInt(1, p.getTotaleBigliettiInVendita());
+            preparedStatement.setInt(2, p.getMediaFeedback());
+            preparedStatement.setInt(3, p.getnVisite());
+            preparedStatement.setString(4, p.getUsername());
             
             preparedStatement.execute();
             result = preparedStatement.getGeneratedKeys();
@@ -156,15 +107,16 @@ public class UtenteDAO {
         }
     }
 		return 0;
+    	
     }
     
-    public boolean deleteUtente(Utente u) {
-		Connection conn = null;
+    public boolean deleteProfilo(Profilo p) {
+    	Connection conn = null;
         PreparedStatement preparedStatement = null;
         try {
         	conn = DBManager.createConnection();
             preparedStatement = conn.prepareStatement(DELETE_QUERY);
-            preparedStatement.setString(1, u.getUsername());
+            preparedStatement.setString(1, p.getUsername());
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
@@ -182,11 +134,11 @@ public class UtenteDAO {
             }
         }
         return false;
-	}
-
-    public Utente readUtente(String username) {
-		
-		Utente u= null;
+    	
+    }
+    
+    public Profilo readProfilo(String username) {
+    	Profilo p= null;
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
@@ -198,7 +150,7 @@ public class UtenteDAO {
             result = preparedStatement.getResultSet();
  
             if (result.next() && result != null) {
-                u = new Utente(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getDate(5),result.getDouble(6),username);
+                p = new Profilo(username,result.getInt(2), result.getInt(3), result.getInt(4));
             } 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -220,6 +172,8 @@ public class UtenteDAO {
             }
         }
  
-        return u;
-	}
+        return p;
+    	
+    }
 }
+
