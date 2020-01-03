@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Date;
 
-public class biglietto {
+public class Biglietto {
 	
 	
 	private String nominativo;
@@ -14,7 +14,7 @@ public class biglietto {
 	private int numeroDiPosti;
 	private int idBiglietto;
 
-	public biglietto(String nominativo, Date dataAndata, Date dataRitorno, Boolean tipologiaAR, String tipoTrasporto,
+	public Biglietto(String nominativo, Date dataAndata, Date dataRitorno, Boolean tipologiaAR, String tipoTrasporto,
 			float prezzoAcquisto, int numeroDiPosti, int idBiglietto) {
 		super();
 		this.nominativo = nominativo;
