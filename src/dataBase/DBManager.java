@@ -1,7 +1,10 @@
 package dataBase;
 import java.sql.*;
 
+
 public class DBManager extends ConnectionFactory{
+
+
 				
 		public static Connection createConnection() {
 			Connection conn=null;
