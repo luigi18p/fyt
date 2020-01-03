@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.List;
 
+import domain.Utente;
+
 public class UtenteDAO {
 
     private static final String CREATE_QUERY = "INSERT INTO utente (nome,cognome,email,password,dataNascita,cellulare,username) VALUES (?,?,?,?,?,?,?)";
