@@ -2,6 +2,12 @@ package dataBase;
 import java.time.LocalDate;
 import java.sql.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Date;
+import java.text.DateFormat;
+import java.time.LocalDate;
+
+
 
 public class DemoDB {
 
@@ -20,7 +26,7 @@ public class DemoDB {
 		Utente u= new Utente("leo","messi","lmessi@gmail.com","aaaa",date,308952845,"leomessi");
 		utenteDAO.createUtente(u);
 */		
-/*		TEST MODIFICA PARAMENTI AD ECCEZIONE DELL'USERNAME CHE è CHIAVE ED è FISSA
+/*		TEST MODIFICA PARAMENTI AD ECCEZIONE DELL'USERNAME CHE Ã¨ CHIAVE ED Ã¨ FISSA
  * 		listaUtenti.get(0).setNome("michele");
 		utenteDAO.updateUtente(listaUtenti.get(0));
 		listaUtenti = utenteDAO.getAllUtenti();
@@ -35,12 +41,16 @@ public class DemoDB {
 		for(Utente u : listaUtenti) {
 			System.out.format("%s, %s, %s\n",u.getNome(),u.getCognome(),u.getDataNascita());
 		}
+
 */	
 /*		TEST RICHIESTA INFORMAZIONI UTENTE DATO L'USERNAME
 		Utente u;
 		u=utenteDAO.getUtente(listaUtenti.get(1).getUsername());
 		System.out.print(u.getCellulare());
 */
+
 	}
 
 }
+
+
