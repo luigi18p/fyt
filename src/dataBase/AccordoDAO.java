@@ -1,26 +1,22 @@
 package dataBase;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.time.LocalDate;
-import java.util.List;
 
-import domain.Profilo;
-import domain.Utente;
+import domain.Accordo;
 
-public class ProfiloDAO {
+public class AccordoDAO {
 	
-	private static final String CREATE_QUERY = "INSERT INTO profilo (username,totaleBigliettiInVendita,mediaFeedback,nVisite) VALUES (?,?,?,?)";
-    private static final String READ_QUERY = "SELECT username,totaleBigliettiInVendita,mediaFeedback,nVisite FROM profilo WHERE username = ?";
-    //private static final String READ_ALL_QUERY = "SELECT * FROM utente";
-    private static final String UPDATE_QUERY = "UPDATE profilo SET totaleBigliettiInVendita=?,mediaFeedback=?,nVisite=? WHERE username = ?";
-    private static final String DELETE_QUERY = "DELETE FROM profilo WHERE username = ?";
+    private static final String CREATE_QUERY = "INSERT INTO accordo (usernameVenditore,idBiglietto,dataAccordo,usernameAcquirente,descrizioneV,descrizioneA,stelleV,stelleA) VALUES (?,?,?,?,?,?,?,?)";
+    private static final String READ_QUERY = "SELECT usernameVenditore,idBiglietto,dataAccordo,usernameAcquirente,descrizioneV,descrizioneA,stelleV,stelleA FROM accordo WHERE idBiglietto = ?";
+    private static final String UPDATE_QUERY = "UPDATE accordo SET usernameVenditore=?,idBiglietto=?,dataAccordo=?,usernameAcquirente=?,descrizioneV=?,descrizioneA=?,stelleV=?,stelleA=? WHERE idBiglietto = ?";
+    private static final String DELETE_QUERY = "DELETE FROM accordo WHERE idBiglietto = ?";
 
-    public int createProfilo(Profilo p) {
+    public int createAccordo(Accordo a) {
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
     	ResultSet result = null;
@@ -28,10 +24,14 @@ public class ProfiloDAO {
     	try {
     		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, p.getUsername());
-            preparedStatement.setInt(2, p.getTotaleBigliettiInVendita());
-            preparedStatement.setInt(3, p.getMediaFeedback());
-            preparedStatement.setInt(4, p.getnVisite());
+            preparedStatement.setString(1, a.getUsernameVenditore());
+            preparedStatement.setInt(2, a.getIdBiglietto());
+            preparedStatement.setDate(3, a.getDataAccordo());
+            preparedStatement.setString(4, a.getUsernameAcquirente());
+            preparedStatement.setString(5,  a.getDescrizioneV());
+            preparedStatement.setString(6,  a.getDescrizioneA());
+            preparedStatement.setInt(7,  a.getStelleV());
+            preparedStatement.setInt(8,  a.getStelleA());
             
             preparedStatement.execute();
             result = preparedStatement.getGeneratedKeys();
@@ -62,10 +62,10 @@ public class ProfiloDAO {
         }
     }
 		return 0;
-    	
+		
     }
-    
-    public int updateProfilo(Profilo p) {
+
+    public int updateAccordo(Accordo a) {
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
     	ResultSet result = null;
@@ -73,10 +73,14 @@ public class ProfiloDAO {
     	try {
     		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(UPDATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setInt(1, p.getTotaleBigliettiInVendita());
-            preparedStatement.setInt(2, p.getMediaFeedback());
-            preparedStatement.setInt(3, p.getnVisite());
-            preparedStatement.setString(4, p.getUsername());
+            preparedStatement.setString(1, a.getUsernameVenditore());
+            preparedStatement.setInt(2, a.getIdBiglietto());
+            preparedStatement.setDate(3, a.getDataAccordo());
+            preparedStatement.setString(4, a.getUsernameAcquirente());
+            preparedStatement.setString(5,  a.getDescrizioneV());
+            preparedStatement.setString(6,  a.getDescrizioneA());
+            preparedStatement.setInt(7,  a.getStelleV());
+            preparedStatement.setInt(8,  a.getStelleA());
             
             preparedStatement.execute();
             result = preparedStatement.getGeneratedKeys();
@@ -107,17 +111,15 @@ public class ProfiloDAO {
         }
     }
 		return 0;
-    	
     }
     
-    //eliminare delete profilo
-    public boolean deleteProfilo(Profilo p) {
-    	Connection conn = null;
+    public boolean deleteAnccordo(Accordo a) {
+		Connection conn = null;
         PreparedStatement preparedStatement = null;
         try {
         	conn = DBManager.createConnection();
             preparedStatement = conn.prepareStatement(DELETE_QUERY);
-            preparedStatement.setString(1, p.getUsername());
+            preparedStatement.setInt(1, a.getIdBiglietto());
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
@@ -135,23 +137,23 @@ public class ProfiloDAO {
             }
         }
         return false;
-    	
-    }
-    
-    public Profilo readProfilo(String username) {
-    	Profilo p= null;
+	}
+
+    public Accordo readAccordo(int idBiglietto) {
+		
+		Accordo a= null;
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
         try {
             conn = DBManager.createConnection();
             preparedStatement = conn.prepareStatement(READ_QUERY);
-            preparedStatement.setString(1, username);
+            preparedStatement.setInt(1, idBiglietto);
             preparedStatement.execute();
             result = preparedStatement.getResultSet();
  
             if (result.next() && result != null) {
-                p = new Profilo(username,result.getInt(2), result.getInt(3), result.getInt(4));
+                a = new Accordo(result.getString(1), result.getInt(2), result.getDate(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7), result.getInt(8));
             } 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -173,8 +175,7 @@ public class ProfiloDAO {
             }
         }
  
-        return p;
-    	
-    }
-}
+        return a;
+	}
 
+}
