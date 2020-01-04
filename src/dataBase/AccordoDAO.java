@@ -24,14 +24,14 @@ public class AccordoDAO {
     	try {
     		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, a.getUsernameVenditore());
+            preparedStatement.setString(1, a.getUserVen());
             preparedStatement.setInt(2, a.getIdBiglietto());
             preparedStatement.setDate(3, a.getDataAccordo());
-            preparedStatement.setString(4, a.getUsernameAcquirente());
-            preparedStatement.setString(5,  a.getDescrizioneV());
-            preparedStatement.setString(6,  a.getDescrizioneA());
-            preparedStatement.setInt(7,  a.getStelleV());
-            preparedStatement.setInt(8,  a.getStelleA());
+            preparedStatement.setString(4, a.getUserAcq());
+            preparedStatement.setString(5,  a.getReviewVen());
+            preparedStatement.setString(6,  a.getReviewAcq());
+            preparedStatement.setInt(7,  a.getRatingVen());
+            preparedStatement.setInt(8,  a.getRatingAcq());
             
             preparedStatement.execute();
             result = preparedStatement.getGeneratedKeys();
@@ -73,14 +73,14 @@ public class AccordoDAO {
     	try {
     		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(UPDATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, a.getUsernameVenditore());
+            preparedStatement.setString(1, a.getUserVen());
             preparedStatement.setInt(2, a.getIdBiglietto());
             preparedStatement.setDate(3, a.getDataAccordo());
-            preparedStatement.setString(4, a.getUsernameAcquirente());
-            preparedStatement.setString(5,  a.getDescrizioneV());
-            preparedStatement.setString(6,  a.getDescrizioneA());
-            preparedStatement.setInt(7,  a.getStelleV());
-            preparedStatement.setInt(8,  a.getStelleA());
+            preparedStatement.setString(4, a.getUserAcq());
+            preparedStatement.setString(5,  a.getReviewVen());
+            preparedStatement.setString(6,  a.getReviewAcq());
+            preparedStatement.setInt(7,  a.getRatingVen());
+            preparedStatement.setInt(8,  a.getRatingAcq());
             
             preparedStatement.execute();
             result = preparedStatement.getGeneratedKeys();

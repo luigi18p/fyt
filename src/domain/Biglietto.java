@@ -9,22 +9,21 @@ public class Biglietto {
 	private Date dataAndata;
 	private Date dataRitorno;
 	private Boolean tipologiaAR;
-	private String tipoTrasporto;
 	private float prezzoAcquisto;
 	private int numeroDiPosti;
-	private int idBiglietto;
+	private int idTicket;
 
-	public Biglietto(String nominativo, Date dataAndata, Date dataRitorno, Boolean tipologiaAR, String tipoTrasporto,
-			float prezzoAcquisto, int numeroDiPosti, int idBiglietto) {
+	public Biglietto(String nominativo, Date dataAndata, Date dataRitorno, Boolean tipologiaAR, 
+			float prezzoAcquisto, int numeroDiPosti, int idTicket) {
 		super();
 		this.nominativo = nominativo;
 		this.dataAndata = dataAndata;
 		this.dataRitorno = dataRitorno;
 		this.tipologiaAR = tipologiaAR;
-		this.tipoTrasporto = tipoTrasporto;
+		//this.tipoTrasporto = tipoTrasporto;
 		this.prezzoAcquisto = prezzoAcquisto;
 		this.numeroDiPosti = numeroDiPosti;
-		this.idBiglietto = idBiglietto;
+		this.idTicket = idTicket;
 	}
 
 	public String getNominativo() {
@@ -59,14 +58,6 @@ public class Biglietto {
 		this.tipologiaAR = tipologiaAR;
 	}
 
-	public String getTipoTrasporto() {
-		return tipoTrasporto;
-	}
-
-	public void setTipoTrasporto(String tipoTrasporto) {
-		this.tipoTrasporto = tipoTrasporto;
-	}
-
 	public float getPrezzoAcquisto() {
 		return prezzoAcquisto;
 	}
@@ -83,12 +74,12 @@ public class Biglietto {
 		this.numeroDiPosti = numeroDiPosti;
 	}
 
-	public int getIdBiglietto() {
-		return idBiglietto;
+	public int getIdTicket() {
+		return idTicket;
 	}
 
-	public void setIdBiglietto(int idBiglietto) {
-		this.idBiglietto = idBiglietto;
+	public void setIdTicket(int idTicket) {
+		this.idTicket = idTicket;
 	}
 
 }

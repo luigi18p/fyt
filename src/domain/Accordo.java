@@ -4,87 +4,89 @@ import java.sql.Date;
 
 public class Accordo {
 
-	private String usernameVenditore;
+	private String userVen;
 	private int idBiglietto;
 	Date dataAccordo;
-	private String usernameAcquirente;
-	private String descrizioneV;
-	private String descrizioneA;
-	private int stelleV;
-	private int stelleA;
-	
-	public Accordo(String usernameVenditore, int idBiglietto, Date dataAccordo, String usernameAcquirente,
-			String descrizioneV, String descrizioneA, int stelleV, int stelleA) {
+	private String userAcq;
+	private String reviewVen;
+	private String reviewAcq;
+	private int ratingVen;
+	private int ratingAcq;
+
+	public Accordo(String userVen, int idBiglietto, Date dataAccordo, String userAcq, String reviewVen,
+			String reviewAcq, int ratingVen, int ratingAcq) {
 		super();
-		this.usernameVenditore = usernameVenditore;
+		this.userVen = userVen;
 		this.idBiglietto = idBiglietto;
 		this.dataAccordo = dataAccordo;
-		this.usernameAcquirente = usernameAcquirente;
-		this.descrizioneV = descrizioneV;
-		this.descrizioneA = descrizioneA;
-		this.stelleV = stelleV;
-		this.stelleA = stelleA;
+		this.userAcq = userAcq;
+		this.reviewVen = reviewVen;
+		this.reviewAcq = reviewAcq;
+		this.ratingVen = ratingVen;
+		this.ratingAcq = ratingAcq;
 	}
-	
-	public Accordo(String usernameVenditore, int idBiglietto, Date dataAccordo, String usernameAcquirente,
-			String descrizioneV, int stelleV) {
-		super();
-		this.usernameVenditore = usernameVenditore;
-		this.idBiglietto = idBiglietto;
-		this.dataAccordo = dataAccordo;
-		this.usernameAcquirente = usernameAcquirente;
-		this.descrizioneV = descrizioneV;
-		this.descrizioneA = null;
-		this.stelleV = stelleV;
-		this.stelleA = 0;
+
+	public String getUserVen() {
+		return userVen;
 	}
-	
-	public String getUsernameVenditore() {
-		return usernameVenditore;
+
+	public void setUserVen(String userVen) {
+		this.userVen = userVen;
 	}
-	public void setUsernameVenditore(String usernameVenditore) {
-		this.usernameVenditore = usernameVenditore;
-	}
+
 	public int getIdBiglietto() {
 		return idBiglietto;
 	}
+
 	public void setIdBiglietto(int idBiglietto) {
 		this.idBiglietto = idBiglietto;
 	}
+
 	public Date getDataAccordo() {
 		return dataAccordo;
 	}
+
 	public void setDataAccordo(Date dataAccordo) {
 		this.dataAccordo = dataAccordo;
 	}
-	public String getUsernameAcquirente() {
-		return usernameAcquirente;
+
+	public String getUserAcq() {
+		return userAcq;
 	}
-	public void setUsernameAcquirente(String usernameAcquirente) {
-		this.usernameAcquirente = usernameAcquirente;
+
+	public void setUserAcq(String userAcq) {
+		this.userAcq = userAcq;
 	}
-	public String getDescrizioneV() {
-		return descrizioneV;
+
+	public String getReviewVen() {
+		return reviewVen;
 	}
-	public void setDescrizioneV(String descrizioneV) {
-		this.descrizioneV = descrizioneV;
+
+	public void setReviewVen(String reviewVen) {
+		this.reviewVen = reviewVen;
 	}
-	public String getDescrizioneA() {
-		return descrizioneA;
+
+	public String getReviewAcq() {
+		return reviewAcq;
 	}
-	public void setDescrizioneA(String descrizioneA) {
-		this.descrizioneA = descrizioneA;
+
+	public void setReviewAcq(String reviewAcq) {
+		this.reviewAcq = reviewAcq;
 	}
-	public int getStelleV() {
-		return stelleV;
+
+	public int getRatingVen() {
+		return ratingVen;
 	}
-	public void setStelleV(int stelleV) {
-		this.stelleV = stelleV;
+
+	public void setRatingVen(int ratingVen) {
+		this.ratingVen = ratingVen;
 	}
-	public int getStelleA() {
-		return stelleA;
+
+	public int getRatingAcq() {
+		return ratingAcq;
 	}
-	public void setStelleA(int stelleA) {
-		this.stelleA = stelleA;
+
+	public void setRatingAcq(int ratingAcq) {
+		this.ratingAcq = ratingAcq;
 	}
 }
