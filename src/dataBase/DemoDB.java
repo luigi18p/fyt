@@ -25,14 +25,16 @@ public class DemoDB {
 		for(Utente u : listaUtenti) {
 			System.out.format("%s, %s, %s\n",u.getNome(),u.getCognome(),u.getDataNascita());
 		}
-//		TEST INSERIMENTO NUOVO UTENTE
-/*  		LocalDate local = LocalDate.of(1999, 01, 30);
+//				TEST INSERIMENTO NUOVO UTENTE
+		
+/*  	LocalDate local = LocalDate.of(1999, 01, 30);
 		Date date = Date.valueOf(local);
 		Utente u= new Utente("andrea","iovino","andreaiov@gmail.com","aaaa",date,4353654,"andreaiov");
 		utenteDAO.createUtente(u);
 */		
-/*		TEST MODIFICA PARAMENTI AD ECCEZIONE DELL'USERNAME CHE è CHIAVE ED è FISSA
- * 		listaUtenti.get(0).setNome("michele");
+		//TEST MODIFICA PARAMENTI AD ECCEZIONE DELL'USERNAME CHE è CHIAVE ED è FISSA
+ 
+ /* 		listaUtenti.get(0).setNome("michele");
 		utenteDAO.updateUtente(listaUtenti.get(0));
 		listaUtenti = utenteDAO.getAllUtenti();
 		for(Utente u : listaUtenti) {
@@ -51,8 +53,9 @@ public class DemoDB {
 		
 */
 	
-/*		TEST RICHIESTA INFORMAZIONI UTENTE DATO L'USERNAME
-		Utente u;
+		//TEST RICHIESTA INFORMAZIONI UTENTE DATO L'USERNAME
+  
+/*		Utente u;
 		u=utenteDAO.readUtente(listaUtenti.get(1).getUsername());
 		System.out.print(u.getCellulare());
 */
@@ -63,6 +66,7 @@ public class DemoDB {
 		System.out.print(p.getnVisite());
 */
 /*		//CREATEPROFILO FUNZIONA E VA UTILIZZATO NEL CONTROLLORE
+		
 		Profilo p=new Profilo("andreaiov");
 		ProfiloDAO profiloDAO = new ProfiloDAO();
 		profiloDAO.createProfilo(p);
@@ -81,6 +85,7 @@ public class DemoDB {
 			System.out.format("%s, %s, %s\n",a.getUsername(),a.getDescrizione(),a.getPrezzoRichiesto());
 	}
 */		
+/*		//CREATE BIGLIETTO T/A CRUD, ANNUNCIO CRUD
 		LocalDate local = LocalDate.of(1999, 01, 30);
 		Date date = Date.valueOf(local);
 		BigliettoTreno b = new BigliettoTreno(0,"gioascala", "maschile", date, null, "treno", true, 0, 0, "a1111", "napoli", "milano", "trenitalia", "economy", null);
@@ -94,19 +99,19 @@ public class DemoDB {
 		b.setPartenza("palermo");
 		ris=bigliettoDAO.updateBigliettoTreno(b);
 		
-/*		BigliettoAereo ba = new BigliettoAereo(0,"gioascala", "maschile", date, null, "aereo", true, 50, 1, "a1111", "napoli", "milano", "alitalia",false,false,null,0,false,false,false);
+		BigliettoAereo ba = new BigliettoAereo(0,"gioascala", "maschile", date, null, "aereo", true, 50, 1, "a1111", "napoli", "milano", "alitalia",false,false,null,0,false,false,false);
 		bigliettoDAO.createBigliettoAereo(ba);
 		ba.setId(bigliettoDAO.readIdBiglietto("gioascala","aereo"));
 		ba.setPartenza("catania");
 		ris=bigliettoDAO.updateBigliettoAereo(ba);
-*/		
+		
 		Annuncio a= new Annuncio("gioascala", b.getId(), null, 0);
 		AnnuncioDAO annuncioDAO = new AnnuncioDAO();
 		annuncioDAO.createAnnuncio(a);
 		
 		//annuncioDAO.deleteAnnuncio(a);
 		//bigliettoDAO.deleteBiglietto(b.getId());
-		
+*/		
 	}
 
 }
