@@ -10,10 +10,10 @@ import java.sql.Statement;
 import domain.Accordo;
 
 public class AccordoDAO {
-	
-    private static final String CREATE_QUERY = "INSERT INTO accordo (usernameVenditore,idBiglietto,dataAccordo,usernameAcquirente,descrizioneV,descrizioneA,stelleV,stelleA) VALUES (?,?,?,?,?,?,?,?)";
-    private static final String READ_QUERY = "SELECT usernameVenditore,idBiglietto,dataAccordo,usernameAcquirente,descrizioneV,descrizioneA,stelleV,stelleA FROM accordo WHERE idBiglietto = ?";
-    private static final String UPDATE_QUERY = "UPDATE accordo SET usernameVenditore=?,idBiglietto=?,dataAccordo=?,usernameAcquirente=?,descrizioneV=?,descrizioneA=?,stelleV=?,stelleA=? WHERE idBiglietto = ?";
+
+    private static final String CREATE_QUERY = "INSERT INTO accordo (userVen,idBiglietto,dataAccordo,userAcq,reviewVen,reviewAcq,ratingVen,ratingAcq) VALUES (?,?,?,?,?,?,?,?)";
+    private static final String READ_QUERY = "SELECT userVen,idBiglietto,dataAccordo,userAcq,reviewVen,reviewAcq,ratingVen,ratingAcq FROM accordo WHERE idBiglietto = ?";
+    private static final String UPDATE_QUERY = "UPDATE accordo SET userVen,idBiglietto,dataAccordo,userAcq,reviewVen,reviewAcq,ratingVen,ratingAcq WHERE idBiglietto = ?";
     private static final String DELETE_QUERY = "DELETE FROM accordo WHERE idBiglietto = ?";
 
     public int createAccordo(Accordo a) {

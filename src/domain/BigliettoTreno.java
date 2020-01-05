@@ -1,64 +1,36 @@
 package domain;
-
-import java.util.Date;
+import java.sql.Date;
 
 public class BigliettoTreno extends Biglietto{
 
-	private String stazionePartenza;
-	private String stazioneArrivo;
-	private int classe;
-	private String fermate;
-	private String compagniaFerrov;
+	private String classe_T;
+	private String fermate_T;
 	
-	public BigliettoTreno(String nominativo, Date dataAndata, Date dataRitorno, Boolean tipologiaAR,
-			float prezzoAcquisto, int numeroDiPosti, int idBiglietto, String stazionePartenza, String stazioneArrivo,
-			int classe, String fermate, String compagniaFerrov) {
-		super(nominativo, dataAndata, dataRitorno, tipologiaAR, prezzoAcquisto, numeroDiPosti, idBiglietto);
-		this.stazionePartenza = stazionePartenza;
-		this.stazioneArrivo = stazioneArrivo;
-		this.classe = classe;
-		this.fermate = fermate;
-		this.compagniaFerrov = compagniaFerrov;
+	public BigliettoTreno(int id, String userVen, String nominativo, Date dataAndata, Date dataRitorno, String tipoTrasporto,
+			Boolean tipologiaAR, float prezzoAcquisto, int numeroDiPosti, String idTicket, String partenza, String arrivo,
+			String compagnia, String classe, String fermate) {
+		super(id, userVen, nominativo, dataAndata, dataRitorno, tipoTrasporto, tipologiaAR, prezzoAcquisto, numeroDiPosti,
+				idTicket, partenza, arrivo, compagnia);
+		this.classe_T = classe_T;
+		this.fermate_T = fermate_T;
+	}
+	public BigliettoTreno(int id) {
+		super(id);
 	}
 
-	public String getStazionePartenza() {
-		return stazionePartenza;
+	public String getClasse_T() {
+		return classe_T;
 	}
 
-	public void setStazionePartenza(String stazionePartenza) {
-		this.stazionePartenza = stazionePartenza;
+	public void setClasse_T(String classe_T) {
+		this.classe_T = classe_T;
 	}
 
-	public String getStazioneArrivo() {
-		return stazioneArrivo;
+	public String getFermate_T() {
+		return fermate_T;
 	}
 
-	public void setStazioneArrivo(String stazioneArrivo) {
-		this.stazioneArrivo = stazioneArrivo;
+	public void setFermate_T(String fermate_T) {
+		this.fermate_T = fermate_T;
 	}
-
-	public int getClasse() {
-		return classe;
-	}
-
-	public void setClasse(int classe) {
-		this.classe = classe;
-	}
-
-	public String getFermate() {
-		return fermate;
-	}
-
-	public void setFermate(String fermate) {
-		this.fermate = fermate;
-	}
-
-	public String getCompagniaFerrov() {
-		return compagniaFerrov;
-	}
-
-	public void setCompagniaFerrov(String compagniaFerrov) {
-		this.compagniaFerrov = compagniaFerrov;
-	}
-
 }

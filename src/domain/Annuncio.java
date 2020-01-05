@@ -6,15 +6,13 @@ public class Annuncio {
 	private int idBiglietto;
 	private String descrizione;
 	private float prezzoRichiesto;
-	private String tipoTrasporto;
 	
-	public Annuncio(String username, int idBiglietto, String descrizione, float prezzoRichiesto, String tipoTrasporto) {
+	public Annuncio(String username, int idBiglietto, String descrizione, float prezzoRichiesto) {
 		super();
 		this.username = username;
 		this.idBiglietto = idBiglietto;
 		this.descrizione = descrizione;
 		this.prezzoRichiesto = prezzoRichiesto;
-		this.tipoTrasporto = tipoTrasporto;
 	}
 	
 	public String getUsername() {
@@ -40,11 +38,5 @@ public class Annuncio {
 	}
 	public void setPrezzoRichiesto(float prezzoRichiesto) {
 		this.prezzoRichiesto = prezzoRichiesto;
-	}
-	public String getTipoTrasporto() {
-		return tipoTrasporto;
-	}
-	public void setTipoTrasporto(String tipoTrasporto) {
-		this.tipoTrasporto = tipoTrasporto;
 	}
 }

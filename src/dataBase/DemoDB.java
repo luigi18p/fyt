@@ -6,6 +6,9 @@ import java.util.Locale;
 
 import domain.Utente;
 import domain.Annuncio;
+import domain.Biglietto;
+import domain.BigliettoAereo;
+import domain.BigliettoTreno;
 import domain.Profilo;
 
 import java.text.DateFormat;
@@ -64,7 +67,7 @@ public class DemoDB {
 		ProfiloDAO profiloDAO = new ProfiloDAO();
 		profiloDAO.createProfilo(p);
 */
-		
+/*		
 		List<Annuncio> listaAnnunci = null;
 		AnnuncioDAO AnnuncioDAO = new AnnuncioDAO();
 		listaAnnunci = AnnuncioDAO.getAllAnnunci();
@@ -76,7 +79,34 @@ public class DemoDB {
 		listaAnnunci1 = AnnuncioDAO1.getAllAnnunciPersonali("luipalermo");
 		for(Annuncio a : listaAnnunci1) {
 			System.out.format("%s, %s, %s\n",a.getUsername(),a.getDescrizione(),a.getPrezzoRichiesto());
-		}
+	}
+*/		
+		LocalDate local = LocalDate.of(1999, 01, 30);
+		Date date = Date.valueOf(local);
+		BigliettoTreno b = new BigliettoTreno(0,"gioascala", "maschile", date, null, "treno", true, 0, 0, "a1111", "napoli", "milano", "trenitalia", "economy", null);
+		
+		BigliettoDAO bigliettoDAO = new BigliettoDAO();
+		bigliettoDAO.createBigliettoTreno(b);
+		b.setId(bigliettoDAO.readIdBiglietto("gioascala","treno"));
+		System.out.println(b.getId() + "-" + b.getPartenza());
+		
+		int ris;
+		b.setPartenza("palermo");
+		ris=bigliettoDAO.updateBigliettoTreno(b);
+		
+/*		BigliettoAereo ba = new BigliettoAereo(0,"gioascala", "maschile", date, null, "aereo", true, 50, 1, "a1111", "napoli", "milano", "alitalia",false,false,null,0,false,false,false);
+		bigliettoDAO.createBigliettoAereo(ba);
+		ba.setId(bigliettoDAO.readIdBiglietto("gioascala","aereo"));
+		ba.setPartenza("catania");
+		ris=bigliettoDAO.updateBigliettoAereo(ba);
+*/		
+		Annuncio a= new Annuncio("gioascala", b.getId(), null, 0);
+		AnnuncioDAO annuncioDAO = new AnnuncioDAO();
+		annuncioDAO.createAnnuncio(a);
+		
+		//annuncioDAO.deleteAnnuncio(a);
+		//bigliettoDAO.deleteBiglietto(b.getId());
+		
 	}
 
 }

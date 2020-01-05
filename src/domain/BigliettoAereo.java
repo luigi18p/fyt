@@ -1,53 +1,29 @@
 package domain;
-
-import java.util.Date;
+import java.sql.Date;
 
 public class BigliettoAereo extends Biglietto{
 	
-	private String areopPartenza;
-	private String areopArrivo;
 	private boolean priority;
-	private String postoAssegnato;
 	private boolean diretto;
-	private String areopScalo;
-	private int attesaScalo;
-	private boolean bagaglioStiva;
-	private boolean bagaglioAMano;
-	private boolean assicurazione;
-	private String compagniaAerea;
-
-	public BigliettoAereo(String nominativo, Date dataAndata, Date dataRitorno, Boolean tipologiaAR,
-			float prezzoAcquisto, int numeroDiPosti, int idBiglietto, String areopPartenza, String areopArrivo,
-			boolean priority, String postoAssegnato, boolean diretto, String areopScalo, int attesaScalo,
-			boolean bagaglioStiva, boolean bagaglioAMano, boolean assicurazione, String compagniaAerea) {
-		super(nominativo, dataAndata, dataRitorno, tipologiaAR, prezzoAcquisto, numeroDiPosti, idBiglietto);
-		this.areopPartenza = areopPartenza;
-		this.areopArrivo = areopArrivo;
+	private String areopScalo_A;
+	private int attesaScalo_A;
+	private boolean bagaglioStiva_A;
+	private boolean bagaglioAMano_A;
+	private boolean assicurazione_A;
+	
+	public BigliettoAereo(int id, String userVen, String nominativo, Date dataAndata, Date dataRitorno, String tipoTrasporto,
+			Boolean tipologiaAR, float prezzoAcquisto, int numeroDiPosti, String idTicket, String partenza, String arrivo,
+			String compagnia, boolean priority, boolean diretto, String areopScalo_A, int attesaScalo_A,
+			boolean bagaglioStiva_A, boolean bagaglioAMano_A, boolean assicurazione_A) {
+		super(id, userVen, nominativo, dataAndata, dataRitorno, tipoTrasporto, tipologiaAR, prezzoAcquisto, numeroDiPosti, 
+				idTicket, partenza, arrivo, compagnia);
 		this.priority = priority;
-		this.postoAssegnato = postoAssegnato;
 		this.diretto = diretto;
-		this.areopScalo = areopScalo;
-		this.attesaScalo = attesaScalo;
-		this.bagaglioStiva = bagaglioStiva;
-		this.bagaglioAMano = bagaglioAMano;
-		this.assicurazione = assicurazione;
-		this.compagniaAerea = compagniaAerea;
-	}
-
-	public String getAreopPartenza() {
-		return areopPartenza;
-	}
-
-	public void setAreopPartenza(String areopPartenza) {
-		this.areopPartenza = areopPartenza;
-	}
-
-	public String getAreopArrivo() {
-		return areopArrivo;
-	}
-
-	public void setAreopArrivo(String areopArrivo) {
-		this.areopArrivo = areopArrivo;
+		this.areopScalo_A = areopScalo_A;
+		this.attesaScalo_A = attesaScalo_A;
+		this.bagaglioStiva_A = bagaglioStiva_A;
+		this.bagaglioAMano_A = bagaglioAMano_A;
+		this.assicurazione_A = assicurazione_A;
 	}
 
 	public boolean isPriority() {
@@ -58,14 +34,6 @@ public class BigliettoAereo extends Biglietto{
 		this.priority = priority;
 	}
 
-	public String getPostoAssegnato() {
-		return postoAssegnato;
-	}
-
-	public void setPostoAssegnato(String postoAssegnato) {
-		this.postoAssegnato = postoAssegnato;
-	}
-
 	public boolean isDiretto() {
 		return diretto;
 	}
@@ -74,52 +42,43 @@ public class BigliettoAereo extends Biglietto{
 		this.diretto = diretto;
 	}
 
-	public String getAreopScalo() {
-		return areopScalo;
+	public String getAreopScalo_A() {
+		return areopScalo_A;
 	}
 
-	public void setAreopScalo(String areopScalo) {
-		this.areopScalo = areopScalo;
+	public void setAreopScalo_A(String areopScalo_A) {
+		this.areopScalo_A = areopScalo_A;
 	}
 
-	public int getAttesaScalo() {
-		return attesaScalo;
+	public int getAttesaScalo_A() {
+		return attesaScalo_A;
 	}
 
-	public void setAttesaScalo(int attesaScalo) {
-		this.attesaScalo = attesaScalo;
+	public void setAttesaScalo_A(int attesaScalo_A) {
+		this.attesaScalo_A = attesaScalo_A;
 	}
 
-	public boolean isBagaglioStiva() {
-		return bagaglioStiva;
+	public boolean isBagaglioStiva_A() {
+		return bagaglioStiva_A;
 	}
 
-	public void setBagaglioStiva(boolean bagaglioStiva) {
-		this.bagaglioStiva = bagaglioStiva;
+	public void setBagaglioStiva_A(boolean bagaglioStiva_A) {
+		this.bagaglioStiva_A = bagaglioStiva_A;
 	}
 
-	public boolean isBagaglioAMano() {
-		return bagaglioAMano;
+	public boolean isBagaglioAMano_A() {
+		return bagaglioAMano_A;
 	}
 
-	public void setBagaglioAMano(boolean bagaglioAMano) {
-		this.bagaglioAMano = bagaglioAMano;
+	public void setBagaglioAMano_A(boolean bagaglioAMano_A) {
+		this.bagaglioAMano_A = bagaglioAMano_A;
 	}
 
-	public boolean isAssicurazione() {
-		return assicurazione;
+	public boolean isAssicurazione_A() {
+		return assicurazione_A;
 	}
 
-	public void setAssicurazione(boolean assicurazione) {
-		this.assicurazione = assicurazione;
+	public void setAssicurazione_A(boolean assicurazione_A) {
+		this.assicurazione_A = assicurazione_A;
 	}
-
-	public String getCompagniaAerea() {
-		return compagniaAerea;
-	}
-
-	public void setCompagniaAerea(String compagniaAerea) {
-		this.compagniaAerea = compagniaAerea;
-	}
-	
 }

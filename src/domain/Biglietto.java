@@ -1,29 +1,53 @@
 package domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Biglietto {
 	
-	
+	private int id;
+	private String userVen;
 	private String nominativo;
 	private Date dataAndata;
 	private Date dataRitorno;
+	private String tipoTrasporto;
 	private Boolean tipologiaAR;
 	private float prezzoAcquisto;
 	private int numeroDiPosti;
-	private int idTicket;
+	private String idTicket;
+	private String partenza;
+	private String arrivo;
+	private String compagnia;
 
-	public Biglietto(String nominativo, Date dataAndata, Date dataRitorno, Boolean tipologiaAR, 
-			float prezzoAcquisto, int numeroDiPosti, int idTicket) {
+	public Biglietto(int id, String userVen, String nominativo, Date dataAndata, Date dataRitorno, String tipoTrasporto,
+			Boolean tipologiaAR, float prezzoAcquisto, int numeroDiPosti, String idTicket, String partenza, String arrivo,
+			String compagnia) {
 		super();
+		this.id = id;
+		this.userVen = userVen;
 		this.nominativo = nominativo;
 		this.dataAndata = dataAndata;
 		this.dataRitorno = dataRitorno;
+		this.tipoTrasporto = tipoTrasporto;
 		this.tipologiaAR = tipologiaAR;
-		//this.tipoTrasporto = tipoTrasporto;
 		this.prezzoAcquisto = prezzoAcquisto;
 		this.numeroDiPosti = numeroDiPosti;
 		this.idTicket = idTicket;
+		this.partenza = partenza;
+		this.arrivo = arrivo;
+		this.compagnia = compagnia;
+	}
+
+	public Biglietto(int id) {
+		super();
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNominativo() {
@@ -50,6 +74,14 @@ public class Biglietto {
 		this.dataRitorno = dataRitorno;
 	}
 
+	public String getTipoTrasporto() {
+		return tipoTrasporto;
+	}
+
+	public void setTipoTrasporto(String tipoTrasporto) {
+		this.tipoTrasporto = tipoTrasporto;
+	}
+
 	public Boolean getTipologiaAR() {
 		return tipologiaAR;
 	}
@@ -74,12 +106,43 @@ public class Biglietto {
 		this.numeroDiPosti = numeroDiPosti;
 	}
 
-	public int getIdTicket() {
+	public String getIdTicket() {
 		return idTicket;
 	}
 
-	public void setIdTicket(int idTicket) {
+	public void setIdTicket(String idTicket) {
 		this.idTicket = idTicket;
 	}
 
+	public String getPartenza() {
+		return partenza;
+	}
+
+	public void setPartenza(String partenza) {
+		this.partenza = partenza;
+	}
+
+	public String getArrivo() {
+		return arrivo;
+	}
+
+	public void setArrivo(String arrivo) {
+		this.arrivo = arrivo;
+	}
+
+	public String getCompagnia() {
+		return compagnia;
+	}
+
+	public void setCompagnia(String compagnia) {
+		this.compagnia = compagnia;
+	}
+
+	public String getUserVen() {
+		return userVen;
+	}
+
+	public void setUserVen(String userVen) {
+		this.userVen = userVen;
+	}
 }
