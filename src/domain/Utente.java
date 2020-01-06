@@ -23,6 +23,17 @@ public class Utente {
 		this.cellulare=cellulare;
 		this.username=username;
 	}
+	
+	public Utente() {
+		this.nome=null;
+		this.cognome=null;
+		this.email=null;
+		this.password=null;
+		this.dataNascita=null;
+		this.cellulare=0;
+		this.username=null;
+	}
+	
 
 	public String getNome() {
 		return nome;
