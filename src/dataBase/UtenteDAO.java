@@ -17,12 +17,12 @@ public class UtenteDAO {
     private static final String CREATE_QUERY = "INSERT INTO utente (nome,cognome,email,password,dataNascita,cellulare,username) VALUES (?,?,?,?,?,?,?)";
     private static final String READ_QUERY = "SELECT nome,cognome,email,password,dataNascita,cellulare,username FROM utente WHERE username = ?";
     private static final String READ_login_QUERY = "SELECT username,password FROM utente WHERE username = ? AND password = ?";
-    private static final String READ_ALL_QUERY = "SELECT * FROM utente";
+//    private static final String READ_ALL_QUERY = "SELECT * FROM utente";
     private static final String UPDATE_QUERY = "UPDATE utente SET nome=?,cognome=?,email=?,password=?,dataNascita=?,cellulare=? WHERE username = ?";
     private static final String DELETE_QUERY = "DELETE FROM utente WHERE username = ?";
     
     //da eliminare getallutenti
-    public List getAllUtenti() {
+ /*   public List getAllUtenti() {
     	
     	List<Utente> listaUtenti = new ArrayList<Utente>();
     	Utente utente = null;
@@ -64,6 +64,7 @@ public class UtenteDAO {
 		return listaUtenti;
     	
     }
+*/
     
     public int createUtente(Utente u) {
     	Connection conn = null;

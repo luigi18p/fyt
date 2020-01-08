@@ -19,12 +19,6 @@ public class DemoDB {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		List<Utente> listaUtenti = null;
-		UtenteDAO utenteDAO = new UtenteDAO();
-		listaUtenti = utenteDAO.getAllUtenti();
-		for(Utente u : listaUtenti) {
-			System.out.format("%s, %s, %s\n",u.getNome(),u.getCognome(),u.getDataNascita());
-		}
 //				TEST INSERIMENTO NUOVO UTENTE
 		
 /*  	LocalDate local = LocalDate.of(1999, 01, 30);
@@ -112,6 +106,7 @@ public class DemoDB {
 		//annuncioDAO.deleteAnnuncio(a);
 		//bigliettoDAO.deleteBiglietto(b.getId());
 */		
+
 	}
 
 }

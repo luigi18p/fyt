@@ -5,7 +5,10 @@
  */
 package gui;
 
-import controller.GestoreUtente;
+
+import javax.swing.JOptionPane;
+
+import businessLogic.GestoreUtente;
 import domain.Utente;
 
 /**
@@ -155,24 +158,27 @@ public class FrameGestisciProfilo extends javax.swing.JFrame {
 
     private void jButtonConfermaActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
-    	Utente u = new Utente();
-        u.setNome(jTextNome.getText());
-        u.setCognome(jTextCognome.getText());
-        u.setEmail(jTextEmail.getText());
-        u.setPassword(jTextPassword.getText());
-        
-        java.util.Date date = dateChooserDataNascita.getSelectedDate().getTime();
-        java.sql.Date sDate = new java.sql.Date(date.getTime());
-        String telefono = jTextTelefono.getText();
-        double ntelefono = Double.parseDouble(telefono);
-        u.setCellulare(ntelefono);
-        u.setDataNascita(sDate);
-        u.setUsername(username);
-        
-        GestoreUtente gu = new GestoreUtente();
-        gu.updateUtente(u);
-        this.toBack();
-        setVisible(false);
+
+        try {
+			String nome=jTextNome.getText();
+			String cognome = jTextCognome.getText();
+			String email = jTextEmail.getText();
+			String password = jTextPassword.getText();
+			String telefono = jTextTelefono.getText();
+			double ntelefono = Double.parseDouble(telefono);
+			
+			java.util.Date date = dateChooserDataNascita.getSelectedDate().getTime();
+			java.sql.Date sDate = new java.sql.Date(date.getTime());
+			
+			GestoreUtente gu = new GestoreUtente();
+			gu.updateUtente(nome, cognome, email, password, sDate, ntelefono, username);
+				
+			this.toBack();
+			setVisible(false);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Inserire correttamente i campi richiesti");
+			e.printStackTrace();
+		}
     }                                               
 
     private void jButtonAnnullaActionPerformed(java.awt.event.ActionEvent evt) {                                               

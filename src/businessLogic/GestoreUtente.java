@@ -1,4 +1,4 @@
-package controller;
+package businessLogic;
 
 import java.sql.Date;
 
@@ -25,7 +25,7 @@ public class GestoreUtente {
 	}
 	
 	public int Login(String username, String password){
-		if(username.length() <10 && password.length() <10) {
+		if(username.length() <15 && password.length() <15) {
 			
 			Utente uVerifica = new Utente();
 			UtenteDAO utenteDAO = new UtenteDAO();
@@ -40,9 +40,20 @@ public class GestoreUtente {
 		return 1;
 	};
 
-	public int updateUtente(Utente u) {
-		UtenteDAO utenteDAO = new UtenteDAO();
-		utenteDAO.updateUtente(u);
+	public int updateUtente(String nome, String cognome, String email, String password, 
+			Date dataNascita, double cellulare, String username) {
+		try {
+			if(nome == null || cognome == null || email == null ||password == null ||dataNascita == null ||cellulare == 0) {
+				return 1;
+			}else {
+				Utente u = new Utente(nome, cognome, email, password, dataNascita, cellulare, username);
+				UtenteDAO utenteDAO = new UtenteDAO();
+				utenteDAO.updateUtente(u);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
 	};
 }

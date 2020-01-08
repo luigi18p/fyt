@@ -6,14 +6,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import domain.Accordo;
+import domain.Annuncio;
 
 public class AccordoDAO {
 
     private static final String CREATE_QUERY = "INSERT INTO accordo (userVen,idBiglietto,dataAccordo,userAcq,reviewVen,reviewAcq,ratingVen,ratingAcq) VALUES (?,?,?,?,?,?,?,?)";
     private static final String READ_QUERY = "SELECT userVen,idBiglietto,dataAccordo,userAcq,reviewVen,reviewAcq,ratingVen,ratingAcq FROM accordo WHERE idBiglietto = ?";
-    private static final String UPDATE_QUERY = "UPDATE accordo SET userVen,idBiglietto,dataAccordo,userAcq,reviewVen,reviewAcq,ratingVen,ratingAcq WHERE idBiglietto = ?";
+    private static final String READ_reating_QUERY = "SELECT ratingAcq FROM accordo WHERE idBiglietto = ?";
+    private static final String READ_allAccordi_QUERY = "SELECT userVen,idBiglietto,dataAccordo,reviewVen,ratingVen,ratingAcq FROM accordo WHERE userAcq = ?";
+    private static final String UPDATE_QUERY = "UPDATE accordo SET userVen=?,idBiglietto=?,dataAccordo=?,userAcq=?,reviewVen=?,reviewAcq=?,ratingVen=?,ratingAcq=? WHERE idBiglietto = ?";
+    private static final String UPDATE_rating_QUERY = "UPDATE accordo SET reviewAcq=?, ratingAcq=? WHERE idBiglietto = ?";
     private static final String DELETE_QUERY = "DELETE FROM accordo WHERE idBiglietto = ?";
 
     public int createAccordo(Accordo a) {
@@ -113,7 +119,50 @@ public class AccordoDAO {
 		return 0;
     }
     
-    public boolean deleteAnccordo(Accordo a) {
+    public int updateRatingAccordo(int idBiglietto, String reviewAcq, int ratingAcq) {
+    	Connection conn = null;
+    	PreparedStatement preparedStatement = null;
+    	ResultSet result = null;
+
+    	try {
+    		conn = DBManager.createConnection();
+    		preparedStatement = conn.prepareStatement(UPDATE_rating_QUERY, Statement.RETURN_GENERATED_KEYS);
+    		preparedStatement.setString(1, reviewAcq);
+    		preparedStatement.setInt(2, ratingAcq);
+            preparedStatement.setInt(3, idBiglietto);
+            
+            preparedStatement.execute();
+            result = preparedStatement.getGeneratedKeys();
+            
+    		
+    	if (result.next() && result != null) {
+            return result.getInt(1);
+        } else {
+            return -1;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            result.close();
+        } catch (Exception rse) {
+            rse.printStackTrace();
+        }
+        try {
+            preparedStatement.close();
+        } catch (Exception sse) {
+            sse.printStackTrace();
+        }
+        try {
+            conn.close();
+        } catch (Exception cse) {
+            cse.printStackTrace();
+        }
+    }
+		return 0;
+    }
+    
+    public boolean deleteAccordo(Accordo a) {
 		Connection conn = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -176,6 +225,86 @@ public class AccordoDAO {
         }
  
         return a;
+	}
+
+    public List ReadAllAccordi(String username) {
+
+    	List<Accordo> listaAccordi = new ArrayList<Accordo>();
+		Accordo a= null;
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        try {
+            conn = DBManager.createConnection();
+            preparedStatement = conn.prepareStatement(READ_allAccordi_QUERY);
+            preparedStatement.setString(1, username);
+            preparedStatement.execute();
+            result = preparedStatement.getResultSet();
+ 
+            if (result.next() && result != null) {
+                a = new Accordo(result.getString(1), result.getInt(2), result.getDate(3), null, result.getString(4), null, result.getInt(5), result.getInt(6));
+                listaAccordi.add(a);
+            } 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                result.close();
+            } catch (Exception rse) {
+                rse.printStackTrace();
+            }
+            try {
+                preparedStatement.close();
+            } catch (Exception sse) {
+                sse.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (Exception cse) {
+                cse.printStackTrace();
+            }
+        }
+ 
+        return listaAccordi;
+	}
+
+    public int readReating(int idBiglietto) {
+		
+		int reatingAcq =0;
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        try {
+            conn = DBManager.createConnection();
+            preparedStatement = conn.prepareStatement(READ_reating_QUERY);
+            preparedStatement.setInt(1, idBiglietto);
+            preparedStatement.execute();
+            result = preparedStatement.getResultSet();
+ 
+            if (result.next() && result != null) {
+                reatingAcq = result.getInt(1);
+            } 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                result.close();
+            } catch (Exception rse) {
+                rse.printStackTrace();
+            }
+            try {
+                preparedStatement.close();
+            } catch (Exception sse) {
+                sse.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (Exception cse) {
+                cse.printStackTrace();
+            }
+        }
+ 
+        return reatingAcq;
 	}
 
 }

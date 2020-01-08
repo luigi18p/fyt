@@ -16,7 +16,6 @@ public class ProfiloDAO {
 	
 	private static final String CREATE_QUERY = "INSERT INTO profilo (username,totaleBigliettiInVendita,mediaFeedback,nVisite) VALUES (?,?,?,?)";
     private static final String READ_QUERY = "SELECT username,totaleBigliettiInVendita,mediaFeedback,nVisite FROM profilo WHERE username = ?";
-    //private static final String READ_ALL_QUERY = "SELECT * FROM utente";
     private static final String UPDATE_QUERY = "UPDATE profilo SET totaleBigliettiInVendita=?,mediaFeedback=?,nVisite=? WHERE username = ?";
     private static final String DELETE_QUERY = "DELETE FROM profilo WHERE username = ?";
 

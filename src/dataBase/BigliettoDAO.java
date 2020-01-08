@@ -16,12 +16,14 @@ public class BigliettoDAO {
 	
     private static final String CREATE_aereo_QUERY = "INSERT INTO biglietto (userVen,nominativo,dataAndata,dataRitorno,tipoTrasporto,tipologiaAR,prezzoAcquisto,numeroPosti,idTicket,partenza,arrivo,priority_A,diretto_A,aereopScalo_A,attesaScalo_A,bagaglioStiva_A,bagaglioAMano_A,assicurazione_A,compagnia) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static final String CREATE_treno_QUERY = "INSERT INTO biglietto (userVen,nominativo,dataAndata,dataRitorno,tipoTrasporto,tipologiaAR,prezzoAcquisto,numeroPosti,idTicket,partenza,arrivo,compagnia,classe_T,fermate_T) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String READ_QUERY = "SELECT id FROM biglietto WHERE userVen = ? AND tipoTrasporto = ? ORDER BY id DESC";
+//    private static final String READ_id_QUERY = "SELECT id FROM biglietto WHERE userVen = ? AND tipoTrasporto = ? ORDER BY id DESC";
+    private static final String READ_biglietto_treno_QUERY = "SELECT * FROM biglietto WHERE id = ?";
     private static final String UPDATE_aereo_QUERY = "UPDATE biglietto SET userVen=?,nominativo=?,dataAndata=?,dataRitorno=?,tipoTrasporto=?,tipologiaAR=?,prezzoAcquisto=?,numeroPosti=?,idTicket=?,partenza=?,arrivo=?,priority_A=?,diretto_A=?,aereopScalo_A=?,attesaScalo_A=?,bagaglioStiva_A=?,bagaglioAMano_A=?,assicurazione_A=?,compagnia=? WHERE id = ?";
     private static final String UPDATE_treno_QUERY = "UPDATE biglietto SET userVen=?,nominativo=?,dataAndata=?,dataRitorno=?,tipoTrasporto=?,tipologiaAR=?,prezzoAcquisto=?,numeroPosti=?,idTicket=?,partenza=?,arrivo=?,compagnia=?,classe_T=?,fermate_T=? WHERE id = ?";
     private static final String DELETE_QUERY = "DELETE FROM biglietto WHERE id = ?";
     
     public int createBigliettoTreno(BigliettoTreno b) {
+    	
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
     	ResultSet result = null;
@@ -47,7 +49,7 @@ public class BigliettoDAO {
 
             preparedStatement.execute();
             result = preparedStatement.getGeneratedKeys();
-                		
+            
     	if (result.next() && result != null) {
             return result.getInt(1);
         } else {
@@ -136,7 +138,7 @@ public class BigliettoDAO {
 		
     }
     
-    public int readIdBiglietto(String userVen, String tipoTrasporto) {
+/*    public int readIdBiglietto(String userVen, String tipoTrasporto) {
 		
     	BigliettoTreno b= null;
         Connection conn = null;
@@ -144,7 +146,7 @@ public class BigliettoDAO {
         ResultSet result = null;
         try {
             conn = DBManager.createConnection();
-            preparedStatement = conn.prepareStatement(READ_QUERY);
+            preparedStatement = conn.prepareStatement(READ_id_QUERY);
             preparedStatement.setString(1, userVen);
             preparedStatement.setString(2, tipoTrasporto);
             preparedStatement.execute();
@@ -176,7 +178,50 @@ public class BigliettoDAO {
  
         return b.getId();
 	}
-	
+*/	
+    public BigliettoTreno readBigliettoTreno(String id) {
+		
+    	BigliettoTreno b= null;
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        try {
+            conn = DBManager.createConnection();
+            preparedStatement = conn.prepareStatement(READ_biglietto_treno_QUERY);
+            preparedStatement.setString(1, id);
+            preparedStatement.execute();
+            result = preparedStatement.getResultSet();
+ 
+            if (result.next() && result != null) {
+                b = new BigliettoTreno(result.getInt(1), result.getString(2), result.getString(3), result.getDate(4),
+                		result.getDate(5), result.getString(6), result.getBoolean(7), result.getFloat(8),
+                		result.getInt(9), result.getString(10), result.getString(11), result.getString(12), 
+                		result.getString(20), result.getString(21), result.getString(22));
+
+            } 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                result.close();
+            } catch (Exception rse) {
+                rse.printStackTrace();
+            }
+            try {
+                preparedStatement.close();
+            } catch (Exception sse) {
+                sse.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (Exception cse) {
+                cse.printStackTrace();
+            }
+        }
+ 
+        return b;
+	}
+
     public int updateBigliettoTreno(BigliettoTreno b) {
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
@@ -294,13 +339,13 @@ public class BigliettoDAO {
 		return 0;
     }
         
-    public boolean deleteBiglietto(int id) {
+    public boolean deleteBiglietto(int i) {
 		Connection conn = null;
         PreparedStatement preparedStatement = null;
         try {
         	conn = DBManager.createConnection();
             preparedStatement = conn.prepareStatement(DELETE_QUERY);
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1,i);
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {

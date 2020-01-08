@@ -5,6 +5,12 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
+
+import businessLogic.GestoreAccordo;
+import businessLogic.GestoreBiglietto;
+
+
 /**
  *
  * @author gioac
@@ -14,7 +20,12 @@ public class FrameRimuovi extends javax.swing.JFrame {
     /**
      * Creates new form FrameRimuovi
      */
-    public FrameRimuovi() {
+	private static String username;
+	private static int id;
+	
+    public FrameRimuovi(String username, int id) {
+    	this.username = username;
+    	this.id = id;
         initComponents();
     }
 
@@ -29,113 +40,174 @@ public class FrameRimuovi extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButtonVenduto = new javax.swing.JRadioButton();
+        jRadioButtonInvenduto = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextUserAcq = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jTextAreaFeedback = new javax.swing.JTextArea();
+        jButtonAnnulla = new javax.swing.JButton();
+        jButtonConferma = new javax.swing.JButton();
+        jSliderRating = new javax.swing.JSlider();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Find Your Ticket");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Seleziona il motivo:");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Biglietto venduto");
+        buttonGroup1.add(jRadioButtonVenduto);
+        jRadioButtonVenduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButtonVenduto.setText("Biglietto venduto");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Biglietto invenduto");
+        buttonGroup1.add(jRadioButtonInvenduto);
+        jRadioButtonInvenduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButtonInvenduto.setText("Biglietto invenduto");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Inserisci username acquirente:");
 
-        jTextField1.setText("jTextField1");
+        jTextUserAcq.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel3.setText("Inserisci feedback");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Inserisci feedback:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextAreaFeedback.setColumns(20);
+        jTextAreaFeedback.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaFeedback);
 
-        jButton1.setText("Annulla");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAnnulla.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonAnnulla.setText("Annulla");
+        jButtonAnnulla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAnnullaActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Conferma");
+        jButtonConferma.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonConferma.setText("Conferma");
+        jButtonConferma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfermaActionPerformed(evt);
+            }
+        });
+
+        jSliderRating.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jSliderRating.setMaximum(5);
+        jSliderRating.setMinimum(1);
+        jSliderRating.setPaintLabels(true);
+        jSliderRating.setValue(1);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Rating:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jRadioButton1)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jButton2)
-                        .addGap(67, 67, 67)
-                        .addComponent(jButton1)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                                .addGap(58, 58, 58)
+                                .addComponent(jButtonConferma)
+                                .addGap(47, 47, 47)
+                                .addComponent(jButtonAnnulla))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jRadioButtonInvenduto)
+                                        .addComponent(jRadioButtonVenduto)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel3))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jSliderRating, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(jTextUserAcq, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))))))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButtonVenduto)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(jRadioButtonInvenduto)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextUserAcq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jSliderRating, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
+                        .addGap(19, 19, 19)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 79, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(100, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1))
-                        .addGap(40, 40, 40))))
+                            .addComponent(jButtonConferma)
+                            .addComponent(jButtonAnnulla))
+                        .addGap(48, 48, 48))))
         );
 
         pack();
     }// </editor-fold>                        
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButtonAnnullaActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
         this.toBack();
         setVisible(false);
-        new FrameIMieiAnnunci().toFront();
-        new FrameIMieiAnnunci().setState(java.awt.Frame.NORMAL);
-        new FrameIMieiAnnunci().setVisible(true);
-    }                                        
+    }                                              
+
+    private void jButtonConfermaActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+        //pulsante conferma
+    	try {
+	    	if(jRadioButtonInvenduto.isSelected()) {
+	    		GestoreBiglietto gestoreBiglietto = new GestoreBiglietto();
+	    		gestoreBiglietto.DeleteBiglietto(id);
+	    		JOptionPane.showMessageDialog(null,"Biglietto non venduto!");
+	            this.toBack();
+	            setVisible(false);
+	    	}else {
+		    	GestoreAccordo gestoreAccordo = new GestoreAccordo();
+		    	String userAcq = jTextUserAcq.getText();
+		    	String feedback = jTextAreaFeedback.getText();
+		    	Boolean venduto = jRadioButtonVenduto.isSelected();
+		    	int ratingV = jSliderRating.getValue();
+		    	
+		    	gestoreAccordo.CreateAccordo(username, id, userAcq,feedback,null,ratingV,0);
+		    	
+		    	JOptionPane.showMessageDialog(null,"Accordo inserito!");
+		    	
+		        this.toBack();
+		        setVisible(false);
+	    	}
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    }                                               
 
     /**
      * @param args the command line arguments
@@ -167,22 +239,24 @@ public class FrameRimuovi extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameRimuovi().setVisible(true);
+                new FrameRimuovi(username,id).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify                     
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAnnulla;
+    private javax.swing.JButton jButtonConferma;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JRadioButton jRadioButtonInvenduto;
+    private javax.swing.JRadioButton jRadioButtonVenduto;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JSlider jSliderRating;
+    private javax.swing.JTextArea jTextAreaFeedback;
+    private javax.swing.JTextField jTextUserAcq;
     // End of variables declaration                   
 }

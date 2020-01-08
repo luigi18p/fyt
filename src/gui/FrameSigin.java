@@ -13,7 +13,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Locale;
 
-import controller.GestoreUtente;
+import javax.swing.JOptionPane;
+
+import businessLogic.GestoreUtente;
+
+
 
 /**
  *
@@ -202,24 +206,29 @@ public class FrameSigin extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {  
-        String nome = jTextName.getText();
-        String cognome = jTextCognome.getText();
-        String email = jTextEmail.getText();
-        String telefono = jTextTelefono.getText();
-        String username = jTextUsername.getText();
-        String password = jTextPassword.getText();
-                
-        java.util.Date date = dateChooserDataNascita.getSelectedDate().getTime();
-        java.sql.Date sDate = new java.sql.Date(date.getTime());
-        double ntelefono = Double.parseDouble(telefono);
-        GestoreUtente gu = new GestoreUtente();
-        gu.Registrazione(nome, cognome, email, password, sDate, ntelefono, username);
-        
-        this.toBack();
-        setVisible(false);
-        new FrameLogin().toFront();
-        new FrameLogin().setState(java.awt.Frame.NORMAL);
-        new FrameLogin().setVisible(true);
+        try {
+			String nome = jTextName.getText();
+			String cognome = jTextCognome.getText();
+			String email = jTextEmail.getText();
+			String telefono = jTextTelefono.getText();
+			String username = jTextUsername.getText();
+			String password = jTextPassword.getText();
+			        
+			java.util.Date date = dateChooserDataNascita.getSelectedDate().getTime();
+			java.sql.Date sDate = new java.sql.Date(date.getTime());
+			double ntelefono = Double.parseDouble(telefono);
+			GestoreUtente gu = new GestoreUtente();
+			gu.Registrazione(nome, cognome, email, password, sDate, ntelefono, username);
+			
+			this.toBack();
+			setVisible(false);
+			new FrameLogin().toFront();
+			new FrameLogin().setState(java.awt.Frame.NORMAL);
+			new FrameLogin().setVisible(true);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Registrazione non effettuata.\nReinserire i campi correttamete.");
+			e.printStackTrace();
+		}
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         

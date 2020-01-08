@@ -5,7 +5,10 @@
  */
 package gui;
 
-import controller.GestoreUtente;
+import javax.swing.JOptionPane;
+
+import businessLogic.GestoreUtente;
+
 
 /**
  *
@@ -47,7 +50,6 @@ public class FrameLogin extends javax.swing.JFrame {
         jLabel2.setText("Nome utente:");
 
         jPasswordpassword.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jPasswordpassword.setText("jPasswordField1");
         jPasswordpassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordpasswordActionPerformed(evt);
@@ -97,13 +99,13 @@ public class FrameLogin extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(jLabel3)))
                 .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPasswordpassword)
-                    .addComponent(jTextUsername)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jButtonLogin)))
-                .addContainerGap(190, Short.MAX_VALUE))
+                        .addComponent(jButtonLogin))
+                    .addComponent(jPasswordpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextUsername, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,19 +137,27 @@ public class FrameLogin extends javax.swing.JFrame {
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
     	
-        String username = jTextUsername.getText();
-        String password = jPasswordpassword.getText();
-                
-        GestoreUtente gu = new GestoreUtente();
-        int verifica = gu.Login(username, password);
-      
-        if (verifica == 0){
-            this.toBack();
-            setVisible(false);//senza questa resta eseguita una finestra java di login
-            FrameHome home = new FrameHome(username);
-            home.setVisible(true);
-            home.toFront();
-        }
+    	try {
+	        String username = jTextUsername.getText();
+	        String password = jPasswordpassword.getText();
+	                
+	        GestoreUtente gu = new GestoreUtente();
+	        int verifica = gu.Login(username, password);
+	      
+	        if (verifica == 0){
+	            this.toBack();
+	            setVisible(false);//senza questa resta eseguita una finestra java di login
+	            FrameHome home = new FrameHome(username);
+	            home.setVisible(true);
+	            home.toFront();
+	        }
+	        else {
+	        	JOptionPane.showMessageDialog(null,"Username o password sbagliati. ");
+	        }
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    		JOptionPane.showMessageDialog(null,"Username o password sbagliati. ");
+    	}
 
     }                                            
 

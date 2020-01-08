@@ -5,6 +5,14 @@
  */
 package gui;
 
+import java.awt.HeadlessException;
+
+import javax.swing.JOptionPane;
+
+import businessLogic.GestoreBiglietto;
+import businessLogic.GestoreProfilo;
+import domain.Profilo;
+
 /**
  *
  * @author gioac
@@ -33,41 +41,33 @@ public class FrameHome extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jTextFieldPartenza = new javax.swing.JTextField();
+        jTextDestinazione = new javax.swing.JTextField();
+        jCheckBoxTipAR = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonCerca = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
-        dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
+        jSpinnerNPosti = new javax.swing.JSpinner();
+        dateChooserPartenza = new datechooser.beans.DateChooserCombo();
+        dateChooserDestinazione = new datechooser.beans.DateChooserCombo();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuCiao = new javax.swing.JMenu();
+        jMenuItemIMieiAnnunci = new javax.swing.JMenuItem();
+        jMenuImieiAcquisti = new javax.swing.JMenuItem();
         jMenuGestisciProfilo = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuImpostazioni = new javax.swing.JMenuItem();
+        jMenuLogout = new javax.swing.JMenuItem();
+        jMenuInserisciAnnuncio = new javax.swing.JMenu();
+        jMenuRiepilogo = new javax.swing.JMenu();
+        jMenuContatti = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Find Your Ticket");
@@ -75,17 +75,15 @@ public class FrameHome extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Destinazione");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField1.setText("jTextField1");
+        jTextFieldPartenza.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField2.setText("jTextField2");
+        jTextDestinazione.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCheckBox1.setText("Andata e Ritorno");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxTipAR.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jCheckBoxTipAR.setText("Andata e Ritorno");
+        jCheckBoxTipAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jCheckBoxTipARActionPerformed(evt);
             }
         });
 
@@ -98,11 +96,11 @@ public class FrameHome extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Partenza");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Cerca");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCerca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonCerca.setText("Cerca");
+        jButtonCerca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonCercaActionPerformed(evt);
             }
         });
 
@@ -119,26 +117,26 @@ public class FrameHome extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(26, 26, 26)
-                        .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(dateChooserDestinazione, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(dateChooserPartenza, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinnerNPosti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addComponent(jCheckBox1)
+                        .addComponent(jButtonCerca))
+                    .addComponent(jCheckBoxTipAR)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextFieldPartenza)
+                            .addComponent(jTextDestinazione, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(187, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,28 +145,28 @@ public class FrameHome extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
+                        .addComponent(jCheckBoxTipAR)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldPartenza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextDestinazione, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3))
-                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateChooserPartenza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateChooserDestinazione, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(jButtonCerca)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSpinnerNPosti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -189,91 +187,9 @@ public class FrameHome extends javax.swing.JFrame {
 
         //jPanel3.setVisible(false);//non visualizza la ricerca
 
-        jPanel5.setPreferredSize(new java.awt.Dimension(250, 73));
-
-        jLabel8.setText("Biglietto 1");
-
-        jButton2.setText("Visualizza");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("info principali biglietto");
-
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8))
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(52, 52, 52))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(190, Short.MAX_VALUE))))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(23, 23, 23))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel4.setPreferredSize(new java.awt.Dimension(250, 73));
-
-        jLabel7.setText("Biglietto 2");
-
-        jButton3.setText("Visualizza");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(51, 51, 51))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-
         jPanel6.setPreferredSize(new java.awt.Dimension(250, 73));
 
-        jLabel9.setText("Biglietto 3");
+        jLabel9.setText("Biglietto");
 
         jButton4.setText("Visualizza");
 
@@ -284,7 +200,7 @@ public class FrameHome extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(48, 48, 48))
         );
@@ -303,42 +219,43 @@ public class FrameHome extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
-                .addGap(108, 108, 108))
+                .addGap(42, 42, 42)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel3);
         jScrollPane1.setVisible(false);//non visualizza la ricerca
 
-        jMenu1.setText("Ciao "+username+"!");
+        jMenuCiao.setText("Ciao "+username+"!");
 
-        jMenuItem1.setText("I miei annunci");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemIMieiAnnunci.setText("I miei annunci");
+        jMenuItemIMieiAnnunci.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemIMieiAnnunciActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenuCiao.add(jMenuItemIMieiAnnunci);
 
-        jMenuItem5.setText("I miei acquisti");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+        jMenuImieiAcquisti.setText("I miei acquisti");
+        jMenuImieiAcquisti.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuImieiAcquistiMouseClicked(evt);
             }
         });
-        jMenu1.add(jMenuItem5);
+        jMenuImieiAcquisti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuImieiAcquistiActionPerformed(evt);
+            }
+        });
+        jMenuCiao.add(jMenuImieiAcquisti);
 
         jMenuGestisciProfilo.setText("Gestisci profilo");
         jMenuGestisciProfilo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -351,31 +268,49 @@ public class FrameHome extends javax.swing.JFrame {
                 jMenuGestisciProfiloActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuGestisciProfilo);
+        jMenuCiao.add(jMenuGestisciProfilo);
 
-        jMenuItem3.setText("Impostazioni");
-        jMenu1.add(jMenuItem3);
+        jMenuImpostazioni.setText("Impostazioni");
+        jMenuCiao.add(jMenuImpostazioni);
 
-        jMenuItem4.setText("Logout");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuLogout.setText("Logout");
+        jMenuLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuLogoutActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        jMenuCiao.add(jMenuLogout);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuCiao);
 
-        jMenu2.setText("Inserisci Annuncio");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Contatti");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenuInserisciAnnuncio.setText("Inserisci Annuncio");
+        jMenuInserisciAnnuncio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu3MouseClicked(evt);
+                jMenuInserisciAnnuncioMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu3);
+        jMenuInserisciAnnuncio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuInserisciAnnuncioActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenuInserisciAnnuncio);
+
+        jMenuRiepilogo.setText("Riepilogo");
+        jMenuRiepilogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuRiepilogoMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuRiepilogo);
+
+        jMenuContatti.setText("Contatti");
+        jMenuContatti.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuContattiMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuContatti);
 
         setJMenuBar(jMenuBar1);
 
@@ -401,17 +336,18 @@ public class FrameHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+    private void jMenuItemIMieiAnnunciActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         // TODO add your handling code here:
         this.toBack();
         //setVisible(false);//senza questa resta eseguita una finestra java di home
-        FrameIMieiAnnunci myhome = new FrameIMieiAnnunci();
+        FrameIMieiAnnunci myhome = new FrameIMieiAnnunci(username);
         myhome.setVisible(true);
         myhome.toFront();
         
-    }                                          
+    }                                                     
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void jMenuLogoutActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
         this.toBack();
         setVisible(false);
@@ -419,33 +355,37 @@ public class FrameHome extends javax.swing.JFrame {
         new FrameLogin().setState(java.awt.Frame.NORMAL);
         new FrameLogin().setVisible(true); //se tolgo l'istruz in login allora rimuovi anche questa, serve per rendere visibile la nuova finestra di login
         
-    }                                          
+    }                                           
 
-    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {                                    
+    private void jMenuContattiMouseClicked(java.awt.event.MouseEvent evt) {                                           
         // TODO add your handling code here:
         FrameContatti contatti = new FrameContatti();
         contatti.setVisible(true);
         contatti.toFront();
-    }                                   
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
     }                                          
+
+    private void jCheckBoxTipARActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+    }                                              
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     }                                        
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButtonCercaActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
         //jPanel3.setVisible(true);//visualizza ricerca
         jScrollPane1.setVisible(true);//visualizza ricerca
         pack();
-    }                                        
+    }                                            
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void jMenuImieiAcquistiActionPerformed(java.awt.event.ActionEvent evt) {                                                   
         // TODO add your handling code here:
-    }                                          
+        this.toBack();
+        FrameIMieiAcquisti mieiAcquisti = new FrameIMieiAcquisti(username);
+        mieiAcquisti.setVisible(true);
+    	mieiAcquisti.toFront();
+    }                                                  
 
     private void jMenuGestisciProfiloMouseClicked(java.awt.event.MouseEvent evt) {                                                  
         // TODO add your handling code here:
@@ -459,6 +399,41 @@ public class FrameHome extends javax.swing.JFrame {
     	gestisciProfilo.toFront();
     }                                                    
 
+    private void jMenuInserisciAnnuncioActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        // TODO add your handling code here:
+    }                                                      
+
+    private void jMenuInserisciAnnuncioMouseClicked(java.awt.event.MouseEvent evt) {                                                    
+        // TODO add your handling code here:
+        this.toBack();
+        FrameInserisciAnnuncio inserisciAnnuncio = new FrameInserisciAnnuncio(username);
+        inserisciAnnuncio.setVisible(true);
+    	inserisciAnnuncio.toFront();
+    }                                                   
+
+    private void jMenuImieiAcquistiMouseClicked(java.awt.event.MouseEvent evt) {                                                
+        // TODO add your handling code here:
+        //pulsante i miei acquisti
+    }                                               
+
+    private void jMenuRiepilogoMouseClicked(java.awt.event.MouseEvent evt) {                                            
+        // TODO add your handling code here:
+        ///riepologo
+    	try {
+			Profilo p = new Profilo(username);
+			GestoreProfilo gestoreProfilo = new GestoreProfilo();
+			p = gestoreProfilo.ReadProfilo(username);
+			JOptionPane.showMessageDialog(null,
+					"Username:"+username+
+					"\nTotale Biglietti in vendita:"+p.getTotaleBigliettiInVendita()+
+					"\nMedia Feedback:"+p.getMediaFeedback()+
+					"\nN. Visite:"+p.getnVisite());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Errore nella visualizzazione del profilo");
+			e.printStackTrace();
+		}
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -488,50 +463,42 @@ public class FrameHome extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-        	public void run() {
+            public void run() {
                 new FrameHome(username).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify                     
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
-    private datechooser.beans.DateChooserCombo dateChooserCombo2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private datechooser.beans.DateChooserCombo dateChooserDestinazione;
+    private datechooser.beans.DateChooserCombo dateChooserPartenza;
     private javax.swing.JButton jButton4;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JButton jButtonCerca;
+    private javax.swing.JCheckBox jCheckBoxTipAR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuCiao;
+    private javax.swing.JMenu jMenuContatti;
     private javax.swing.JMenuItem jMenuGestisciProfilo;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuImieiAcquisti;
+    private javax.swing.JMenuItem jMenuImpostazioni;
+    private javax.swing.JMenu jMenuInserisciAnnuncio;
+    private javax.swing.JMenuItem jMenuItemIMieiAnnunci;
+    private javax.swing.JMenuItem jMenuLogout;
+    private javax.swing.JMenu jMenuRiepilogo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinnerNPosti;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextDestinazione;
+    private javax.swing.JTextField jTextFieldPartenza;
     // End of variables declaration                   
 }

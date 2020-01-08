@@ -11,26 +11,27 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import businessLogic.GestoreAccordo;
 import businessLogic.GestoreAnnuncio;
 import businessLogic.GestoreBiglietto;
-import domain.Annuncio;
+import domain.Accordo;
 import domain.BigliettoTreno;
 
 /**
  *
  * @author gioac
  */
-public class FrameIMieiAnnunci extends javax.swing.JFrame {
+public class FrameIMieiAcquisti extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrameIMieiAnnunci
+     * Creates new form FrameIMieiAcquisti
      */
 	private static String username;
 	
-    public FrameIMieiAnnunci(String username) {
-    	this.username = username;
+    public FrameIMieiAcquisti(String username) {
+    	this.username=username;
         initComponents();
-        initTable();  
+        initTable();
     }
 
     /**
@@ -43,43 +44,43 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableAnnunci = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jButtonVisualizza = new javax.swing.JButton();
-        jButtonRimuovi = new javax.swing.JButton();
+        jButtonRilascia = new javax.swing.JButton();
         jButtonAnnulla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Find Your Ticket");
 
-        jTableAnnunci.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id Biglietto", "Prezzo"
+                "Username Venditore", "Id Biglietto", "Data Accordo", "Review Venditore", "Rating Venditore", "Rating Personale"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Float.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTableAnnunci);
+        jScrollPane1.setViewportView(jTable1);
 
-        jButtonVisualizza.setText("Visualizza");
+        jButtonVisualizza.setText("Visualizza Review");
         jButtonVisualizza.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVisualizzaActionPerformed(evt);
             }
         });
 
-        jButtonRimuovi.setText("Rimuovi");
-        jButtonRimuovi.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRilascia.setText("Rilascia Review");
+        jButtonRilascia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRimuoviActionPerformed(evt);
+                jButtonRilasciaActionPerformed(evt);
             }
         });
 
@@ -95,108 +96,91 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonVisualizza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonRimuovi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonAnnulla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButtonRilascia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonVisualizza, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAnnulla, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(51, 51, 51)
                 .addComponent(jButtonVisualizza)
-                .addGap(35, 35, 35)
-                .addComponent(jButtonRimuovi)
-                .addGap(35, 35, 35)
+                .addGap(31, 31, 31)
+                .addComponent(jButtonRilascia)
+                .addGap(39, 39, 39)
                 .addComponent(jButtonAnnulla)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
-    }// </editor-fold>           
+    }// </editor-fold>   
     
     private void initTable() {
     	
-    	DefaultTableModel table = (DefaultTableModel) jTableAnnunci.getModel();
-    	List<Annuncio> listaAnnunci = null;
-    	GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
-    	listaAnnunci = gestoreAnnuncio.getAllAnnunciPersonali(username);
-    	for(Annuncio a : listaAnnunci) {
-    		table.addRow(new Object[] {a.getIdBiglietto(),a.getPrezzoRichiesto()});
+    	DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+    	List<Accordo> listaAnnunci = null;
+    	GestoreAccordo gestoreAccordo = new GestoreAccordo();
+    	listaAnnunci = gestoreAccordo.ReadAllAccordi(username);
+
+    	for(Accordo a : listaAnnunci) {
+    		table.addRow(new Object[] {a.getUserVen(),a.getIdBiglietto(),a.getDataAccordo(),
+    				a.getReviewVen(),a.getRatingVen(),a.getRatingAcq()});
 		}
     }
 
     private void jButtonVisualizzaActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
+        //visualizza review
     	try {
-	    	ListSelectionModel cellSelectionModel = jTableAnnunci.getSelectionModel();
+	    	ListSelectionModel cellSelectionModel = jTable1.getSelectionModel();
 	    	cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    	
-	    	int[] selectedRow = jTableAnnunci.getSelectedRows();
-	        int[] selectedColumns = jTableAnnunci.getSelectedColumns();
+	    	int[] selectedRow = jTable1.getSelectedRows();
+	        int[] selectedColumns = jTable1.getSelectedColumns();
 	        
-	        Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], selectedColumns[0]);
-	        String id = String.valueOf(idBiglietto);
-
-	        GestoreBiglietto gestoreBiglietto = new GestoreBiglietto();
-	        BigliettoTreno b = gestoreBiglietto.ReadBigliettoTreno(id);
-	        
-	        JOptionPane.showMessageDialog(null,
-	        		"\nNome:		"+b.getNominativo()+
-	        		"\nUser:		"+b.getUserVen()+
-	        		"\nPartenza:	"+b.getPartenza()+
-	        		"\nArrivo:		"+b.getArrivo()+
-	        		"\nData Andata:	"+b.getDataAndata()+
-	        		"\nData Ritorno:"+b.getDataRitorno()+
-	        		"\nTipo Trasporto:"+b.getTipoTrasporto()+
-	        		"\nTipologia A/R:"+b.getTipologiaAR()+
-	        		"\nPrezzo Acquisto:"+b.getPrezzoAcquisto()+
-	        		"\nN. Posti:	"+b.getNumeroDiPosti()+
-	        		"\nCompagnia:	"+b.getCompagnia()+
-	        		"\nClasse:		"+b.getClasse_T()+
-	        		"\nFermate:		"+b.getFermate_T()
-	        	);
+	        Object review = jTable1.getValueAt(selectedRow[0], selectedColumns[0]);
+	        //String id = String.valueOf(idBiglietto);
+       
+	        JOptionPane.showMessageDialog(null,review);
     	}catch(Exception e) {
     		e.printStackTrace();
-    		JOptionPane.showMessageDialog(null,"Seleziona un elemento della colonna Id Biglietto");
+    		JOptionPane.showMessageDialog(null,"Seleziona un elemento della colonna Review Venditore");
     	}
-        
     }                                                 
 
-    private void jButtonRimuoviActionPerformed(java.awt.event.ActionEvent evt) {                                               
+    private void jButtonRilasciaActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
-        //pulsante rimuovi
-    	
+        //rilascia review
     	try {
-	    	ListSelectionModel cellSelectionModel = jTableAnnunci.getSelectionModel();
+	    	ListSelectionModel cellSelectionModel = jTable1.getSelectionModel();
 	    	cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    	
-	    	int[] selectedRow = jTableAnnunci.getSelectedRows();
-	        int[] selectedColumns = jTableAnnunci.getSelectedColumns();
+	    	int[] selectedRow = jTable1.getSelectedRows();
+	        int[] selectedColumns = jTable1.getSelectedColumns();
 	        
-	        Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], selectedColumns[0]);
+	        Object idBiglietto = jTable1.getValueAt(selectedRow[0], selectedColumns[0]);
 	        String id = String.valueOf(idBiglietto);
-	        int i = (int) idBiglietto;
 	        
-	        FrameRimuovi rimuovi = new FrameRimuovi(username,i);
-	        rimuovi.setVisible(true);
-	        rimuovi.toFront();
+	        FrameRilasciaReview rilasciaReview = new FrameRilasciaReview(username,(int)idBiglietto);
+	        rilasciaReview.setVisible(true);
+	    	rilasciaReview.toFront();
+       
 	        
     	}catch(Exception e) {
     		e.printStackTrace();
-    		JOptionPane.showMessageDialog(null,"Seleziona un elemento della colonna Id Biglietto");
-    		
+    		JOptionPane.showMessageDialog(null,"Seleziona un elemento della colonna Review Venditore");
     	}
-	        		
-    }                                              
+
+    }                                               
 
     private void jButtonAnnullaActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
-        //pulsante annulla
+        //annulla
         this.toBack();
         setVisible(false);
     }                                              
@@ -218,29 +202,29 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameIMieiAnnunci.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameIMieiAcquisti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameIMieiAnnunci.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameIMieiAcquisti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameIMieiAnnunci.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameIMieiAcquisti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameIMieiAnnunci.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameIMieiAcquisti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            	new FrameIMieiAnnunci(username).setVisible(true);
+                new FrameIMieiAcquisti(username).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButtonAnnulla;
-    private javax.swing.JButton jButtonRimuovi;
+    private javax.swing.JButton jButtonRilascia;
     private javax.swing.JButton jButtonVisualizza;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableAnnunci;
+    private javax.swing.JTable jTable1;
     // End of variables declaration                   
 }
