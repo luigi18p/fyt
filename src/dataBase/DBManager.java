@@ -3,9 +3,7 @@ import java.sql.*;
 
 
 public class DBManager extends ConnectionFactory{
-
-
-				
+		
 		public static Connection createConnection() {
 			Connection conn=null;
 
@@ -21,26 +19,3 @@ public class DBManager extends ConnectionFactory{
 			return conn;
 		}
 }
-
-/*
- 
-Connection conn;
-PreparedStatement preparedStatement;
-ResultSet result;
-String querysql;
-
-querysql = "SELECT nome FROM utente;";
-
-try {
-	preparedStatement = conn.prepareStatement(querysql); // creo sempre uno statement sulla
-								// connessione
-	preparedStatement.execute();
-	result = preparedStatement.getResultSet(); // faccio la query su uno statement
-	while (result.next() == true) {
-		System.out.println(result.getString("nome"));
-	}
-} catch (SQLException e) {
-	System.out.println("errore:" + e.getMessage());
-} // fine try-catch
-conn.close(); // chiusura connessione
-*/

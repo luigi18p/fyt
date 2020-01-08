@@ -1,31 +1,29 @@
 package dataBase;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.time.LocalDate;
 import java.util.List;
 
-import domain.Utente;
+import domain.Annuncio;
 
-public class UtenteDAO {
+public class AnnuncioDAO {
 
-    private static final String CREATE_QUERY = "INSERT INTO utente (nome,cognome,email,password,dataNascita,cellulare,username) VALUES (?,?,?,?,?,?,?)";
-    private static final String READ_QUERY = "SELECT nome,cognome,email,password,dataNascita,cellulare,username FROM utente WHERE username = ?";
-    private static final String READ_login_QUERY = "SELECT username,password FROM utente WHERE username = ? AND password = ?";
-//    private static final String READ_ALL_QUERY = "SELECT * FROM utente";
-    private static final String UPDATE_QUERY = "UPDATE utente SET nome=?,cognome=?,email=?,password=?,dataNascita=?,cellulare=? WHERE username = ?";
-    private static final String DELETE_QUERY = "DELETE FROM utente WHERE username = ?";
-    
-    //da eliminare getallutenti
- /*   public List getAllUtenti() {
+    private static final String CREATE_QUERY = "INSERT INTO annuncio (username,idBiglietto,descrizione,prezzoRichiesto) VALUES (?,?,?,?)";
+    private static final String READ_QUERY = "SELECT username,idBiglietto,descrizione,prezzoRichiesto FROM annuncio WHERE idBiglietto = ?";
+    private static final String READ_ALL_QUERY = "SELECT * FROM annuncio";
+    private static final String READ_ALL_ANNUNCI_tipologia_QUERY = "SELECT * FROM annuncio WHERE (SELECT idBiglietto FROM biglietto WHERE tipoTrasporto = ?)";
+    private static final String READ_ALL_ANNUNCI_username_QUERY = "SELECT * FROM annuncio WHERE username = ?";
+    private static final String UPDATE_QUERY = "UPDATE annuncio SET nome=?,descrizione=?,prezzoRichiesto=? WHERE idBiglietto = ?";
+    private static final String DELETE_QUERY = "DELETE FROM annuncio WHERE idBiglietto = ?";
+
+    public List getAllAnnunci() {
     	
-    	List<Utente> listaUtenti = new ArrayList<Utente>();
-    	Utente utente = null;
+    	List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
+    	Annuncio annuncio = null;
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
     	ResultSet result = null;
@@ -36,10 +34,8 @@ public class UtenteDAO {
     		preparedStatement.execute();
     		result = preparedStatement.getResultSet();
     		while (result.next() == true) {
-    			utente = new Utente(result.getString(1),result.getString(2),result.getString(3),result.getString(4),result.getDate(5),result.getDouble(6),result.getString(7));
-    			
-    			listaUtenti.add(utente);
-    			//System.out.println(utente.getCognome());
+    			annuncio = new Annuncio(result.getString(1),result.getInt(2),result.getString(3),result.getFloat(4));
+    			listaAnnunci.add(annuncio);
     		}
     	} catch (SQLException e) {
     		e.printStackTrace();
@@ -61,12 +57,96 @@ public class UtenteDAO {
             }
         }
     	
-		return listaUtenti;
+		return listaAnnunci;
     	
     }
-*/
     
-    public int createUtente(Utente u) {
+    public List getAllAnnunci(String tipoTrasporto) {
+    	
+    	List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
+    	Annuncio annuncio = null;
+    	Connection conn = null;
+    	PreparedStatement preparedStatement = null;
+    	ResultSet result = null;
+    	
+    	try {
+    		conn = DBManager.createConnection();
+    		preparedStatement = conn.prepareStatement(READ_ALL_ANNUNCI_tipologia_QUERY);
+    		preparedStatement.execute();
+    		result = preparedStatement.getResultSet();
+    		while (result.next() == true) {
+    			annuncio = new Annuncio(result.getString(1),result.getInt(2),result.getString(3),result.getFloat(4));
+    			
+    			listaAnnunci.add(annuncio);
+    		}
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	} finally {
+            try {
+                result.close();
+            } catch (Exception rse) {
+                rse.printStackTrace();
+            }
+            try {
+                preparedStatement.close();
+            } catch (Exception sse) {
+                sse.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (Exception cse) {
+                cse.printStackTrace();
+            }
+        }
+    	
+		return listaAnnunci;
+    	
+    }
+    
+    public List getAllAnnunciPersonali(String username) {
+    	
+    	List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
+    	Annuncio annuncio = null;
+    	Connection conn = null;
+    	PreparedStatement preparedStatement = null;
+    	ResultSet result = null;
+    	
+    	try {
+    		conn = DBManager.createConnection();
+    		preparedStatement = conn.prepareStatement(READ_ALL_ANNUNCI_username_QUERY);
+    		preparedStatement.setString(1, username);
+    		preparedStatement.execute();
+    		result = preparedStatement.getResultSet();
+    		while (result.next() == true) {
+    			annuncio = new Annuncio(result.getString(1),result.getInt(2),result.getString(3),result.getFloat(4));
+    			
+    			listaAnnunci.add(annuncio);
+    		}
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	} finally {
+            try {
+                result.close();
+            } catch (Exception rse) {
+                rse.printStackTrace();
+            }
+            try {
+                preparedStatement.close();
+            } catch (Exception sse) {
+                sse.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (Exception cse) {
+                cse.printStackTrace();
+            }
+        }
+    	
+		return listaAnnunci;
+    	
+    }
+    
+    public int createAnnuncio(Annuncio a) {
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
     	ResultSet result = null;
@@ -74,13 +154,10 @@ public class UtenteDAO {
     	try {
     		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(CREATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, u.getNome());
-            preparedStatement.setString(2, u.getCognome());
-            preparedStatement.setString(3, u.getEmail());
-            preparedStatement.setString(4, u.getPassword());
-            preparedStatement.setDate(5,  u.getDataNascita());
-            preparedStatement.setDouble(6, u.getCellulare());
-            preparedStatement.setString(7, u.getUsername());
+            preparedStatement.setString(1, a.getUsername());
+            preparedStatement.setInt(2, a.getIdBiglietto());
+            preparedStatement.setString(3, a.getDescrizione());
+            preparedStatement.setFloat(4, a.getPrezzoRichiesto());
             
             preparedStatement.execute();
             result = preparedStatement.getGeneratedKeys();
@@ -114,7 +191,7 @@ public class UtenteDAO {
 		
     }
 
-    public int updateUtente(Utente u) {
+    public int updateAnnuncio(Annuncio a) {
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
     	ResultSet result = null;
@@ -122,13 +199,10 @@ public class UtenteDAO {
     	try {
     		conn = DBManager.createConnection();
     		preparedStatement = conn.prepareStatement(UPDATE_QUERY, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, u.getNome());
-            preparedStatement.setString(2, u.getCognome());
-            preparedStatement.setString(3, u.getEmail());
-            preparedStatement.setString(4, u.getPassword());
-            preparedStatement.setDate(5,  u.getDataNascita());
-            preparedStatement.setDouble(6, u.getCellulare());
-            preparedStatement.setString(7, u.getUsername());
+            preparedStatement.setString(1, a.getUsername());
+            preparedStatement.setInt(2, a.getIdBiglietto());
+            preparedStatement.setString(3, a.getDescrizione());
+            preparedStatement.setFloat(4, a.getPrezzoRichiesto());
             
             preparedStatement.execute();
             result = preparedStatement.getGeneratedKeys();
@@ -161,13 +235,13 @@ public class UtenteDAO {
 		return 0;
     }
     
-    public boolean deleteUtente(Utente u) {
+    public boolean deleteAnnuncio(Annuncio a) {
 		Connection conn = null;
         PreparedStatement preparedStatement = null;
         try {
         	conn = DBManager.createConnection();
             preparedStatement = conn.prepareStatement(DELETE_QUERY);
-            preparedStatement.setString(1, u.getUsername());
+            preparedStatement.setInt(1, a.getIdBiglietto());
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
@@ -187,21 +261,21 @@ public class UtenteDAO {
         return false;
 	}
 
-    public Utente readUtente(String username) {
+    public Annuncio readAnnuncio(int idBiglietto) {
 		
-		Utente u= null;
+		Annuncio a= null;
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
         try {
             conn = DBManager.createConnection();
             preparedStatement = conn.prepareStatement(READ_QUERY);
-            preparedStatement.setString(1, username);
+            preparedStatement.setInt(1, idBiglietto);
             preparedStatement.execute();
             result = preparedStatement.getResultSet();
  
             if (result.next() && result != null) {
-                u = new Utente(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getDate(5),result.getDouble(6),username);
+                a = new Annuncio(result.getString(1), result.getInt(2), result.getString(3), result.getFloat(4));
             } 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -223,50 +297,7 @@ public class UtenteDAO {
             }
         }
  
-        return u;
-	}
-
-    public Utente readUtenteLogin(String username, String password) {
-		
-		Utente uVerifica= new Utente();
-		
-        Connection conn = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet result = null;
-        try {
-            conn = DBManager.createConnection();
-            preparedStatement = conn.prepareStatement(READ_login_QUERY);
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-            preparedStatement.execute();
-            result = preparedStatement.getResultSet();
- 
-            if (result.next() && result != null) {
-                uVerifica.setUsername(result.getString(1));
-                uVerifica.setPassword(result.getString(2));
-            } 
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                result.close();
-            } catch (Exception rse) {
-                rse.printStackTrace();
-            }
-            try {
-                preparedStatement.close();
-            } catch (Exception sse) {
-                sse.printStackTrace();
-            }
-            try {
-                conn.close();
-            } catch (Exception cse) {
-                cse.printStackTrace();
-            }
-        }
- 
-        return uVerifica;
+        return a;
 	}
 
 }
