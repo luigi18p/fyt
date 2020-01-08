@@ -196,14 +196,18 @@ public class FrameRimuovi extends javax.swing.JFrame {
 		    	Boolean venduto = jRadioButtonVenduto.isSelected();
 		    	int ratingV = jSliderRating.getValue();
 		    	
-		    	gestoreAccordo.CreateAccordo(username, id, userAcq,feedback,null,ratingV,0);
-		    	
-		    	JOptionPane.showMessageDialog(null,"Accordo inserito!");
+		    	try {
+					gestoreAccordo.CreateAccordo(username, id, userAcq,feedback,null,ratingV,0);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null,"Accordo non approvato!");
+					e.printStackTrace();
+				}   	
 		    	
 		        this.toBack();
 		        setVisible(false);
 	    	}
     	}catch(Exception e) {
+    		JOptionPane.showMessageDialog(null,"Accordo non inserito!");
     		e.printStackTrace();
     	}
     	
