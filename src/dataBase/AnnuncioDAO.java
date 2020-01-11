@@ -20,7 +20,7 @@ public class AnnuncioDAO {
     private static final String UPDATE_QUERY = "UPDATE annuncio SET nome=?,descrizione=?,prezzoRichiesto=? WHERE idBiglietto = ?";
     private static final String DELETE_QUERY = "DELETE FROM annuncio WHERE idBiglietto = ?";
 
-    public List getAllAnnunci() {
+    public List<Annuncio> getAllAnnunci() {
     	
     	List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
     	Annuncio annuncio = null;
@@ -61,7 +61,7 @@ public class AnnuncioDAO {
     	
     }
     
-    public List getAllAnnunci(String tipoTrasporto) {
+    public List<Annuncio> getAllAnnunci(String tipoTrasporto) {
     	
     	List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
     	Annuncio annuncio = null;
@@ -103,7 +103,7 @@ public class AnnuncioDAO {
     	
     }
     
-    public List getAllAnnunciPersonali(String username) {
+    public List<Annuncio> getAllAnnunciPersonali(String username) {
     	
     	List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
     	Annuncio annuncio = null;

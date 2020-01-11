@@ -46,7 +46,7 @@ public class GestoreAnnuncio {
 		return 0;
 	}
 		
-	public List getAllAnnunciPersonali(String username){
+	public List<Annuncio> getAllAnnunciPersonali(String username){
 		
 		List<Annuncio> listaAnnunci = null;
 		AnnuncioDAO annuncioDAO = new AnnuncioDAO();

@@ -7,8 +7,11 @@ package gui;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+
 import businessLogic.GestoreAccordo;
 import businessLogic.GestoreBiglietto;
+import jdk.nashorn.internal.runtime.ECMAErrors;
 
 
 /**
@@ -182,35 +185,37 @@ public class FrameRimuovi extends javax.swing.JFrame {
     private void jButtonConfermaActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
         //pulsante conferma
-    	try {
-	    	if(jRadioButtonInvenduto.isSelected()) {
-	    		GestoreBiglietto gestoreBiglietto = new GestoreBiglietto();
-	    		gestoreBiglietto.DeleteBiglietto(id);
-	    		JOptionPane.showMessageDialog(null,"Biglietto non venduto!");
-	            this.toBack();
-	            setVisible(false);
-	    	}else {
-		    	GestoreAccordo gestoreAccordo = new GestoreAccordo();
-		    	String userAcq = jTextUserAcq.getText();
-		    	String feedback = jTextAreaFeedback.getText();
-		    	Boolean venduto = jRadioButtonVenduto.isSelected();
-		    	int ratingV = jSliderRating.getValue();
-		    	
-		    	try {
-					gestoreAccordo.CreateAccordo(username, id, userAcq,feedback,null,ratingV,0);
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null,"Accordo non approvato!");
-					e.printStackTrace();
-				}   	
-		    	
-		        this.toBack();
-		        setVisible(false);
-	    	}
-    	}catch(Exception e) {
-    		JOptionPane.showMessageDialog(null,"Accordo non inserito!");
-    		e.printStackTrace();
-    	}
     	
+	    if(jRadioButtonInvenduto.isSelected()) {
+	    	GestoreBiglietto gestoreBiglietto = new GestoreBiglietto();
+	    	try {	
+	    		gestoreBiglietto.DeleteBiglietto(id);
+	    		JOptionPane.showMessageDialog(null,"Rimozione Confermata\nBiglietto non venduto!");
+	    		this.toBack();
+	            setVisible(false);
+	    	}catch(Exception e) {
+	    		JOptionPane.showMessageDialog(null,"Rimozione non confermata.");
+	    		//e.printStackTrace();
+	    	}
+    	}else if(jRadioButtonVenduto.isSelected()){
+	    	GestoreAccordo gestoreAccordo = new GestoreAccordo();
+	    	String userAcq = jTextUserAcq.getText();
+	    	String feedback = jTextAreaFeedback.getText();
+	    	Boolean venduto = jRadioButtonVenduto.isSelected();
+	    	int ratingV = jSliderRating.getValue();
+	    	
+	    	try {
+				gestoreAccordo.CreateAccordo(username, id, userAcq,feedback,null,ratingV,0);
+				this.toBack();
+		        setVisible(false);
+			} catch(NullPointerException npe){
+				JOptionPane.showMessageDialog(null,"Accordo non approvato!\nInserire un username valida");
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null,"Accordo non approvato!");
+				e.printStackTrace();
+			}
+    	}else
+	    	JOptionPane.showMessageDialog(null,"Rimozione non autorizzata!\nSelezionare Venduto o Invenduto");
     }                                               
 
     /**

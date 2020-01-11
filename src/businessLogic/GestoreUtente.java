@@ -25,19 +25,20 @@ public class GestoreUtente {
 	}
 	
 	public int Login(String username, String password){
-		if(username.length() <15 && password.length() <15) {
-			
-			Utente uVerifica = new Utente();
-			UtenteDAO utenteDAO = new UtenteDAO();
-			uVerifica = utenteDAO.readUtenteLogin(username, password);
-			
-			int var1 = uVerifica.getUsername().compareTo( username );
-			int var2 = uVerifica.getPassword().compareTo( password );
-            if (var1 == var2) {
-            	return 0;
-            }
-		}
-		return 1;
+
+			if(username.length() <15 && password.length() <15) {
+				
+				Utente uVerifica = new Utente();
+				UtenteDAO utenteDAO = new UtenteDAO();
+				uVerifica = utenteDAO.readUtenteLogin(username, password);
+				
+				int var1 = uVerifica.getUsername().compareTo( username );
+				int var2 = uVerifica.getPassword().compareTo( password );
+			    if (var1 == var2) {
+			    	return 0;
+			    }
+			}
+			return 1;
 	};
 
 	public int updateUtente(String nome, String cognome, String email, String password, 

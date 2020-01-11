@@ -123,11 +123,10 @@ public class FrameIMieiAcquisti extends javax.swing.JFrame {
     private void initTable() {
     	
     	DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-    	List<Accordo> listaAnnunci = null;
+    	List<Accordo> listaAccordi = null;
     	GestoreAccordo gestoreAccordo = new GestoreAccordo();
-    	listaAnnunci = gestoreAccordo.ReadAllAccordi(username);
-
-    	for(Accordo a : listaAnnunci) {
+    	listaAccordi = gestoreAccordo.ReadAllAccordi(username);
+    	for(Accordo a : listaAccordi) {
     		table.addRow(new Object[] {a.getUserVen(),a.getIdBiglietto(),a.getDataAccordo(),
     				a.getReviewVen(),a.getRatingVen(),a.getRatingAcq()});
 		}
@@ -141,9 +140,10 @@ public class FrameIMieiAcquisti extends javax.swing.JFrame {
 	    	cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    	
 	    	int[] selectedRow = jTable1.getSelectedRows();
-	        int[] selectedColumns = jTable1.getSelectedColumns();
+	        //int[] selectedColumns = jTable1.getSelectedColumns();
 	        
-	        Object review = jTable1.getValueAt(selectedRow[0], selectedColumns[0]);
+	        Object review = jTable1.getValueAt(selectedRow[0], 3);
+	       // Object review = jTable1.getValueAt(selectedRow[0], selectedColumns[0]);
 	        //String id = String.valueOf(idBiglietto);
        
 	        JOptionPane.showMessageDialog(null,review);
@@ -161,19 +161,20 @@ public class FrameIMieiAcquisti extends javax.swing.JFrame {
 	    	cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    	
 	    	int[] selectedRow = jTable1.getSelectedRows();
-	        int[] selectedColumns = jTable1.getSelectedColumns();
+	        //int[] selectedColumns = jTable1.getSelectedColumns();
 	        
-	        Object idBiglietto = jTable1.getValueAt(selectedRow[0], selectedColumns[0]);
-	        String id = String.valueOf(idBiglietto);
-	        
+	        //Object idBiglietto = jTable1.getValueAt(selectedRow[0], selectedColumns[0]);
+	        Object idBiglietto = jTable1.getValueAt(selectedRow[0], 1);
+	        //String id = String.valueOf(idBiglietto);
+
 	        FrameRilasciaReview rilasciaReview = new FrameRilasciaReview(username,(int)idBiglietto);
 	        rilasciaReview.setVisible(true);
 	    	rilasciaReview.toFront();
        
 	        
     	}catch(Exception e) {
-    		e.printStackTrace();
-    		JOptionPane.showMessageDialog(null,"Seleziona un elemento della colonna Review Venditore");
+    		JOptionPane.showMessageDialog(null,"Errore");
+    		//e.printStackTrace();
     	}
 
     }                                               

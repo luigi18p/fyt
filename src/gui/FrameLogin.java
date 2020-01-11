@@ -144,19 +144,17 @@ public class FrameLogin extends javax.swing.JFrame {
 	        GestoreUtente gu = new GestoreUtente();
 	        int verifica = gu.Login(username, password);
 	      
-	        if (verifica == 0){
+	        if (verifica == 0) {
 	            this.toBack();
 	            setVisible(false);//senza questa resta eseguita una finestra java di login
 	            FrameHome home = new FrameHome(username);
 	            home.setVisible(true);
 	            home.toFront();
 	        }
-	        else {
-	        	JOptionPane.showMessageDialog(null,"Username o password sbagliati. ");
-	        }
     	}catch(Exception e) {
-    		e.printStackTrace();
     		JOptionPane.showMessageDialog(null,"Username o password sbagliati. ");
+    		//e.printStackTrace();
+    		
     	}
 
     }                                            

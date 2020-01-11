@@ -227,7 +227,7 @@ public class FrameSigin extends javax.swing.JFrame {
 			new FrameLogin().setVisible(true);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,"Registrazione non effettuata.\nReinserire i campi correttamete.");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
     }                                        
 

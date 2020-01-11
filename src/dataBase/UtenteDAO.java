@@ -246,7 +246,8 @@ public class UtenteDAO {
                 uVerifica.setPassword(result.getString(2));
             } 
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
+        	System.out.println("mi trovo in utente dao exception");
             e.printStackTrace();
         } finally {
             try {

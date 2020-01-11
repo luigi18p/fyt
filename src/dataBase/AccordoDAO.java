@@ -227,7 +227,7 @@ public class AccordoDAO {
         return a;
 	}
 
-    public List ReadAllAccordi(String username) {
+    public List<Accordo> ReadAllAccordi(String username) {
 
     	List<Accordo> listaAccordi = new ArrayList<Accordo>();
 		Accordo a= null;
@@ -241,7 +241,7 @@ public class AccordoDAO {
             preparedStatement.execute();
             result = preparedStatement.getResultSet();
  
-            if (result.next() && result != null) {
+            while (result.next() == true) {
                 a = new Accordo(result.getString(1), result.getInt(2), result.getDate(3), null, result.getString(4), null, result.getInt(5), result.getInt(6));
                 listaAccordi.add(a);
             } 
@@ -264,7 +264,6 @@ public class AccordoDAO {
                 cse.printStackTrace();
             }
         }
- 
         return listaAccordi;
 	}
 

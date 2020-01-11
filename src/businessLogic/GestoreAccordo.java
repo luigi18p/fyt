@@ -14,7 +14,6 @@ public class GestoreAccordo {
 	
 	public void CreateAccordo(String username, int id, String userAcq, String feedback, Object object, int ratingV, int i) {
 		
-
 			Utente u = new Utente();
 			UtenteDAO utenteDAO = new UtenteDAO();
 			u=utenteDAO.readUtente(userAcq);
@@ -36,7 +35,7 @@ public class GestoreAccordo {
 
 	}
 
-	public List ReadAllAccordi(String username) {
+	public List<Accordo> ReadAllAccordi(String username) {
 
 		List<Accordo> listaAccordi = null;
 		AccordoDAO accordoDAO = new AccordoDAO();
