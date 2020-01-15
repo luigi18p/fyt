@@ -10,9 +10,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import businessLogic.GestoreAnnuncio;
-import businessLogic.GestoreBiglietto;
 import domain.Annuncio;
 import domain.BigliettoTreno;
 
@@ -56,7 +56,7 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Biglietto", "Prezzo"
+                "Id Biglietto", "Prezzo Richiesto"
             }
         ) {
             Class[] types = new Class [] {
@@ -127,7 +127,7 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
     	listaAnnunci = gestoreAnnuncio.getAllAnnunciPersonali(username);
     	for(Annuncio a : listaAnnunci) {
     		table.addRow(new Object[] {a.getIdBiglietto(),a.getPrezzoRichiesto()});
-		}
+    	}
     }
 
     private void jButtonVisualizzaActionPerformed(java.awt.event.ActionEvent evt) {                                                  
@@ -136,14 +136,18 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
 	    	ListSelectionModel cellSelectionModel = jTableAnnunci.getSelectionModel();
 	    	cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    	
+	    	
 	    	int[] selectedRow = jTableAnnunci.getSelectedRows();
-	        int[] selectedColumns = jTableAnnunci.getSelectedColumns();
+	        //int[] selectedColumns = jTableAnnunci.getSelectedColumns();
+	    	//Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], selectedColumns[0]);
 	        
-	        Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], selectedColumns[0]);
-	        String id = String.valueOf(idBiglietto);
+	        Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], 0);
+	       // String id = String.valueOf(idBiglietto);
+	        int id = (int) idBiglietto;
+	        
 
-	        GestoreBiglietto gestoreBiglietto = new GestoreBiglietto();
-	        BigliettoTreno b = gestoreBiglietto.ReadBigliettoTreno(id);
+	        GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
+	        BigliettoTreno b = gestoreAnnuncio.ReadBigliettoTreno(id);
 	        
 	        JOptionPane.showMessageDialog(null,
 	        		"\nNome:		"+b.getNominativo()+
@@ -161,8 +165,8 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
 	        		"\nFermate:		"+b.getFermate_T()
 	        	);
     	}catch(Exception e) {
-    		e.printStackTrace();
-    		JOptionPane.showMessageDialog(null,"Seleziona un elemento della colonna Id Biglietto");
+    		JOptionPane.showMessageDialog(null,"Seleziona un annuncio");
+    		//e.printStackTrace();
     	}
         
     }                                                 
@@ -176,9 +180,9 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
 	    	cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    	
 	    	int[] selectedRow = jTableAnnunci.getSelectedRows();
-	        int[] selectedColumns = jTableAnnunci.getSelectedColumns();
-	        
-	        Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], selectedColumns[0]);
+	        //int[] selectedColumns = jTableAnnunci.getSelectedColumns();
+	    	//Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], selectedColumns[0]);
+	        Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], 0);
 	        String id = String.valueOf(idBiglietto);
 	        int i = (int) idBiglietto;
 	        
@@ -187,8 +191,8 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
 	        rimuovi.toFront();
 	        
     	}catch(Exception e) {
-    		e.printStackTrace();
-    		JOptionPane.showMessageDialog(null,"Seleziona un elemento della colonna Id Biglietto");
+    		//e.printStackTrace();
+    		JOptionPane.showMessageDialog(null,"Seleziona un annuncio da eliminare");
     		
     	}
 	        		

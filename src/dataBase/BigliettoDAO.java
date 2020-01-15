@@ -179,7 +179,7 @@ public class BigliettoDAO {
         return b.getId();
 	}
 */	
-    public BigliettoTreno readBigliettoTreno(String id) {
+    public BigliettoTreno readBigliettoTreno(int id) {
 		
     	BigliettoTreno b= null;
         Connection conn = null;
@@ -188,7 +188,7 @@ public class BigliettoDAO {
         try {
             conn = DBManager.createConnection();
             preparedStatement = conn.prepareStatement(READ_biglietto_treno_QUERY);
-            preparedStatement.setString(1, id);
+            preparedStatement.setInt(1, id);
             preparedStatement.execute();
             result = preparedStatement.getResultSet();
  
@@ -339,13 +339,13 @@ public class BigliettoDAO {
 		return 0;
     }
         
-    public boolean deleteBiglietto(int i) {
+    public boolean deleteBiglietto(int id) {
 		Connection conn = null;
         PreparedStatement preparedStatement = null;
         try {
         	conn = DBManager.createConnection();
             preparedStatement = conn.prepareStatement(DELETE_QUERY);
-            preparedStatement.setInt(1,i);
+            preparedStatement.setInt(1,id);
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {

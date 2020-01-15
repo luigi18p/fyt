@@ -7,7 +7,12 @@ public class Profilo {
 	private int mediaFeedback;
 	private int nVisite;
 	
-	
+	public Profilo() {
+		this.username = null;
+		this.totaleBigliettiInVendita = 0;
+		this.mediaFeedback = 0;
+		this.nVisite = 0;
+	}
 	
 	public Profilo(String username, int totaleBigliettiInVendita, int mediaFeedback, int nVisite) {
 		super();

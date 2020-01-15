@@ -9,7 +9,7 @@ public class Client {
 	   
       try {  
          // Getting the registry 
-         Registry registry = LocateRegistry.getRegistry("192.168.1.142",5000); 
+         Registry registry = LocateRegistry.getRegistry("localhost",5000); 
     
          // Looking up the registry for the remote object 
          RemoteInterface stub = (RemoteInterface) registry.lookup("RemoteInterface"); 

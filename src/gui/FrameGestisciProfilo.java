@@ -158,7 +158,6 @@ public class FrameGestisciProfilo extends javax.swing.JFrame {
 
     private void jButtonConfermaActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
-
         try {
 			String nome=jTextNome.getText();
 			String cognome = jTextCognome.getText();
@@ -166,19 +165,20 @@ public class FrameGestisciProfilo extends javax.swing.JFrame {
 			String password = jTextPassword.getText();
 			String telefono = jTextTelefono.getText();
 			double ntelefono = Double.parseDouble(telefono);
-			
+
 			java.util.Date date = dateChooserDataNascita.getSelectedDate().getTime();
 			java.sql.Date sDate = new java.sql.Date(date.getTime());
 			
 			GestoreUtente gu = new GestoreUtente();
-			gu.updateUtente(nome, cognome, email, password, sDate, ntelefono, username);
-				
-			this.toBack();
-			setVisible(false);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,"Inserire correttamente i campi richiesti");
-			e.printStackTrace();
-		}
+			
+			
+				gu.updateUtente(nome, cognome, email, password, sDate, ntelefono, username);
+			} 
+			catch(Exception  e){
+				JOptionPane.showMessageDialog(null,"Inserire correttamente tutti i campi richiesti");
+				//e.printStackTrace();
+			}
+			
     }                                               
 
     private void jButtonAnnullaActionPerformed(java.awt.event.ActionEvent evt) {                                               

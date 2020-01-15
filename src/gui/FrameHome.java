@@ -9,7 +9,6 @@ import java.awt.HeadlessException;
 
 import javax.swing.JOptionPane;
 
-import businessLogic.GestoreBiglietto;
 import businessLogic.GestoreProfilo;
 import domain.Profilo;
 
