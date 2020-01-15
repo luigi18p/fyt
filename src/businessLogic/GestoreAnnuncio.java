@@ -14,8 +14,10 @@ import domain.Annuncio;
 import domain.BigliettoTreno;
 import domain.Profilo;
 import domain.Utente;
+import rmi.IGestoreAnnuncio;
+import rmi.IGestoreUtente;
 
-public class GestoreAnnuncio {
+public class GestoreAnnuncio implements IGestoreAnnuncio{
 	
 	public int CreateAnnuncio(String username, String idTicket, String partenza, String arrivo, String nominativo,
 			String compagnia, String classe, String fermate, String descrizione, Boolean Btreno, Boolean Baereo,

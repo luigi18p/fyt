@@ -2,8 +2,10 @@ package businessLogic;
 
 import dataBase.ProfiloDAO;
 import domain.Profilo;
+import rmi.IGestoreProfilo;
+import rmi.IGestoreUtente;
 
-public class GestoreProfilo {
+public class GestoreProfilo implements IGestoreProfilo{
 	
 	public int createProfilo(String username) {
 		

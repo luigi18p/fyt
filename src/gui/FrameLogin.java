@@ -5,9 +5,14 @@
  */
 package gui;
 
+import java.rmi.ConnectException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
 import javax.swing.JOptionPane;
 
 import businessLogic.GestoreUtente;
+import rmi.IGestoreUtente;
 
 
 /**
@@ -138,19 +143,28 @@ public class FrameLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     	
     	try {
+    		
 	        String username = jTextUsername.getText();
 	        String password = jPasswordpassword.getText();
-	                
-	        GestoreUtente gu = new GestoreUtente();
+	        
+	        Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	        IGestoreUtente igestoreUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
+	        int verifica = igestoreUtente.Login(username, password);
+	        
+/*	        GestoreUtente gu = new GestoreUtente();
 	        int verifica = gu.Login(username, password);
-	      
+*/	      
 	        if (verifica == 0) {
 	            this.toBack();
 	            setVisible(false);//senza questa resta eseguita una finestra java di login
 	            FrameHome home = new FrameHome(username);
 	            home.setVisible(true);
 	            home.toFront();
-	        }
+	            
+			}
+	        
+    	}catch(ConnectException ce) {
+    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
     	}catch(Exception e) {
     		JOptionPane.showMessageDialog(null,"Username o password sbagliati. ");
     		//e.printStackTrace();

@@ -9,8 +9,10 @@ import dataBase.UtenteDAO;
 import domain.Accordo;
 import domain.Annuncio;
 import domain.Utente;
+import rmi.IGestoreAccordo;
+import rmi.IGestoreUtente;
 
-public class GestoreAccordo {
+public class GestoreAccordo implements IGestoreAccordo{
 	
 	public List<Accordo> ReadAllAccordi(String username) {
 

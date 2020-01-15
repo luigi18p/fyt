@@ -6,8 +6,9 @@ import dataBase.ProfiloDAO;
 import dataBase.UtenteDAO;
 import domain.Profilo;
 import domain.Utente;
+import rmi.IGestoreUtente;
 
-public class GestoreUtente {
+public class GestoreUtente implements IGestoreUtente{
 	
 	public int Registrazione(String nome, String cognome, String email, String password, 
 			Date dataNascita, double cellulare, String username) {
