@@ -13,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import businessLogic.GestoreAnnuncio;
-import businessLogic.GestoreBiglietto;
 import domain.Annuncio;
 import domain.BigliettoTreno;
 
@@ -143,10 +142,12 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
 	    	//Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], selectedColumns[0]);
 	        
 	        Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], 0);
-	        String id = String.valueOf(idBiglietto);
+	       // String id = String.valueOf(idBiglietto);
+	        int id = (int) idBiglietto;
+	        
 
-	        GestoreBiglietto gestoreBiglietto = new GestoreBiglietto();
-	        BigliettoTreno b = gestoreBiglietto.ReadBigliettoTreno(id);
+	        GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
+	        BigliettoTreno b = gestoreAnnuncio.ReadBigliettoTreno(id);
 	        
 	        JOptionPane.showMessageDialog(null,
 	        		"\nNome:		"+b.getNominativo()+

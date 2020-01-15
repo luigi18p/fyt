@@ -20,7 +20,7 @@ public class AccordoDAO {
     private static final String READ_allAccordi_QUERY = "SELECT userVen,idBiglietto,dataAccordo,reviewVen,ratingVen,ratingAcq FROM accordo WHERE userAcq = ?";
     private static final String UPDATE_QUERY = "UPDATE accordo SET userVen=?,idBiglietto=?,dataAccordo=?,userAcq=?,reviewVen=?,reviewAcq=?,ratingVen=?,ratingAcq=? WHERE idBiglietto = ?";
     private static final String UPDATE_rating_QUERY = "UPDATE accordo SET reviewAcq=?, ratingAcq=? WHERE idBiglietto = ?";
-    private static final String DELETE_QUERY = "DELETE FROM accordo WHERE idBiglietto = ?";
+    //private static final String DELETE_QUERY = "DELETE FROM accordo WHERE idBiglietto = ?";
 
     public int createAccordo(Accordo a) {
     	Connection conn = null;
@@ -71,7 +71,9 @@ public class AccordoDAO {
 		
     }
 
-    public int updateAccordo(Accordo a) {
+    /*
+     public int updateAccordo(Accordo a) {
+     
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
     	ResultSet result = null;
@@ -119,7 +121,9 @@ public class AccordoDAO {
 		return 0;
     }
     
-    public int updateRatingAccordo(int idBiglietto, String reviewAcq, int ratingAcq) {
+    */
+    
+    public int reviewAccordo(int idBiglietto, String reviewAcq, int ratingAcq) {
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
     	ResultSet result = null;
@@ -162,7 +166,9 @@ public class AccordoDAO {
 		return 0;
     }
     
-    public boolean deleteAccordo(Accordo a) {
+    /*
+     public boolean deleteAccordo(Accordo a) {
+     
 		Connection conn = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -187,8 +193,9 @@ public class AccordoDAO {
         }
         return false;
 	}
-
-    public Accordo readAccordo(int idBiglietto) {
+*/
+    
+   /* public Accordo readAccordo(int idBiglietto) {
 		
 		Accordo a= null;
         Connection conn = null;
@@ -225,7 +232,7 @@ public class AccordoDAO {
         }
  
         return a;
-	}
+	}*/
 
     public List<Accordo> ReadAllAccordi(String username) {
 
@@ -267,7 +274,7 @@ public class AccordoDAO {
         return listaAccordi;
 	}
 
-    public int readReating(int idBiglietto) {
+    public int readRating(int idBiglietto) {
 		
 		int reatingAcq =0;
         Connection conn = null;

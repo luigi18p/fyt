@@ -13,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 
 import businessLogic.GestoreAccordo;
 import businessLogic.GestoreAnnuncio;
-import businessLogic.GestoreBiglietto;
 import domain.Accordo;
 import domain.BigliettoTreno;
 

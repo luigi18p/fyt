@@ -8,9 +8,8 @@ package gui;
 import javax.swing.JOptionPane;
 
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
-
 import businessLogic.GestoreAccordo;
-import businessLogic.GestoreBiglietto;
+import businessLogic.GestoreAnnuncio;
 import jdk.nashorn.internal.runtime.ECMAErrors;
 
 
@@ -187,9 +186,9 @@ public class FrameRimuovi extends javax.swing.JFrame {
         //pulsante conferma
     	
 	    if(jRadioButtonInvenduto.isSelected()) {
-	    	GestoreBiglietto gestoreBiglietto = new GestoreBiglietto();
+	    	GestoreAnnuncio gestoreAnnucio = new GestoreAnnuncio();
 	    	try {	
-	    		gestoreBiglietto.DeleteBiglietto(id);
+	    		gestoreAnnucio.DeleteBiglietto(id);
 	    		JOptionPane.showMessageDialog(null,"Rimozione Confermata\nBiglietto non venduto!");
 	    		this.toBack();
 	            setVisible(false);
@@ -198,21 +197,22 @@ public class FrameRimuovi extends javax.swing.JFrame {
 	    		//e.printStackTrace();
 	    	}
     	}else if(jRadioButtonVenduto.isSelected()){
-	    	GestoreAccordo gestoreAccordo = new GestoreAccordo();
+	    	GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
 	    	String userAcq = jTextUserAcq.getText();
-	    	String feedback = jTextAreaFeedback.getText();
+	    	String reviewVen = jTextAreaFeedback.getText();
 	    	Boolean venduto = jRadioButtonVenduto.isSelected();
 	    	int ratingV = jSliderRating.getValue();
 	    	
 	    	try {
-				gestoreAccordo.CreateAccordo(username, id, userAcq,feedback,null,ratingV,0);
-				this.toBack();
-		        setVisible(false);
+				gestoreAnnuncio.CreateAccordo(username, id, userAcq,reviewVen,ratingV);
 			} catch(NullPointerException npe){
-				JOptionPane.showMessageDialog(null,"Accordo non approvato!\nInserire un username valida");
+				JOptionPane.showMessageDialog(null,"Accordo non approvato!\nUsername invalida");
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null,"Accordo non approvato!");
 				e.printStackTrace();
+			} finally {
+				this.toBack();
+		        setVisible(false);
 			}
     	}else
 	    	JOptionPane.showMessageDialog(null,"Rimozione non autorizzata!\nSelezionare Venduto o Invenduto");

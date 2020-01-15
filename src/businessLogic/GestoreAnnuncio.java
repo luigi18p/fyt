@@ -1,13 +1,18 @@
 package businessLogic;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
+import dataBase.AccordoDAO;
 import dataBase.AnnuncioDAO;
 import dataBase.BigliettoDAO;
+import dataBase.ProfiloDAO;
 import dataBase.UtenteDAO;
+import domain.Accordo;
 import domain.Annuncio;
 import domain.BigliettoTreno;
+import domain.Profilo;
 import domain.Utente;
 
 public class GestoreAnnuncio {
@@ -38,7 +43,7 @@ public class GestoreAnnuncio {
 			annuncioDAO.createAnnuncio(a);
 			
 			GestoreProfilo gestoreProfilo = new GestoreProfilo();
-			gestoreProfilo.UpdateTotBiglietti(username);
+			gestoreProfilo.UpdateRiepilogo(username,1);
         }catch (Exception rse) {
 	            rse.printStackTrace();
 	            return 1;
@@ -55,5 +60,40 @@ public class GestoreAnnuncio {
 		return listaAnnunci;
 		
 	}
+	
+	public void DeleteBiglietto(int id) {
+		
+		BigliettoDAO bigliettoDAO = new BigliettoDAO();
+		bigliettoDAO.deleteBiglietto(id);
+		
+	}
+	
+	public BigliettoTreno ReadBigliettoTreno(int id) {
+		
+		BigliettoDAO bigliettoDAO = new BigliettoDAO();
+		BigliettoTreno b = bigliettoDAO.readBigliettoTreno(id);
 
+		return b;
+		
+	}
+
+	public void CreateAccordo(String username, int id, String userAcq, String feedback, int ratingV) {
+		
+		Profilo p = new Profilo();
+		ProfiloDAO profiloDAO = new ProfiloDAO();
+		p.setUsername(profiloDAO.readUsername(userAcq));
+		if(p.getUsername() != null) {
+						
+			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+			Accordo a = new Accordo(username, id, date, userAcq, feedback, null, ratingV, 0);
+			
+			AccordoDAO accordoDAO = new AccordoDAO();
+			accordoDAO.createAccordo(a);
+			
+			DeleteBiglietto(id);
+			
+			GestoreProfilo gestoreProfilo = new GestoreProfilo();
+			gestoreProfilo.UpdateRiepilogo(username,-1);
+		}
+	}
 }

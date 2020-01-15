@@ -18,6 +18,7 @@ public class ProfiloDAO {
     private static final String READ_QUERY = "SELECT username,totaleBigliettiInVendita,mediaFeedback,nVisite FROM profilo WHERE username = ?";
     private static final String UPDATE_QUERY = "UPDATE profilo SET totaleBigliettiInVendita=?,mediaFeedback=?,nVisite=? WHERE username = ?";
     private static final String DELETE_QUERY = "DELETE FROM profilo WHERE username = ?";
+    private static final String READ_QUERY_username = "SELECT username FROM profilo WHERE username = ?";
 
     public int createProfilo(Profilo p) {
     	Connection conn = null;
@@ -110,7 +111,7 @@ public class ProfiloDAO {
     }
     
     //eliminare delete profilo
-    public boolean deleteProfilo(Profilo p) {
+/*    public boolean deleteProfilo(Profilo p) {
     	Connection conn = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -136,6 +137,7 @@ public class ProfiloDAO {
         return false;
     	
     }
+    */
     
     public Profilo readProfilo(String username) {
     	Profilo p= null;
@@ -175,5 +177,45 @@ public class ProfiloDAO {
         return p;
     	
     }
+    
+    public String readUsername(String username) {
+		
+		Profilo p= null;
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet result = null;
+        try {
+            conn = DBManager.createConnection();
+            preparedStatement = conn.prepareStatement(READ_QUERY_username);
+            preparedStatement.setString(1, username);
+            preparedStatement.execute();
+            result = preparedStatement.getResultSet();
+ 
+            if (result.next() && result != null) {
+                p = new Profilo(result.getString(1));
+            } 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                result.close();
+            } catch (Exception rse) {
+                rse.printStackTrace();
+            }
+            try {
+                preparedStatement.close();
+            } catch (Exception sse) {
+                sse.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (Exception cse) {
+                cse.printStackTrace();
+            }
+        }
+ 
+        return p.getUsername();
+	}
+
 }
 
