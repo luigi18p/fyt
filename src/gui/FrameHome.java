@@ -6,11 +6,16 @@
 package gui;
 
 import java.awt.HeadlessException;
+import java.rmi.ConnectException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 import javax.swing.JOptionPane;
 
 import businessLogic.GestoreProfilo;
 import domain.Profilo;
+import rmi.IGestoreAnnuncio;
+import rmi.IGestoreProfilo;
 
 /**
  *
@@ -419,15 +424,19 @@ public class FrameHome extends javax.swing.JFrame {
         // TODO add your handling code here:
         ///riepologo
     	try {
+    		Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	        IGestoreProfilo igestoreProfilo = (IGestoreProfilo) registry.lookup("IGestoreProfilo");
 			Profilo p = new Profilo(username);
-			GestoreProfilo gestoreProfilo = new GestoreProfilo();
-			p = gestoreProfilo.ReadProfilo(username);
+			//GestoreProfilo gestoreProfilo = new GestoreProfilo();
+			p = igestoreProfilo.ReadProfilo(username);
 			JOptionPane.showMessageDialog(null,
 					"Username:"+username+
 					"\nTotale Biglietti in vendita:"+p.getTotaleBigliettiInVendita()+
 					"\nMedia Feedback:"+p.getMediaFeedback()+
 					"\nN. Visite:"+p.getnVisite());
-		} catch (Exception e) {
+    	}catch(ConnectException ce) {
+    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
+    	} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,"Errore nella visualizzazione del profilo");
 			e.printStackTrace();
 		}

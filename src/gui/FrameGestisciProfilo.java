@@ -6,10 +6,15 @@
 package gui;
 
 
+import java.rmi.ConnectException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
 import javax.swing.JOptionPane;
 
 import businessLogic.GestoreUtente;
 import domain.Utente;
+import rmi.IGestoreUtente;
 
 /**
  *
@@ -169,12 +174,15 @@ public class FrameGestisciProfilo extends javax.swing.JFrame {
 			java.util.Date date = dateChooserDataNascita.getSelectedDate().getTime();
 			java.sql.Date sDate = new java.sql.Date(date.getTime());
 			
-			GestoreUtente gu = new GestoreUtente();
+			//GestoreUtente gu = new GestoreUtente();
 			
-			
-				gu.updateUtente(nome, cognome, email, password, sDate, ntelefono, username);
-			} 
-			catch(Exception  e){
+			Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	        IGestoreUtente igestoreUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
+	        igestoreUtente.updateUtente(nome, cognome, email, password, sDate, ntelefono, username);
+	        
+        }catch(ConnectException ce) {
+    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
+    	} catch(Exception  e){
 				JOptionPane.showMessageDialog(null,"Inserire correttamente tutti i campi richiesti");
 				//e.printStackTrace();
 			}

@@ -5,6 +5,12 @@
  */
 package gui;
 
+import java.rmi.AccessException;
+import java.rmi.ConnectException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -15,6 +21,7 @@ import businessLogic.GestoreAccordo;
 import businessLogic.GestoreAnnuncio;
 import domain.Accordo;
 import domain.BigliettoTreno;
+import rmi.IGestoreAccordo;
 
 /**
  *
@@ -121,13 +128,28 @@ public class FrameIMieiAcquisti extends javax.swing.JFrame {
     
     private void initTable() {
     	
-    	DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-    	List<Accordo> listaAccordi = null;
-    	GestoreAccordo gestoreAccordo = new GestoreAccordo();
-    	listaAccordi = gestoreAccordo.ReadAllAccordi(username);
-    	for(Accordo a : listaAccordi) {
-    		table.addRow(new Object[] {a.getUserVen(),a.getIdBiglietto(),a.getDataAccordo(),
-    				a.getReviewVen(),a.getRatingVen(),a.getRatingAcq()});
+    	try {
+			DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
+			List<Accordo> listaAccordi = null;
+			//GestoreAccordo gestoreAccordo = new GestoreAccordo();
+			Registry registry = LocateRegistry.getRegistry("localhost",5008);
+			IGestoreAccordo igestoreAccordo = (IGestoreAccordo) registry.lookup("IGestoreAccordo");
+			listaAccordi = igestoreAccordo.ReadAllAccordi(username);
+			for(Accordo a : listaAccordi) {
+				table.addRow(new Object[] {a.getUserVen(),a.getIdBiglietto(),a.getDataAccordo(),
+						a.getReviewVen(),a.getRatingVen(),a.getRatingAcq()});
+			}
+    	}catch(ConnectException ce) {
+    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
+    	} catch (AccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
     }
 

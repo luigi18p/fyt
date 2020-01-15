@@ -5,6 +5,12 @@
  */
 package gui;
 
+import java.rmi.AccessException;
+import java.rmi.ConnectException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -15,6 +21,7 @@ import javax.swing.table.TableColumn;
 import businessLogic.GestoreAnnuncio;
 import domain.Annuncio;
 import domain.BigliettoTreno;
+import rmi.IGestoreAnnuncio;
 
 /**
  *
@@ -121,13 +128,28 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
     
     private void initTable() {
     	
-    	DefaultTableModel table = (DefaultTableModel) jTableAnnunci.getModel();
-    	List<Annuncio> listaAnnunci = null;
-    	GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
-    	listaAnnunci = gestoreAnnuncio.getAllAnnunciPersonali(username);
-    	for(Annuncio a : listaAnnunci) {
-    		table.addRow(new Object[] {a.getIdBiglietto(),a.getPrezzoRichiesto()});
-    	}
+    	try {
+			DefaultTableModel table = (DefaultTableModel) jTableAnnunci.getModel();
+			List<Annuncio> listaAnnunci = null;
+			//GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
+			Registry registry = LocateRegistry.getRegistry("localhost",5008);
+			IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
+			listaAnnunci = igestoreAnnuncio.getAllAnnunciPersonali(username);
+			for(Annuncio a : listaAnnunci) {
+				table.addRow(new Object[] {a.getIdBiglietto(),a.getPrezzoRichiesto()});
+			}
+    	}catch(ConnectException ce) {
+    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
+    	} catch (AccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     private void jButtonVisualizzaActionPerformed(java.awt.event.ActionEvent evt) {                                                  
@@ -146,8 +168,10 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
 	        int id = (int) idBiglietto;
 	        
 
-	        GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
-	        BigliettoTreno b = gestoreAnnuncio.ReadBigliettoTreno(id);
+	        //GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
+	        Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
+	        BigliettoTreno b = igestoreAnnuncio.ReadBigliettoTreno(id);
 	        
 	        JOptionPane.showMessageDialog(null,
 	        		"\nNome:		"+b.getNominativo()+
@@ -164,6 +188,8 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
 	        		"\nClasse:		"+b.getClasse_T()+
 	        		"\nFermate:		"+b.getFermate_T()
 	        	);
+    	}catch(ConnectException ce) {
+    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
     	}catch(Exception e) {
     		JOptionPane.showMessageDialog(null,"Seleziona un annuncio");
     		//e.printStackTrace();
