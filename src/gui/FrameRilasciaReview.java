@@ -11,9 +11,7 @@ import java.rmi.registry.Registry;
 
 import javax.swing.JOptionPane;
 
-import businessLogic.GestoreAccordo;
 import rmi.IGestoreAccordo;
-import rmi.IGestoreUtente;
 
 /**
  *

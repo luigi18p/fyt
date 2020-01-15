@@ -10,13 +10,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import javax.swing.JOptionPane;
-
-import com.mysql.cj.jdbc.exceptions.CommunicationsException;
-import businessLogic.GestoreAccordo;
-import businessLogic.GestoreAnnuncio;
-import jdk.nashorn.internal.runtime.ECMAErrors;
 import rmi.IGestoreAnnuncio;
-import rmi.IGestoreUtente;
 
 
 /**

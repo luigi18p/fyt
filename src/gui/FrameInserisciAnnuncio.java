@@ -11,7 +11,6 @@ import java.rmi.registry.Registry;
 
 import javax.swing.JOptionPane;
 
-import businessLogic.GestoreAnnuncio;
 import rmi.IGestoreAnnuncio;
 
 /**

@@ -11,9 +11,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import javax.swing.JOptionPane;
-
-import businessLogic.GestoreUtente;
-import domain.Utente;
 import rmi.IGestoreUtente;
 
 /**

@@ -5,16 +5,13 @@
  */
 package gui;
 
-import java.awt.HeadlessException;
 import java.rmi.ConnectException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import javax.swing.JOptionPane;
 
-import businessLogic.GestoreProfilo;
 import domain.Profilo;
-import rmi.IGestoreAnnuncio;
 import rmi.IGestoreProfilo;
 
 /**
