@@ -5,11 +5,13 @@
  */
 package gui;
 
+import java.io.Serializable;
+
 /**
  *
  * @author gioac
  */
-public class FrameContatti extends javax.swing.JFrame {
+public class FrameContatti extends javax.swing.JFrame implements Serializable{
 
     /**
      * Creates new form FrameContatti

@@ -1,8 +1,13 @@
 package domain;
+import java.io.Serializable;
 import java.sql.Date;
 
-public class BigliettoTreno extends Biglietto{
+public class BigliettoTreno extends Biglietto implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2757140573802332518L;
 	private String classe_T;
 	private String fermate_T;
 	

@@ -1,7 +1,13 @@
 package domain;
 
-public class Annuncio {
+import java.io.Serializable;
 
+public class Annuncio implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9006105091683784824L;
 	private String username;
 	private int idBiglietto;
 	private String descrizione;

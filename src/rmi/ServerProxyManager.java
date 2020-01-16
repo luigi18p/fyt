@@ -14,7 +14,7 @@ public class ServerProxyManager extends UnicastRemoteObject{
 	private static final long serialVersionUID = 1L;
 	
 	public ServerProxyManager() throws RemoteException {
-
+		super();
 	}
 
 	public static void main(String[] args) {

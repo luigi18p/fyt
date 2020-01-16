@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.io.Serializable;
 import java.rmi.ConnectException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -17,7 +18,7 @@ import rmi.IGestoreAccordo;
  *
  * @author gioac
  */
-public class FrameRilasciaReview extends javax.swing.JFrame {
+public class FrameRilasciaReview extends javax.swing.JFrame implements Serializable{
 
     /**
      * Creates new form FrameRilasciaReview

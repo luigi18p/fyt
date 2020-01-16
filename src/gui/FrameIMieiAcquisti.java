@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.io.Serializable;
 import java.rmi.AccessException;
 import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
@@ -24,7 +25,7 @@ import rmi.IGestoreAccordo;
  *
  * @author gioac
  */
-public class FrameIMieiAcquisti extends javax.swing.JFrame {
+public class FrameIMieiAcquisti extends javax.swing.JFrame implements Serializable{
 
     /**
      * Creates new form FrameIMieiAcquisti

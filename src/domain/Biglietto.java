@@ -1,9 +1,14 @@
 package domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Biglietto {
+public class Biglietto implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4675652955592640591L;
 	private int id;
 	private String userVen;
 	private String nominativo;

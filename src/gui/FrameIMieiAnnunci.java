@@ -5,12 +5,14 @@
  */
 package gui;
 
+import java.io.Serializable;
 import java.rmi.AccessException;
 import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -24,7 +26,7 @@ import rmi.IGestoreAnnuncio;
  *
  * @author gioac
  */
-public class FrameIMieiAnnunci extends javax.swing.JFrame {
+public class FrameIMieiAnnunci extends javax.swing.JFrame implements Serializable{
 
     /**
      * Creates new form FrameIMieiAnnunci
@@ -127,11 +129,12 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame {
     	
     	try {
 			DefaultTableModel table = (DefaultTableModel) jTableAnnunci.getModel();
-			List<Annuncio> listaAnnunci = null;
-			//GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
+			List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();;
+			
 			Registry registry = LocateRegistry.getRegistry("localhost",5008);
 			IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
 			listaAnnunci = igestoreAnnuncio.getAllAnnunciPersonali(username);
+			//System.out.println(listaAnnunci);
 			for(Annuncio a : listaAnnunci) {
 				table.addRow(new Object[] {a.getIdBiglietto(),a.getPrezzoRichiesto()});
 			}

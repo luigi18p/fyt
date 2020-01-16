@@ -6,6 +6,7 @@
 package gui;
 
 
+import java.io.Serializable;
 import java.rmi.ConnectException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -17,7 +18,7 @@ import rmi.IGestoreUtente;
  *
  * @author gioac
  */
-public class FrameGestisciProfilo extends javax.swing.JFrame {
+public class FrameGestisciProfilo extends javax.swing.JFrame implements Serializable{
 
     /**
      * Creates new form FrameGestisciProfilo
@@ -182,7 +183,10 @@ public class FrameGestisciProfilo extends javax.swing.JFrame {
     	} catch(Exception  e){
 				JOptionPane.showMessageDialog(null,"Inserire correttamente tutti i campi richiesti");
 				//e.printStackTrace();
-			}
+		}finally {
+	    	this.toBack();
+	    	setVisible(false);
+		}
 			
     }                                               
 

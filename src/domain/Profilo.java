@@ -1,7 +1,13 @@
 package domain;
 
-public class Profilo {
+import java.io.Serializable;
+
+public class Profilo implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6759174168643296047L;
 	private String username;
 	private int totaleBigliettiInVendita;
 	private int mediaFeedback;
