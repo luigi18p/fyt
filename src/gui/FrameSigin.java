@@ -5,17 +5,12 @@
  */
 package gui;
 
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Locale;
-
+import java.rmi.ConnectException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import javax.swing.JOptionPane;
 
-import businessLogic.GestoreUtente;
+import rmi.IGestoreUtente;
 
 
 
@@ -217,15 +212,20 @@ public class FrameSigin extends javax.swing.JFrame {
 			java.util.Date date = dateChooserDataNascita.getSelectedDate().getTime();
 			java.sql.Date sDate = new java.sql.Date(date.getTime());
 			double ntelefono = Double.parseDouble(telefono);
-			GestoreUtente gu = new GestoreUtente();
-			gu.Registrazione(nome, cognome, email, password, sDate, ntelefono, username);
+			
+	        Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	        IGestoreUtente igestoreUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
+	        
+			igestoreUtente.Registrazione(nome, cognome, email, password, sDate, ntelefono, username);
 			
 			this.toBack();
 			setVisible(false);
 			new FrameLogin().toFront();
 			new FrameLogin().setState(java.awt.Frame.NORMAL);
 			new FrameLogin().setVisible(true);
-		} catch (Exception e) {
+    	}catch(ConnectException ce) {
+    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
+    	} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,"Registrazione non effettuata.\nReinserire i campi correttamete.");
 			//e.printStackTrace();
 		}

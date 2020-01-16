@@ -10,10 +10,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import javax.swing.JOptionPane;
-
-import businessLogic.GestoreUtente;
 import rmi.IGestoreUtente;
-
 
 /**
  *
@@ -27,6 +24,7 @@ public class FrameLogin extends javax.swing.JFrame {
     public FrameLogin() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,10 +148,7 @@ public class FrameLogin extends javax.swing.JFrame {
 	        Registry registry = LocateRegistry.getRegistry("localhost",5008);
 	        IGestoreUtente igestoreUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
 	        int verifica = igestoreUtente.Login(username, password);
-	        
-/*	        GestoreUtente gu = new GestoreUtente();
-	        int verifica = gu.Login(username, password);
-*/	      
+	            
 	        if (verifica == 0) {
 	            this.toBack();
 	            setVisible(false);//senza questa resta eseguita una finestra java di login

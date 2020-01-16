@@ -5,12 +5,12 @@
  */
 package gui;
 
-import javax.swing.JOptionPane;
+import java.rmi.ConnectException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
-import com.mysql.cj.jdbc.exceptions.CommunicationsException;
-import businessLogic.GestoreAccordo;
-import businessLogic.GestoreAnnuncio;
-import jdk.nashorn.internal.runtime.ECMAErrors;
+import javax.swing.JOptionPane;
+import rmi.IGestoreAnnuncio;
 
 
 /**
@@ -184,28 +184,35 @@ public class FrameRimuovi extends javax.swing.JFrame {
     private void jButtonConfermaActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
         //pulsante conferma
-    	
 	    if(jRadioButtonInvenduto.isSelected()) {
-	    	GestoreAnnuncio gestoreAnnucio = new GestoreAnnuncio();
+	    	//GestoreAnnuncio gestoreAnnucio = new GestoreAnnuncio();
 	    	try {	
-	    		gestoreAnnucio.DeleteBiglietto(id);
+	    		Registry registry = LocateRegistry.getRegistry("localhost",5008);
+		        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
+	    		igestoreAnnuncio.DeleteBiglietto(id);
 	    		JOptionPane.showMessageDialog(null,"Rimozione Confermata\nBiglietto non venduto!");
 	    		this.toBack();
 	            setVisible(false);
+	    	}catch(ConnectException ce) {
+	    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
 	    	}catch(Exception e) {
 	    		JOptionPane.showMessageDialog(null,"Rimozione non confermata.");
 	    		//e.printStackTrace();
 	    	}
     	}else if(jRadioButtonVenduto.isSelected()){
-	    	GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
+	    	//GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
 	    	String userAcq = jTextUserAcq.getText();
 	    	String reviewVen = jTextAreaFeedback.getText();
 	    	Boolean venduto = jRadioButtonVenduto.isSelected();
 	    	int ratingV = jSliderRating.getValue();
 	    	
 	    	try {
-				gestoreAnnuncio.CreateAccordo(username, id, userAcq,reviewVen,ratingV);
-			} catch(NullPointerException npe){
+	    		Registry registry = LocateRegistry.getRegistry("localhost",5008);
+		        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
+				igestoreAnnuncio.CreateAccordo(username, id, userAcq,reviewVen,ratingV);
+	    	}catch(ConnectException ce) {
+	    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
+	    	} catch(NullPointerException npe){
 				JOptionPane.showMessageDialog(null,"Accordo non approvato!\nUsername invalida");
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null,"Accordo non approvato!");

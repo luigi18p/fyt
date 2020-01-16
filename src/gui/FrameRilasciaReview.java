@@ -5,9 +5,13 @@
  */
 package gui;
 
+import java.rmi.ConnectException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
 import javax.swing.JOptionPane;
 
-import businessLogic.GestoreAccordo;
+import rmi.IGestoreAccordo;
 
 /**
  *
@@ -126,14 +130,18 @@ public class FrameRilasciaReview extends javax.swing.JFrame {
         // TODO add your handling code here:
         //conferma
     	try {
+    		Registry registry = LocateRegistry.getRegistry("localhost",5008);
+    		IGestoreAccordo igestoreAccordo = (IGestoreAccordo) registry.lookup("IGestoreAccordo");
 	    	String review = jTextAreaFeedback.getText();
 	    	int rating = jSliderRating.getValue();
-	    	GestoreAccordo gestoreAccordo = new GestoreAccordo();
-	    	boolean modifica = gestoreAccordo.updateRatingAccordo(idBiglietto,review,rating);
+	    	//GestoreAccordo gestoreAccordo = new GestoreAccordo();
+	    	boolean modifica = igestoreAccordo.updateRatingAccordo(idBiglietto,review,rating);
 	        if (modifica == false)
 	        	JOptionPane.showMessageDialog(null,"Review già rilasciata");
 	    	this.toBack();
 	        setVisible(false);
+    	}catch(ConnectException ce) {
+    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
     	}catch(Exception e) {
     		JOptionPane.showMessageDialog(null,"Errore");
     		e.printStackTrace();

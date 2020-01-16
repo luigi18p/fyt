@@ -5,9 +5,13 @@
  */
 package gui;
 
+import java.rmi.ConnectException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
 import javax.swing.JOptionPane;
 
-import businessLogic.GestoreAnnuncio;
+import rmi.IGestoreAnnuncio;
 
 /**
  *
@@ -339,10 +343,11 @@ public class FrameInserisciAnnuncio extends javax.swing.JFrame {
 	        Boolean tipAR = jCheckBoxTipAR.isSelected();
 	        int nPosti = (int) jSpinnerNposti.getValue();
 	        
-	
+	        Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
 	        
-	        GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
-	        int inserito = gestoreAnnuncio.CreateAnnuncio(username,idTicket,partenza,arrivo,nominativo,compagnia,classe,fermate,descrizione,
+	        //GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
+	        int inserito = igestoreAnnuncio.CreateAnnuncio(username,idTicket,partenza,arrivo,nominativo,compagnia,classe,fermate,descrizione,
 	        		treno,aereo,tipAR,prezzoA,prezzoR,sDateA,sDateR,nPosti);
 	        if(inserito != 0) {
 	        	JOptionPane.showMessageDialog(null,"Annuncio non inserito. Riprovare!");
@@ -350,6 +355,8 @@ public class FrameInserisciAnnuncio extends javax.swing.JFrame {
 	        
 	        this.toBack();
 	        setVisible(false);
+    	}catch(ConnectException ce) {
+    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
     	}catch(Exception rse){
     		JOptionPane.showMessageDialog(null,"Annuncio non inserito. Riprovare!");
     	}
