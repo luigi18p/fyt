@@ -131,7 +131,7 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame implements Serializabl
 			DefaultTableModel table = (DefaultTableModel) jTableAnnunci.getModel();
 			List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();;
 			
-			Registry registry = LocateRegistry.getRegistry("localhost",5008);
+			Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 			IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
 			listaAnnunci = igestoreAnnuncio.getAllAnnunciPersonali(username);
 			//System.out.println(listaAnnunci);
@@ -169,7 +169,7 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame implements Serializabl
 	        
 
 	        //GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
-	        Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	        Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 	        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
 	        BigliettoTreno b = igestoreAnnuncio.ReadBigliettoTreno(id);
 	        

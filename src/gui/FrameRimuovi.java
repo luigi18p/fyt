@@ -188,7 +188,7 @@ public class FrameRimuovi extends javax.swing.JFrame implements Serializable{
 	    if(jRadioButtonInvenduto.isSelected()) {
 	    	//GestoreAnnuncio gestoreAnnucio = new GestoreAnnuncio();
 	    	try {	
-	    		Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	    		Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 		        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
 	    		igestoreAnnuncio.DeleteBiglietto(id);
 	    		JOptionPane.showMessageDialog(null,"Rimozione Confermata\nBiglietto non venduto!");
@@ -208,7 +208,7 @@ public class FrameRimuovi extends javax.swing.JFrame implements Serializable{
 	    	int ratingV = jSliderRating.getValue();
 	    	
 	    	try {
-	    		Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	    		Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 		        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
 				igestoreAnnuncio.CreateAccordo(username, id, userAcq,reviewVen,ratingV);
 	    	}catch(ConnectException ce) {

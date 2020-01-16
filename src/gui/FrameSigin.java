@@ -214,11 +214,11 @@ public class FrameSigin extends javax.swing.JFrame implements Serializable{
 			java.sql.Date sDate = new java.sql.Date(date.getTime());
 			double ntelefono = Double.parseDouble(telefono);
 			
-	        Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	        Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 	        IGestoreUtente igestoreUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
 	        
 			igestoreUtente.Registrazione(nome, cognome, email, password, sDate, ntelefono, username);
-			
+
 			this.toBack();
 			setVisible(false);
 			new FrameLogin().toFront();

@@ -25,7 +25,7 @@ public class FrameLogin extends javax.swing.JFrame implements Serializable{
     public FrameLogin() {
         initComponents();
     }
-    
+    public static final String myhost = "localhost";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -146,7 +146,7 @@ public class FrameLogin extends javax.swing.JFrame implements Serializable{
 	        String username = jTextUsername.getText();
 	        String password = jPasswordpassword.getText();
 	        
-	        Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	        Registry registry = LocateRegistry.getRegistry(myhost,5008);
 	        IGestoreUtente igestoreUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
 	        int verifica = igestoreUtente.Login(username, password);
 	            

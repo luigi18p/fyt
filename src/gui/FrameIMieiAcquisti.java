@@ -130,7 +130,7 @@ public class FrameIMieiAcquisti extends javax.swing.JFrame implements Serializab
 			DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
 			List<Accordo> listaAccordi = null;
 			//GestoreAccordo gestoreAccordo = new GestoreAccordo();
-			Registry registry = LocateRegistry.getRegistry("localhost",5008);
+			Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 			IGestoreAccordo igestoreAccordo = (IGestoreAccordo) registry.lookup("IGestoreAccordo");
 			listaAccordi = igestoreAccordo.ReadAllAccordi(username);
 			for(Accordo a : listaAccordi) {

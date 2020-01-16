@@ -422,7 +422,7 @@ public class FrameHome extends javax.swing.JFrame implements Serializable{
         // TODO add your handling code here:
         ///riepologo
     	try {
-    		Registry registry = LocateRegistry.getRegistry("localhost",5008);
+    		Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 	        IGestoreProfilo igestoreProfilo = (IGestoreProfilo) registry.lookup("IGestoreProfilo");
 			Profilo p = new Profilo(username);
 			//GestoreProfilo gestoreProfilo = new GestoreProfilo();

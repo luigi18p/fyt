@@ -174,7 +174,7 @@ public class FrameGestisciProfilo extends javax.swing.JFrame implements Serializ
 			
 			//GestoreUtente gu = new GestoreUtente();
 			
-			Registry registry = LocateRegistry.getRegistry("localhost",5008);
+			Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 	        IGestoreUtente igestoreUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
 	        igestoreUtente.updateUtente(nome, cognome, email, password, sDate, ntelefono, username);
 	        

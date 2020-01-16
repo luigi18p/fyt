@@ -131,7 +131,7 @@ public class FrameRilasciaReview extends javax.swing.JFrame implements Serializa
         // TODO add your handling code here:
         //conferma
     	try {
-    		Registry registry = LocateRegistry.getRegistry("localhost",5008);
+    		Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
     		IGestoreAccordo igestoreAccordo = (IGestoreAccordo) registry.lookup("IGestoreAccordo");
 	    	String review = jTextAreaFeedback.getText();
 	    	int rating = jSliderRating.getValue();

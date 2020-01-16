@@ -13,7 +13,7 @@ public class GestoreUtente implements IGestoreUtente{
 	public int Registrazione(String nome, String cognome, String email, String password, 
 			Date dataNascita, double cellulare, String username) {
 		
-		if(username.length() <10 && password.length() <10) {
+		if(username != "" && password != "" && username.length() <12 && password.length() <12 ) {
 			Utente utente = new Utente(nome, cognome, email, password, dataNascita, cellulare, username);
 			UtenteDAO utenteDAO = new UtenteDAO();
 			utenteDAO.createUtente(utente);

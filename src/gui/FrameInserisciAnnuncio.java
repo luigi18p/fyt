@@ -344,7 +344,7 @@ public class FrameInserisciAnnuncio extends javax.swing.JFrame implements Serial
 	        Boolean tipAR = jCheckBoxTipAR.isSelected();
 	        int nPosti = (int) jSpinnerNposti.getValue();
 	        
-	        Registry registry = LocateRegistry.getRegistry("localhost",5008);
+	        Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 	        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
 	        
 	        //GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
