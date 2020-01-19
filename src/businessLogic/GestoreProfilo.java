@@ -1,9 +1,9 @@
 package businessLogic;
 
+
 import dataBase.ProfiloDAO;
 import domain.Profilo;
 import rmi.IGestoreProfilo;
-import rmi.IGestoreUtente;
 
 public class GestoreProfilo implements IGestoreProfilo{
 	
@@ -22,12 +22,12 @@ public class GestoreProfilo implements IGestoreProfilo{
 		return 0;
 	}
 
-	public void UpdateRiepilogo(String username, int i) {
+	public void IncrementaAnnunci(String username) {
 		try {
 			Profilo p = new Profilo(username);
 			ProfiloDAO profiloDAO = new ProfiloDAO();
 			p=profiloDAO.readProfilo(username);
-			p.setTotaleBigliettiInVendita((p.getTotaleBigliettiInVendita())+i);
+			p.setTotaleBigliettiInVendita((p.getTotaleBigliettiInVendita())+1);
 			profiloDAO.updateProfilo(p);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -48,4 +48,5 @@ public class GestoreProfilo implements IGestoreProfilo{
 		return null;
 		
 	}
+
 }

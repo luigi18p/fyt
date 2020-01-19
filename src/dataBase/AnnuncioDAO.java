@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import domain.Annuncio;
+import domain.CatalogoPersonale;
 
 public class AnnuncioDAO {
 
@@ -20,9 +20,10 @@ public class AnnuncioDAO {
     private static final String UPDATE_QUERY = "UPDATE annuncio SET nome=?,descrizione=?,prezzoRichiesto=? WHERE idBiglietto = ?";
     private static final String DELETE_QUERY = "DELETE FROM annuncio WHERE idBiglietto = ?";
 
-    public List<Annuncio> getAllAnnunci() {
+    public CatalogoPersonale getAllAnnunci() {
     	
-    	List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
+    	CatalogoPersonale cp = new CatalogoPersonale();
+    	ArrayList<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
     	Annuncio annuncio = null;
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
@@ -37,6 +38,7 @@ public class AnnuncioDAO {
     			annuncio = new Annuncio(result.getString(1),result.getInt(2),result.getString(3),result.getFloat(4));
     			listaAnnunci.add(annuncio);
     		}
+    		cp.setElencoAnnunci(listaAnnunci);
     	} catch (SQLException e) {
     		e.printStackTrace();
     	} finally {
@@ -57,13 +59,14 @@ public class AnnuncioDAO {
             }
         }
     	
-		return listaAnnunci;
+		return cp;
     	
     }
     
-    public List<Annuncio> getAllAnnunci(String tipoTrasporto) {
+    public CatalogoPersonale getAllAnnunci(String tipoTrasporto) {
     	
-    	List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
+    	CatalogoPersonale cp = new CatalogoPersonale();
+    	ArrayList<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
     	Annuncio annuncio = null;
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
@@ -79,6 +82,7 @@ public class AnnuncioDAO {
     			
     			listaAnnunci.add(annuncio);
     		}
+    		cp.setElencoAnnunci(listaAnnunci);
     	} catch (SQLException e) {
     		e.printStackTrace();
     	} finally {
@@ -99,13 +103,14 @@ public class AnnuncioDAO {
             }
         }
     	
-		return listaAnnunci;
+		return cp;
     	
     }
     
-    public List<Annuncio> getAllAnnunciPersonali(String username) {
+    public CatalogoPersonale getAllAnnunciPersonali(String username) {
     	
-    	List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
+    	CatalogoPersonale cp = new CatalogoPersonale();
+    	ArrayList<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
     	Annuncio annuncio = null;
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
@@ -119,9 +124,9 @@ public class AnnuncioDAO {
     		result = preparedStatement.getResultSet();
     		while (result.next() == true) {
     			annuncio = new Annuncio(result.getString(1),result.getInt(2),result.getString(3),result.getFloat(4));
-    			
     			listaAnnunci.add(annuncio);
     		}
+    		cp.setElencoAnnunci(listaAnnunci);
     	} catch (SQLException e) {
     		e.printStackTrace();
     	} finally {
@@ -142,7 +147,7 @@ public class AnnuncioDAO {
             }
         }
     	
-		return listaAnnunci;
+		return cp;
     	
     }
     

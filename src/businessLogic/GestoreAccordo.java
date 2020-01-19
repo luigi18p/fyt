@@ -8,19 +8,21 @@ import dataBase.AccordoDAO;
 import dataBase.UtenteDAO;
 import domain.Accordo;
 import domain.Annuncio;
+import domain.ElencoAccordi;
 import domain.Utente;
 import rmi.IGestoreAccordo;
 import rmi.IGestoreUtente;
 
 public class GestoreAccordo implements IGestoreAccordo{
 	
-	public List<Accordo> ReadAllAccordi(String username) {
+	public ElencoAccordi ReadAllAccordi(String username) {
 
+		ElencoAccordi ea = new ElencoAccordi();
 		List<Accordo> listaAccordi = null;
 		AccordoDAO accordoDAO = new AccordoDAO();
-		listaAccordi = accordoDAO.ReadAllAccordi(username);
+		ea = accordoDAO.ReadAllAccordi(username);
 		
-		return listaAccordi;
+		return ea;
 	}
 	
 	public boolean updateRatingAccordo(int idBiglietto, String reviewAcq, int ratingAcq){

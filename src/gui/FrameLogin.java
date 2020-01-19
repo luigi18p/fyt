@@ -147,8 +147,8 @@ public class FrameLogin extends javax.swing.JFrame implements Serializable{
 	        String password = jPasswordpassword.getText();
 	        
 	        Registry registry = LocateRegistry.getRegistry(myhost,5008);
-	        IGestoreUtente igestoreUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
-	        int verifica = igestoreUtente.Login(username, password);
+	        IGestoreUtente sketetonGUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
+	        int verifica = sketetonGUtente.Login(username, password);
 	            
 	        if (verifica == 0) {
 	            this.toBack();

@@ -1,7 +1,6 @@
 package dataBase;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Accordo;
-import domain.Annuncio;
+import domain.ElencoAccordi;
 
 public class AccordoDAO {
 
     private static final String CREATE_QUERY = "INSERT INTO accordo (userVen,idBiglietto,dataAccordo,userAcq,reviewVen,reviewAcq,ratingVen,ratingAcq) VALUES (?,?,?,?,?,?,?,?)";
-    private static final String READ_QUERY = "SELECT userVen,idBiglietto,dataAccordo,userAcq,reviewVen,reviewAcq,ratingVen,ratingAcq FROM accordo WHERE idBiglietto = ?";
+//    private static final String READ_QUERY = "SELECT userVen,idBiglietto,dataAccordo,userAcq,reviewVen,reviewAcq,ratingVen,ratingAcq FROM accordo WHERE idBiglietto = ?";
     private static final String READ_reating_QUERY = "SELECT ratingAcq FROM accordo WHERE idBiglietto = ?";
     private static final String READ_allAccordi_QUERY = "SELECT userVen,idBiglietto,dataAccordo,reviewVen,ratingVen,ratingAcq FROM accordo WHERE userAcq = ?";
-    private static final String UPDATE_QUERY = "UPDATE accordo SET userVen=?,idBiglietto=?,dataAccordo=?,userAcq=?,reviewVen=?,reviewAcq=?,ratingVen=?,ratingAcq=? WHERE idBiglietto = ?";
+//    private static final String UPDATE_QUERY = "UPDATE accordo SET userVen=?,idBiglietto=?,dataAccordo=?,userAcq=?,reviewVen=?,reviewAcq=?,ratingVen=?,ratingAcq=? WHERE idBiglietto = ?";
     private static final String UPDATE_rating_QUERY = "UPDATE accordo SET reviewAcq=?, ratingAcq=? WHERE idBiglietto = ?";
     //private static final String DELETE_QUERY = "DELETE FROM accordo WHERE idBiglietto = ?";
 
@@ -234,9 +233,10 @@ public class AccordoDAO {
         return a;
 	}*/
 
-    public List<Accordo> ReadAllAccordi(String username) {
+    public ElencoAccordi ReadAllAccordi(String username) {
 
-    	List<Accordo> listaAccordi = new ArrayList<Accordo>();
+    	ElencoAccordi ea = new ElencoAccordi();
+    	ArrayList<Accordo> listaAccordi = new ArrayList<Accordo>();
 		Accordo a= null;
         Connection conn = null;
         PreparedStatement preparedStatement = null;
@@ -252,6 +252,7 @@ public class AccordoDAO {
                 a = new Accordo(result.getString(1), result.getInt(2), result.getDate(3), null, result.getString(4), null, result.getInt(5), result.getInt(6));
                 listaAccordi.add(a);
             } 
+            ea.setElencoAccordi(listaAccordi);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -271,7 +272,7 @@ public class AccordoDAO {
                 cse.printStackTrace();
             }
         }
-        return listaAccordi;
+        return ea;
 	}
 
     public int readRating(int idBiglietto) {

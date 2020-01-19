@@ -345,10 +345,10 @@ public class FrameInserisciAnnuncio extends javax.swing.JFrame implements Serial
 	        int nPosti = (int) jSpinnerNposti.getValue();
 	        
 	        Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
-	        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
+	        IGestoreAnnuncio sketetonGAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
 	        
 	        //GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
-	        int inserito = igestoreAnnuncio.CreateAnnuncio(username,idTicket,partenza,arrivo,nominativo,compagnia,classe,fermate,descrizione,
+	        int inserito = sketetonGAnnuncio.CreateAnnuncio(username,idTicket,partenza,arrivo,nominativo,compagnia,classe,fermate,descrizione,
 	        		treno,aereo,tipAR,prezzoA,prezzoR,sDateA,sDateR,nPosti);
 	        if(inserito != 0) {
 	        	JOptionPane.showMessageDialog(null,"Annuncio non inserito. Riprovare!");

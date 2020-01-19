@@ -22,20 +22,20 @@ public class ServerProxyManager extends UnicastRemoteObject{
 			Registry registry = LocateRegistry.createRegistry(5008); 
 			
 			GestoreUtente gestoreUtente = new GestoreUtente();
-			IGestoreUtente igestoreUtente = (IGestoreUtente) UnicastRemoteObject.exportObject(gestoreUtente,0);
-			registry.rebind("IGestoreUtente", igestoreUtente);
+			IGestoreUtente sketetonGUtente = (IGestoreUtente) UnicastRemoteObject.exportObject(gestoreUtente,0);
+			registry.rebind("IGestoreUtente", sketetonGUtente);
 			
 			GestoreProfilo gestoreProfilo = new GestoreProfilo();
-			IGestoreProfilo igestoreProfilo = (IGestoreProfilo) UnicastRemoteObject.exportObject(gestoreProfilo,0);
-			registry.rebind("IGestoreProfilo", igestoreProfilo);
+			IGestoreProfilo sketetonGProfilo = (IGestoreProfilo) UnicastRemoteObject.exportObject(gestoreProfilo,0);
+			registry.rebind("IGestoreProfilo", sketetonGProfilo);
 			
 			GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
-			IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) UnicastRemoteObject.exportObject(gestoreAnnuncio,0);
-			registry.rebind("IGestoreAnnuncio", igestoreAnnuncio);
+			IGestoreAnnuncio sketetonGAnnuncio = (IGestoreAnnuncio) UnicastRemoteObject.exportObject(gestoreAnnuncio,0);
+			registry.rebind("IGestoreAnnuncio", sketetonGAnnuncio);
 			
 			GestoreAccordo gestoreAccordo = new GestoreAccordo();
-			IGestoreAccordo igestoreAccordo = (IGestoreAccordo) UnicastRemoteObject.exportObject(gestoreAccordo,0);
-			registry.rebind("IGestoreAccordo", igestoreAccordo);
+			IGestoreAccordo sketetonGAccordo = (IGestoreAccordo) UnicastRemoteObject.exportObject(gestoreAccordo,0);
+			registry.rebind("IGestoreAccordo", sketetonGAccordo);
 			
 		}catch (RemoteException e){
 			e.printStackTrace();

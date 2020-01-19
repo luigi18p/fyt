@@ -175,8 +175,8 @@ public class FrameGestisciProfilo extends javax.swing.JFrame implements Serializ
 			//GestoreUtente gu = new GestoreUtente();
 			
 			Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
-	        IGestoreUtente igestoreUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
-	        igestoreUtente.updateUtente(nome, cognome, email, password, sDate, ntelefono, username);
+	        IGestoreUtente sketetonGUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
+	        sketetonGUtente.updateUtente(nome, cognome, email, password, sDate, ntelefono, username);
 	        
         }catch(ConnectException ce) {
     		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");

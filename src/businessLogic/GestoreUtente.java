@@ -2,9 +2,7 @@ package businessLogic;
 
 import java.sql.Date;
 
-import dataBase.ProfiloDAO;
 import dataBase.UtenteDAO;
-import domain.Profilo;
 import domain.Utente;
 import rmi.IGestoreUtente;
 

@@ -423,10 +423,10 @@ public class FrameHome extends javax.swing.JFrame implements Serializable{
         ///riepologo
     	try {
     		Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
-	        IGestoreProfilo igestoreProfilo = (IGestoreProfilo) registry.lookup("IGestoreProfilo");
+	        IGestoreProfilo sketetonGProfilo = (IGestoreProfilo) registry.lookup("IGestoreProfilo");
 			Profilo p = new Profilo(username);
 			//GestoreProfilo gestoreProfilo = new GestoreProfilo();
-			p = igestoreProfilo.ReadProfilo(username);
+			p = sketetonGProfilo.ReadProfilo(username);
 			JOptionPane.showMessageDialog(null,
 					"Username:"+username+
 					"\nTotale Biglietti in vendita:"+p.getTotaleBigliettiInVendita()+

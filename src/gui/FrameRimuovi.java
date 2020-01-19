@@ -189,8 +189,8 @@ public class FrameRimuovi extends javax.swing.JFrame implements Serializable{
 	    	//GestoreAnnuncio gestoreAnnucio = new GestoreAnnuncio();
 	    	try {	
 	    		Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
-		        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
-	    		igestoreAnnuncio.DeleteBiglietto(id);
+		        IGestoreAnnuncio sketetonGAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
+		        sketetonGAnnuncio.DeleteBiglietto(id);
 	    		JOptionPane.showMessageDialog(null,"Rimozione Confermata\nBiglietto non venduto!");
 	    		this.toBack();
 	            setVisible(false);
@@ -209,8 +209,8 @@ public class FrameRimuovi extends javax.swing.JFrame implements Serializable{
 	    	
 	    	try {
 	    		Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
-		        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
-				igestoreAnnuncio.CreateAccordo(username, id, userAcq,reviewVen,ratingV);
+		        IGestoreAnnuncio sketetonGAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
+		        sketetonGAnnuncio.CreateAccordo(username, id, userAcq,reviewVen,ratingV);
 	    	}catch(ConnectException ce) {
 	    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
 	    	} catch(NullPointerException npe){

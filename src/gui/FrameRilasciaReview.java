@@ -132,11 +132,11 @@ public class FrameRilasciaReview extends javax.swing.JFrame implements Serializa
         //conferma
     	try {
     		Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
-    		IGestoreAccordo igestoreAccordo = (IGestoreAccordo) registry.lookup("IGestoreAccordo");
+    		IGestoreAccordo sketetonGAccordo = (IGestoreAccordo) registry.lookup("IGestoreAccordo");
 	    	String review = jTextAreaFeedback.getText();
 	    	int rating = jSliderRating.getValue();
 	    	//GestoreAccordo gestoreAccordo = new GestoreAccordo();
-	    	boolean modifica = igestoreAccordo.updateRatingAccordo(idBiglietto,review,rating);
+	    	boolean modifica = sketetonGAccordo.updateRatingAccordo(idBiglietto,review,rating);
 	        if (modifica == false)
 	        	JOptionPane.showMessageDialog(null,"Review già rilasciata");
 	    	this.toBack();

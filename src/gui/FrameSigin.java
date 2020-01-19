@@ -10,7 +10,6 @@ import java.rmi.ConnectException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javax.swing.JOptionPane;
-
 import rmi.IGestoreUtente;
 
 
@@ -215,9 +214,9 @@ public class FrameSigin extends javax.swing.JFrame implements Serializable{
 			double ntelefono = Double.parseDouble(telefono);
 			
 	        Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
-	        IGestoreUtente igestoreUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
-	        
-			igestoreUtente.Registrazione(nome, cognome, email, password, sDate, ntelefono, username);
+	        IGestoreUtente sketetonGUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");
+
+	        sketetonGUtente.Registrazione(nome, cognome, email, password, sDate, ntelefono, username);
 
 			this.toBack();
 			setVisible(false);

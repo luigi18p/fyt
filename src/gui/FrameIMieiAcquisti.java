@@ -19,6 +19,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import domain.Accordo;
+import domain.ElencoAccordi;
 import rmi.IGestoreAccordo;
 
 /**
@@ -128,12 +129,13 @@ public class FrameIMieiAcquisti extends javax.swing.JFrame implements Serializab
     	
     	try {
 			DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-			List<Accordo> listaAccordi = null;
-			//GestoreAccordo gestoreAccordo = new GestoreAccordo();
+
+			ElencoAccordi ea = new ElencoAccordi();
 			Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
-			IGestoreAccordo igestoreAccordo = (IGestoreAccordo) registry.lookup("IGestoreAccordo");
-			listaAccordi = igestoreAccordo.ReadAllAccordi(username);
-			for(Accordo a : listaAccordi) {
+			IGestoreAccordo sketetonGAccordo = (IGestoreAccordo) registry.lookup("IGestoreAccordo");
+			
+			ea = sketetonGAccordo.ReadAllAccordi(username);
+			for(Accordo a : ea.getElencoAccordi()) {
 				table.addRow(new Object[] {a.getUserVen(),a.getIdBiglietto(),a.getDataAccordo(),
 						a.getReviewVen(),a.getRatingVen(),a.getRatingAcq()});
 			}
@@ -189,6 +191,7 @@ public class FrameIMieiAcquisti extends javax.swing.JFrame implements Serializab
 	        FrameRilasciaReview rilasciaReview = new FrameRilasciaReview(username,(int)idBiglietto);
 	        rilasciaReview.setVisible(true);
 	    	rilasciaReview.toFront();
+	    	this.setVisible(false);
        
 	        
     	}catch(Exception e) {

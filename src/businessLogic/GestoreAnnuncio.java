@@ -2,20 +2,17 @@ package businessLogic;
 
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.List;
 
 import dataBase.AccordoDAO;
 import dataBase.AnnuncioDAO;
 import dataBase.BigliettoDAO;
 import dataBase.ProfiloDAO;
-import dataBase.UtenteDAO;
 import domain.Accordo;
 import domain.Annuncio;
 import domain.BigliettoTreno;
+import domain.CatalogoPersonale;
 import domain.Profilo;
-import domain.Utente;
 import rmi.IGestoreAnnuncio;
-import rmi.IGestoreUtente;
 
 public class GestoreAnnuncio implements IGestoreAnnuncio{
 	
@@ -45,7 +42,7 @@ public class GestoreAnnuncio implements IGestoreAnnuncio{
 			annuncioDAO.createAnnuncio(a);
 			
 			GestoreProfilo gestoreProfilo = new GestoreProfilo();
-			gestoreProfilo.UpdateRiepilogo(username,1);
+			gestoreProfilo.IncrementaAnnunci(username);
         }catch (Exception rse) {
 	            rse.printStackTrace();
 	            return 1;
@@ -53,13 +50,13 @@ public class GestoreAnnuncio implements IGestoreAnnuncio{
 		return 0;
 	}
 		
-	public List<Annuncio> getAllAnnunciPersonali(String username){
+	public CatalogoPersonale getAllAnnunciPersonali(String username){
 		
-		List<Annuncio> listaAnnunci = null;
+		CatalogoPersonale cp = new CatalogoPersonale();
 		AnnuncioDAO annuncioDAO = new AnnuncioDAO();
-		listaAnnunci = annuncioDAO.getAllAnnunciPersonali(username);
+		cp = annuncioDAO.getAllAnnunciPersonali(username);
 
-		return listaAnnunci;
+		return cp;
 		
 	}
 	
@@ -94,8 +91,21 @@ public class GestoreAnnuncio implements IGestoreAnnuncio{
 			
 			DeleteBiglietto(id);
 			
-			GestoreProfilo gestoreProfilo = new GestoreProfilo();
-			gestoreProfilo.UpdateRiepilogo(username,-1);
+			GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
+			gestoreAnnuncio.UpdateRiepilogo(username);
+		}
+	}
+
+	public void UpdateRiepilogo(String username) {
+		try {
+			Profilo p = new Profilo(username);
+			ProfiloDAO profiloDAO = new ProfiloDAO();
+			p=profiloDAO.readProfilo(username);
+			p.setTotaleBigliettiInVendita((p.getTotaleBigliettiInVendita())-1);
+			profiloDAO.updateProfilo(p);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

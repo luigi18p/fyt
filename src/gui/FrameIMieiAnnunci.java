@@ -20,6 +20,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import domain.Annuncio;
 import domain.BigliettoTreno;
+import domain.CatalogoPersonale;
 import rmi.IGestoreAnnuncio;
 
 /**
@@ -129,13 +130,13 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame implements Serializabl
     	
     	try {
 			DefaultTableModel table = (DefaultTableModel) jTableAnnunci.getModel();
-			List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();;
+			CatalogoPersonale cp = new CatalogoPersonale();
 			
 			Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
-			IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
-			listaAnnunci = igestoreAnnuncio.getAllAnnunciPersonali(username);
+			IGestoreAnnuncio sketetonGAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
+			cp = sketetonGAnnuncio.getAllAnnunciPersonali(username);
 			//System.out.println(listaAnnunci);
-			for(Annuncio a : listaAnnunci) {
+			for(Annuncio a : cp.getElencoAnnunci()) {
 				table.addRow(new Object[] {a.getIdBiglietto(),a.getPrezzoRichiesto()});
 			}
     	}catch(ConnectException ce) {
@@ -170,8 +171,8 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame implements Serializabl
 
 	        //GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
 	        Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
-	        IGestoreAnnuncio igestoreAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
-	        BigliettoTreno b = igestoreAnnuncio.ReadBigliettoTreno(id);
+	        IGestoreAnnuncio sketetonGAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
+	        BigliettoTreno b = sketetonGAnnuncio.ReadBigliettoTreno(id);
 	        
 	        JOptionPane.showMessageDialog(null,
 	        		"\nNome:		"+b.getNominativo()+
@@ -215,6 +216,7 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame implements Serializabl
 	        FrameRimuovi rimuovi = new FrameRimuovi(username,i);
 	        rimuovi.setVisible(true);
 	        rimuovi.toFront();
+	        this.setVisible(false);
 	        
     	}catch(Exception e) {
     		//e.printStackTrace();
