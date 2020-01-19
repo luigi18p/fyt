@@ -5,7 +5,6 @@
  */
 package gui;
 
-import java.io.Serializable;
 import java.rmi.ConnectException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -18,7 +17,7 @@ import rmi.IGestoreUtente;
  *
  * @author gioac
  */
-public class FrameSigin extends javax.swing.JFrame implements Serializable{
+public class FrameSigin extends javax.swing.JFrame{
 
     /**
      * Creates new form FrameSigin

@@ -1,23 +1,18 @@
 package dataBase;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.time.LocalDate;
-import java.util.List;
 
 import domain.Profilo;
-import domain.Utente;
 
 public class ProfiloDAO {
 	
 	private static final String CREATE_QUERY = "INSERT INTO profilo (username,totaleBigliettiInVendita,mediaFeedback,nVisite) VALUES (?,?,?,?)";
     private static final String READ_QUERY = "SELECT username,totaleBigliettiInVendita,mediaFeedback,nVisite FROM profilo WHERE username = ?";
     private static final String UPDATE_QUERY = "UPDATE profilo SET totaleBigliettiInVendita=?,mediaFeedback=?,nVisite=? WHERE username = ?";
-    private static final String DELETE_QUERY = "DELETE FROM profilo WHERE username = ?";
+//    private static final String DELETE_QUERY = "DELETE FROM profilo WHERE username = ?";
     private static final String READ_QUERY_username = "SELECT username FROM profilo WHERE username = ?";
 
     public int createProfilo(Profilo p) {

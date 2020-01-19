@@ -2,13 +2,9 @@ package domain;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.time.LocalDate;
 
 public class Utente implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2131364514162756657L;
 	private String nome;
 	private String cognome;

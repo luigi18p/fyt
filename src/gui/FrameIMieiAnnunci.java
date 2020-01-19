@@ -5,15 +5,12 @@
  */
 package gui;
 
-import java.io.Serializable;
 import java.rmi.AccessException;
 import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -27,7 +24,7 @@ import rmi.IGestoreAnnuncio;
  *
  * @author gioac
  */
-public class FrameIMieiAnnunci extends javax.swing.JFrame implements Serializable{
+public class FrameIMieiAnnunci extends javax.swing.JFrame{
 
     /**
      * Creates new form FrameIMieiAnnunci

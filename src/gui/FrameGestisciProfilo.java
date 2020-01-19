@@ -5,8 +5,6 @@
  */
 package gui;
 
-
-import java.io.Serializable;
 import java.rmi.ConnectException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -18,7 +16,7 @@ import rmi.IGestoreUtente;
  *
  * @author gioac
  */
-public class FrameGestisciProfilo extends javax.swing.JFrame implements Serializable{
+public class FrameGestisciProfilo extends javax.swing.JFrame{
 
     /**
      * Creates new form FrameGestisciProfilo
