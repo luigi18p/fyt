@@ -1,13 +1,77 @@
 package businessLogic;
 
+import java.rmi.RemoteException;
 import java.sql.Date;
 
 import dataBase.UtenteDAO;
+import domain.Profilo;
 import domain.Utente;
 import rmi.IGestoreUtente;
 
 public class GestoreUtente implements IGestoreUtente{
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//_______________________________________ALTRO
 	public int Registrazione(String nome, String cognome, String email, String password, 
 			Date dataNascita, double cellulare, String username) {
 		
@@ -17,7 +81,9 @@ public class GestoreUtente implements IGestoreUtente{
 			utenteDAO.createUtente(utente);
 			
 			GestoreProfilo gestoreProfilo = new GestoreProfilo();
-			gestoreProfilo.createProfilo(username);
+
+				gestoreProfilo.createProfilo(username);
+
 
 		}
 		return 0;

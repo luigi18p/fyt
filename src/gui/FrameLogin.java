@@ -19,6 +19,11 @@ import rmi.IGestoreUtente;
 public class FrameLogin extends javax.swing.JFrame{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5355387680728570733L;
+
+	/**
      * Creates new form FrameLogin
      */
     public FrameLogin() {
@@ -142,7 +147,8 @@ public class FrameLogin extends javax.swing.JFrame{
     	try {
     		
 	        String username = jTextUsername.getText();
-	        String password = jPasswordpassword.getText();
+	        @SuppressWarnings("deprecation")
+			String password = jPasswordpassword.getText();
 	        
 	        Registry registry = LocateRegistry.getRegistry(myhost,5008);
 	        IGestoreUtente sketetonGUtente = (IGestoreUtente) registry.lookup("IGestoreUtente");

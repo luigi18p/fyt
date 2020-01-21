@@ -12,6 +12,10 @@ package gui;
 public class FrameContatti extends javax.swing.JFrame{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -918563621891257401L;
+	/**
      * Creates new form FrameContatti
      */
     public FrameContatti() {

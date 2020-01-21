@@ -1,22 +1,92 @@
 package businessLogic;
 
+import java.rmi.RemoteException;
 import java.sql.Date;
-import java.util.Calendar;
 
-import dataBase.AccordoDAO;
+import dataBase.BigliettoTrenoDAO;
 import dataBase.AnnuncioDAO;
-import dataBase.BigliettoDAO;
-import dataBase.ProfiloDAO;
-import domain.Accordo;
+import dataBase.BigliettoAereoDAO;
 import domain.Annuncio;
 import domain.BigliettoTreno;
 import domain.CatalogoPersonale;
+import domain.ElencoAccordi;
 import domain.Profilo;
 import rmi.IGestoreAnnuncio;
 
 public class GestoreAnnuncio implements IGestoreAnnuncio{
+
+	public CatalogoPersonale getAllAnnunciPersonali(String username) throws RemoteException{
+		
+		CatalogoPersonale cp = new CatalogoPersonale();
+		cp.getAllAnnunciPersonali(username);
+
+		return cp;
+	}
 	
-	public int CreateAnnuncio(String username, String idTicket, String partenza, String arrivo, String nominativo,
+	public boolean deletePerVendita(int id, String venditore, String acquirente, String reviewVen, int ratingVen, String tipoTrasporto)throws RemoteException {
+		
+		Profilo p = new Profilo();
+		boolean esistenzaUsername = p.checkProfilo(acquirente);
+		if (esistenzaUsername == false) {
+			return false;
+		}
+		else {
+			ElencoAccordi elencoA = new ElencoAccordi();
+			elencoA.createAccordo(id, venditore, acquirente, reviewVen, ratingVen);
+			
+			deletion(id,tipoTrasporto);
+			p.updateRiepilogo(venditore);
+			return true;
+		}	
+	}
+	
+	public void deletion(int id, String tipoTrasporto) throws RemoteException{
+		
+		if(tipoTrasporto=="treno") {
+			
+			BigliettoTrenoDAO trenoDAO = new BigliettoTrenoDAO();
+			trenoDAO.deleteBiglietto(id);
+		}
+		else {
+			BigliettoAereoDAO aereoDAO = new BigliettoAereoDAO();
+			aereoDAO.deleteBiglietto(id);
+		}
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	//______________________________________ALTRO___________________________________________________________
+
+	public BigliettoTreno ReadBigliettoTreno(int id) {
+		
+		BigliettoTrenoDAO bigliettoDAO = new BigliettoTrenoDAO();
+		BigliettoTreno b = bigliettoDAO.readBigliettoTreno(id);
+
+		return b;
+		
+	}
+	
+	
+
+	public int CreateAnnuncioTreno(String username, String idTicket, String partenza, String arrivo, String nominativo,
 			String compagnia, String classe, String fermate, String descrizione, Boolean Btreno, Boolean Baereo,
 			Boolean tipAR, float prezzoA, float prezzoR, Date sDateA, Date sDateR, int nPosti) {
 		
@@ -31,15 +101,17 @@ public class GestoreAnnuncio implements IGestoreAnnuncio{
 				sDateR=null;
 			}
         
-			BigliettoTreno b = new BigliettoTreno(0, username, nominativo, sDateA, sDateR, treno, tipAR, prezzoA, nPosti,
-					idTicket, partenza, arrivo, compagnia, classe, fermate);
-			
-			BigliettoDAO bigliettoDAO = new BigliettoDAO();
-			b.setId(bigliettoDAO.createBigliettoTreno(b));
-			
-			Annuncio a= new Annuncio(username, b.getId(), descrizione, prezzoR);
+			Annuncio a= new Annuncio(0,username, descrizione, prezzoR,treno);
 			AnnuncioDAO annuncioDAO = new AnnuncioDAO();
-			annuncioDAO.createAnnuncio(a);
+			a.setIdAnnuncio(annuncioDAO.createAnnuncio(a));
+			
+			BigliettoTreno b = new BigliettoTreno(a.getIdAnnuncio(), nominativo, sDateA, sDateR, tipAR, prezzoA, nPosti,
+					idTicket, partenza, arrivo, compagnia, classe, fermate);
+				
+			BigliettoTrenoDAO bigliettoDAO = new BigliettoTrenoDAO();
+			bigliettoDAO.createBigliettoTreno(b);
+			
+
 			
 			GestoreProfilo gestoreProfilo = new GestoreProfilo();
 			gestoreProfilo.IncrementaAnnunci(username);
@@ -49,63 +121,4 @@ public class GestoreAnnuncio implements IGestoreAnnuncio{
 	        }
 		return 0;
 	}
-		
-	public CatalogoPersonale getAllAnnunciPersonali(String username){
-		
-		CatalogoPersonale cp = new CatalogoPersonale();
-		AnnuncioDAO annuncioDAO = new AnnuncioDAO();
-		cp = annuncioDAO.getAllAnnunciPersonali(username);
-
-		return cp;
-		
 	}
-	
-	public void DeleteBiglietto(int id) {
-		
-		BigliettoDAO bigliettoDAO = new BigliettoDAO();
-		bigliettoDAO.deleteBiglietto(id);
-		
-	}
-	
-	public BigliettoTreno ReadBigliettoTreno(int id) {
-		
-		BigliettoDAO bigliettoDAO = new BigliettoDAO();
-		BigliettoTreno b = bigliettoDAO.readBigliettoTreno(id);
-
-		return b;
-		
-	}
-
-	public void CreateAccordo(String username, int id, String userAcq, String feedback, int ratingV) {
-		
-		Profilo p = new Profilo();
-		ProfiloDAO profiloDAO = new ProfiloDAO();
-		p.setUsername(profiloDAO.readUsername(userAcq));
-		if(p.getUsername() != null) {
-						
-			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-			Accordo a = new Accordo(username, id, date, userAcq, feedback, null, ratingV, 0);
-			
-			AccordoDAO accordoDAO = new AccordoDAO();
-			accordoDAO.createAccordo(a);
-			
-			DeleteBiglietto(id);
-			
-			GestoreAnnuncio gestoreAnnuncio = new GestoreAnnuncio();
-			gestoreAnnuncio.UpdateRiepilogo(username);
-		}
-	}
-
-	public void UpdateRiepilogo(String username) {
-		try {
-			Profilo p = new Profilo(username);
-			ProfiloDAO profiloDAO = new ProfiloDAO();
-			p=profiloDAO.readProfilo(username);
-			p.setTotaleBigliettiInVendita((p.getTotaleBigliettiInVendita())-1);
-			profiloDAO.updateProfilo(p);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-}

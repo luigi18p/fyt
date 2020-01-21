@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 public class Annuncio implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -9006105091683784824L;
+	
+	private int idAnnuncio;
 	private String username;
-	private int idBiglietto;
 	private String descrizione;
 	private float prezzoRichiesto;
+	private String tipoTrasporto;
 	
-	public Annuncio(String username, int idBiglietto, String descrizione, float prezzoRichiesto) {
+	public Annuncio(int idAnnuncio, String username, String descrizione, float prezzoRichiesto,String tipoTrasporto) {
 		super();
 		this.username = username;
-		this.idBiglietto = idBiglietto;
+		this.idAnnuncio = idAnnuncio;
 		this.descrizione = descrizione;
 		this.prezzoRichiesto = prezzoRichiesto;
+		this.tipoTrasporto = tipoTrasporto;
 	}
 	
 	public String getUsername() {
@@ -27,11 +27,11 @@ public class Annuncio implements Serializable{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public int getIdBiglietto() {
-		return idBiglietto;
+	public int getIdAnnuncio() {
+		return idAnnuncio;
 	}
-	public void setIdBiglietto(int idBiglietto) {
-		this.idBiglietto = idBiglietto;
+	public void setIdAnnuncio(int idAnnuncio) {
+		this.idAnnuncio = idAnnuncio;
 	}
 	public String getDescrizione() {
 		return descrizione;
@@ -44,5 +44,13 @@ public class Annuncio implements Serializable{
 	}
 	public void setPrezzoRichiesto(float prezzoRichiesto) {
 		this.prezzoRichiesto = prezzoRichiesto;
+	}
+
+	public String getTipoTrasporto() {
+		return tipoTrasporto;
+	}
+
+	public void setTipoTrasporto(String tipoTrasporto) {
+		this.tipoTrasporto = tipoTrasporto;
 	}
 }

@@ -5,25 +5,23 @@ import java.sql.Date;
 
 public class Accordo implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5270157970305317073L;
-	private String userVen;
-	private int idBiglietto;
+	
+	private int idAnnuncio;
 	Date dataAccordo;
+	private String userVen;
 	private String userAcq;
 	private String reviewVen;
 	private String reviewAcq;
 	private int ratingVen;
 	private int ratingAcq;
 
-	public Accordo(String userVen, int idBiglietto, Date dataAccordo, String userAcq, String reviewVen,
+	public Accordo(int idAnnuncio, Date dataAccordo, String userVen, String userAcq, String reviewVen,
 			String reviewAcq, int ratingVen, int ratingAcq) {
 		super();
-		this.userVen = userVen;
-		this.idBiglietto = idBiglietto;
+		this.idAnnuncio = idAnnuncio;
 		this.dataAccordo = dataAccordo;
+		this.userVen = userVen;
 		this.userAcq = userAcq;
 		this.reviewVen = reviewVen;
 		this.reviewAcq = reviewAcq;
@@ -39,12 +37,12 @@ public class Accordo implements Serializable{
 		this.userVen = userVen;
 	}
 
-	public int getIdBiglietto() {
-		return idBiglietto;
+	public int getIdAnnuncio() {
+		return idAnnuncio;
 	}
 
-	public void setIdBiglietto(int idBiglietto) {
-		this.idBiglietto = idBiglietto;
+	public void setIdAnnuncio(int idAnnuncio) {
+		this.idAnnuncio = idAnnuncio;
 	}
 
 	public Date getDataAccordo() {

@@ -4,6 +4,46 @@ import java.rmi.RemoteException;
 import java.sql.Date;  
 
 public interface IGestoreUtente extends Remote {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//_____________________________ALTRO
 
 	public int Registrazione(String nome, String cognome, String email, String password, 
 			Date dataNascita, double cellulare, String username) throws RemoteException;

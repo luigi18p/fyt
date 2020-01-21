@@ -7,6 +7,55 @@ import rmi.IGestoreProfilo;
 
 public class GestoreProfilo implements IGestoreProfilo{
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//_______________________________________ALTRO
 	public int createProfilo(String username) {
 		
 		try {

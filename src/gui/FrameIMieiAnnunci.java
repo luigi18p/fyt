@@ -27,12 +27,16 @@ import rmi.IGestoreAnnuncio;
 public class FrameIMieiAnnunci extends javax.swing.JFrame{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5583396281011731777L;
+	/**
      * Creates new form FrameIMieiAnnunci
      */
 	private static String username;
 	
     public FrameIMieiAnnunci(String username) {
-    	this.username = username;
+    	FrameIMieiAnnunci.username = username;
         initComponents();
         initTable();  
     }
@@ -60,11 +64,11 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame{
 
             },
             new String [] {
-                "Id Biglietto", "Prezzo Richiesto"
+                "Id Annuncio", "Prezzo", "Tipo Trasporto"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Float.class
+                java.lang.Object.class, java.lang.Float.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -121,7 +125,7 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame{
         );
 
         pack();
-    }// </editor-fold>           
+    }// </editor-fold>            
     
     private void initTable() {
     	
@@ -132,9 +136,9 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame{
 			Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 			IGestoreAnnuncio sketetonGAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
 			cp = sketetonGAnnuncio.getAllAnnunciPersonali(username);
-			//System.out.println(listaAnnunci);
+			
 			for(Annuncio a : cp.getElencoAnnunci()) {
-				table.addRow(new Object[] {a.getIdBiglietto(),a.getPrezzoRichiesto()});
+				table.addRow(new Object[] {a.getIdAnnuncio(),a.getPrezzoRichiesto(),a.getTipoTrasporto()});
 			}
     	}catch(ConnectException ce) {
     		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
@@ -173,18 +177,16 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame{
 	        
 	        JOptionPane.showMessageDialog(null,
 	        		"\nNome:		"+b.getNominativo()+
-	        		"\nUser:		"+b.getUserVen()+
 	        		"\nPartenza:	"+b.getPartenza()+
 	        		"\nArrivo:		"+b.getArrivo()+
 	        		"\nData Andata:	"+b.getDataAndata()+
 	        		"\nData Ritorno:"+b.getDataRitorno()+
-	        		"\nTipo Trasporto:"+b.getTipoTrasporto()+
 	        		"\nTipologia A/R:"+b.getTipologiaAR()+
 	        		"\nPrezzo Acquisto:"+b.getPrezzoAcquisto()+
 	        		"\nN. Posti:	"+b.getNumeroDiPosti()+
 	        		"\nCompagnia:	"+b.getCompagnia()+
-	        		"\nClasse:		"+b.getClasse_T()+
-	        		"\nFermate:		"+b.getFermate_T()
+	        		"\nClasse:		"+b.getClasse()+
+	        		"\nFermate:		"+b.getFermate()
 	        	);
     	}catch(ConnectException ce) {
     		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
@@ -207,10 +209,12 @@ public class FrameIMieiAnnunci extends javax.swing.JFrame{
 	        //int[] selectedColumns = jTableAnnunci.getSelectedColumns();
 	    	//Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], selectedColumns[0]);
 	        Object idBiglietto = jTableAnnunci.getValueAt(selectedRow[0], 0);
-	        String id = String.valueOf(idBiglietto);
+	        //String id = String.valueOf(idBiglietto);
 	        int i = (int) idBiglietto;
+	        Object tipologiaO = jTableAnnunci.getValueAt(selectedRow[0], 2);
+	        String tipologia = (String) tipologiaO;
 	        
-	        FrameRimuovi rimuovi = new FrameRimuovi(username,i);
+	        FrameRimuovi rimuovi = new FrameRimuovi(username,i,tipologia);
 	        rimuovi.setVisible(true);
 	        rimuovi.toFront();
 	        this.setVisible(false);
