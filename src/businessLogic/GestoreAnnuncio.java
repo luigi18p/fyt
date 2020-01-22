@@ -13,6 +13,21 @@ import domain.Profilo;
 import rmi.IGestoreAnnuncio;
 
 public class GestoreAnnuncio implements IGestoreAnnuncio{
+	
+	private volatile static GestoreAnnuncio single = null;
+	public GestoreAnnuncio() {}
+	
+	public static synchronized GestoreAnnuncio getIstance() {
+		
+		if(single == null) {
+			synchronized(GestoreAnnuncio.class) {
+				if(single == null) {
+					single = new GestoreAnnuncio();
+				}
+			}
+		}
+		return single;
+	}
 
 	public CatalogoPersonale getAllAnnunciPersonali(String username) throws RemoteException{
 		
@@ -101,7 +116,6 @@ public class GestoreAnnuncio implements IGestoreAnnuncio{
 			BigliettoTrenoDAO bigliettoDAO = new BigliettoTrenoDAO();
 			bigliettoDAO.createBigliettoTreno(b);
 			
-
 			GestoreProfilo gestoreProfilo = new GestoreProfilo();
 			gestoreProfilo.IncrementaAnnunci(username);
         }catch (Exception rse) {

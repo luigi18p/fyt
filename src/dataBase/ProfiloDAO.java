@@ -13,7 +13,7 @@ public class ProfiloDAO {
     private static final String UPDATE_QUERY = "UPDATE profilo SET totaleBigliettiInVendita=?,mediaFeedback=?,nVisite=? WHERE username = ?";
     private static final String READ_QUERY_username = "SELECT username FROM profilo WHERE username = ?";
 
- public String readUsername(String username) {
+    public String readUsername(String username) {
 		
 		String p= null;
         Connection conn = null;

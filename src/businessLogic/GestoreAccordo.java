@@ -6,6 +6,20 @@ import rmi.IGestoreAccordo;
 
 public class GestoreAccordo implements IGestoreAccordo{
 	
+	private volatile static GestoreAccordo single = null;
+	public GestoreAccordo() {}
+	
+	public static synchronized GestoreAccordo getIstance() {
+		
+		if(single == null) {
+			synchronized(GestoreAccordo.class) {
+				if(single == null) {
+					single = new GestoreAccordo();
+				}
+			}
+		}
+		return single;
+	}
 	
 	
 	

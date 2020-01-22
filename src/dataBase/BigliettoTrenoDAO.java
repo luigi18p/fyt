@@ -9,44 +9,7 @@ import java.sql.Statement;
 import domain.BigliettoTreno;
 
 public class BigliettoTrenoDAO {
-	/*
-	private static final String DELETE_QUERY = "DELETE FROM bigliettoTreno WHERE idAnnuncio = ?";
-    
-    public void deleteBiglietto(int id) {
-		Connection conn = null;
-        PreparedStatement preparedStatement = null;
-        try {
-        	conn = DBManager.createConnection();
-            preparedStatement = conn.prepareStatement(DELETE_QUERY);
-            preparedStatement.setInt(1,id);
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (Exception sse) {
-                sse.printStackTrace();
-            }
-            try {
-                conn.close();
-            } catch (Exception cse) {
-                cse.printStackTrace();
-            }
-        }
-	}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    */
-    
-    
+
     
     
     
@@ -249,4 +212,43 @@ public class BigliettoTrenoDAO {
 
    
 */
+    
+	/*
+	private static final String DELETE_QUERY = "DELETE FROM bigliettoTreno WHERE idAnnuncio = ?";
+    
+    public void deleteBiglietto(int id) {
+		Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        try {
+        	conn = DBManager.createConnection();
+            preparedStatement = conn.prepareStatement(DELETE_QUERY);
+            preparedStatement.setInt(1,id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (Exception sse) {
+                sse.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (Exception cse) {
+                cse.printStackTrace();
+            }
+        }
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    */
+    
+    
 }

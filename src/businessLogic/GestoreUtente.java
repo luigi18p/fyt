@@ -8,7 +8,20 @@ import rmi.IGestoreUtente;
 
 public class GestoreUtente implements IGestoreUtente{
 	
+	private volatile static GestoreUtente single = null;
+	public GestoreUtente() {}
 	
+	public static synchronized GestoreUtente getIstance() {
+		
+		if(single == null) {
+			synchronized(GestoreUtente.class) {
+				if(single == null) {
+					single = new GestoreUtente();
+				}
+			}
+		}
+		return single;
+	}
 	
 	
 	

@@ -7,7 +7,20 @@ import rmi.IGestoreProfilo;
 
 public class GestoreProfilo implements IGestoreProfilo{
 	
+	private volatile static GestoreProfilo single = null;
+	public GestoreProfilo() {}
 	
+	public static synchronized GestoreProfilo getIstance() {
+		
+		if(single == null) {
+			synchronized(GestoreProfilo.class) {
+				if(single == null) {
+					single = new GestoreProfilo();
+				}
+			}
+		}
+		return single;
+	}
 	
 	
 	
