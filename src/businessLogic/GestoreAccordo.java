@@ -50,6 +50,7 @@ public class GestoreAccordo implements IGestoreAccordo{
 	
 	
 	
+	
 	//_______________________________________ALTRO
 	
 	public ElencoAccordi ReadAllAccordi(String username) {
