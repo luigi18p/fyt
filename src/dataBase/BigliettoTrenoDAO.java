@@ -9,7 +9,7 @@ import java.sql.Statement;
 import domain.BigliettoTreno;
 
 public class BigliettoTrenoDAO {
-	
+	/*
 	private static final String DELETE_QUERY = "DELETE FROM bigliettoTreno WHERE idAnnuncio = ?";
     
     public void deleteBiglietto(int id) {
@@ -44,7 +44,7 @@ public class BigliettoTrenoDAO {
     
     
     
-    
+    */
     
     
     

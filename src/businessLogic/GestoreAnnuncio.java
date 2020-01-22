@@ -5,7 +5,6 @@ import java.sql.Date;
 
 import dataBase.BigliettoTrenoDAO;
 import dataBase.AnnuncioDAO;
-import dataBase.BigliettoAereoDAO;
 import domain.Annuncio;
 import domain.BigliettoTreno;
 import domain.CatalogoPersonale;
@@ -23,7 +22,7 @@ public class GestoreAnnuncio implements IGestoreAnnuncio{
 		return cp;
 	}
 	
-	public boolean deletePerVendita(int id, String venditore, String acquirente, String reviewVen, int ratingVen, String tipoTrasporto)throws RemoteException {
+	public boolean deletePerVendita(int id, String venditore, String acquirente, String reviewVen, int ratingVen)throws RemoteException {
 		
 		Profilo p = new Profilo();
 		boolean esistenzaUsername = p.checkProfilo(acquirente);
@@ -34,23 +33,16 @@ public class GestoreAnnuncio implements IGestoreAnnuncio{
 			ElencoAccordi elencoA = new ElencoAccordi();
 			elencoA.createAccordo(id, venditore, acquirente, reviewVen, ratingVen);
 			
-			deletion(id,tipoTrasporto);
+			deletion(id);
 			p.updateRiepilogo(venditore);
 			return true;
 		}	
 	}
 	
-	public void deletion(int id, String tipoTrasporto) throws RemoteException{
-		
-		if(tipoTrasporto=="treno") {
-			
-			BigliettoTrenoDAO trenoDAO = new BigliettoTrenoDAO();
-			trenoDAO.deleteBiglietto(id);
-		}
-		else {
-			BigliettoAereoDAO aereoDAO = new BigliettoAereoDAO();
-			aereoDAO.deleteBiglietto(id);
-		}
+	public void deletion(int id) throws RemoteException{
+
+		Annuncio.deleteAnnuncio(id);
+
 	}
 
 
@@ -84,8 +76,6 @@ public class GestoreAnnuncio implements IGestoreAnnuncio{
 		
 	}
 	
-	
-
 	public int CreateAnnuncioTreno(String username, String idTicket, String partenza, String arrivo, String nominativo,
 			String compagnia, String classe, String fermate, String descrizione, Boolean Btreno, Boolean Baereo,
 			Boolean tipAR, float prezzoA, float prezzoR, Date sDateA, Date sDateR, int nPosti) {
@@ -112,7 +102,6 @@ public class GestoreAnnuncio implements IGestoreAnnuncio{
 			bigliettoDAO.createBigliettoTreno(b);
 			
 
-			
 			GestoreProfilo gestoreProfilo = new GestoreProfilo();
 			gestoreProfilo.IncrementaAnnunci(username);
         }catch (Exception rse) {

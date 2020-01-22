@@ -6,16 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import domain.Annuncio;
 
 public class AnnuncioDAO {
 
     private static final String READ_ALL_ANNUNCI_username_QUERY = "SELECT * FROM annuncio WHERE username = ?";
+    private static final String DELETE_QUERY = "DELETE FROM annuncio WHERE idAnnuncio = ?";
     
-    public ArrayList<Annuncio> getAllAnnunciPersonali(String username) {
+    
+    public List<Annuncio> getAllAnnunciPersonali(String username) {
     	
-    	ArrayList<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
+    	List<Annuncio> listaAnnunci = new ArrayList<Annuncio>();
     	Annuncio annuncio = null;
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
@@ -53,7 +56,31 @@ public class AnnuncioDAO {
 		return listaAnnunci;
     }
     
-    
+    public boolean deleteAnnuncio(int idAnnuncio) {
+		Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        try {
+        	conn = DBManager.createConnection();
+            preparedStatement = conn.prepareStatement(DELETE_QUERY);
+            preparedStatement.setInt(1, idAnnuncio);
+            preparedStatement.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (Exception sse) {
+                sse.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (Exception cse) {
+                cse.printStackTrace();
+            }
+        }
+        return false;
+	}
     
     
     
@@ -110,11 +137,11 @@ public class AnnuncioDAO {
 	//_______________________________________ALTRO
     
     private static final String CREATE_QUERY = "INSERT INTO annuncio (username,descrizione,prezzoRichiesto,tipoTrasporto) VALUES (?,?,?,?)";
-    private static final String READ_QUERY = "SELECT username,idBiglietto,descrizione,prezzoRichiesto FROM annuncio WHERE idBiglietto = ?";
+/*    private static final String READ_QUERY = "SELECT username,idBiglietto,descrizione,prezzoRichiesto FROM annuncio WHERE idBiglietto = ?";
     private static final String READ_ALL_QUERY = "SELECT * FROM annuncio";
     private static final String READ_ALL_ANNUNCI_tipologia_QUERY = "SELECT * FROM annuncio WHERE (SELECT idBiglietto FROM biglietto WHERE tipoTrasporto = ?)";
     private static final String UPDATE_QUERY = "UPDATE annuncio SET nome=?,descrizione=?,prezzoRichiesto=? WHERE idBiglietto = ?";
-    private static final String DELETE_QUERY = "DELETE FROM annuncio WHERE idBiglietto = ?";
+*/
 
     
     public int createAnnuncio(Annuncio a) {
@@ -209,31 +236,7 @@ public class AnnuncioDAO {
 		return 0;
     }
     
-    public boolean deleteAnnuncio(Annuncio a) {
-		Connection conn = null;
-        PreparedStatement preparedStatement = null;
-        try {
-        	conn = DBManager.createConnection();
-            preparedStatement = conn.prepareStatement(DELETE_QUERY);
-            preparedStatement.setInt(1, a.getIdBiglietto());
-            preparedStatement.execute();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (Exception sse) {
-                sse.printStackTrace();
-            }
-            try {
-                conn.close();
-            } catch (Exception cse) {
-                cse.printStackTrace();
-            }
-        }
-        return false;
-	}
+    
 
     public Annuncio readAnnuncio(int idBiglietto) {
 		

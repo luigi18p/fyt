@@ -131,7 +131,7 @@ public class FrameRilasciaReview extends javax.swing.JFrame{
     }// </editor-fold>                        
 
     private void jButtonConfermaActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
+
         //conferma
     	try {
     		Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
@@ -153,7 +153,7 @@ public class FrameRilasciaReview extends javax.swing.JFrame{
     }                                               
 
     private void jButtonAnnullaActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
+
         //annulla
         this.toBack();
         setVisible(false);

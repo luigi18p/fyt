@@ -66,10 +66,12 @@ public class Profilo implements Serializable{
 		
 		ProfiloDAO profiloDAO = new ProfiloDAO();
 		String username = profiloDAO.readUsername(userAcq);
-		if(username == null)
+		if(username == null) {
 			return false;
-		else
+		}
+		else {
 			return true;
+		}
 		
 	}
 	

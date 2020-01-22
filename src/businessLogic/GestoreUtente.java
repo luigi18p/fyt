@@ -1,10 +1,8 @@
 package businessLogic;
 
-import java.rmi.RemoteException;
 import java.sql.Date;
 
 import dataBase.UtenteDAO;
-import domain.Profilo;
 import domain.Utente;
 import rmi.IGestoreUtente;
 

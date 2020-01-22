@@ -28,12 +28,10 @@ public class FrameRimuovi extends javax.swing.JFrame{
      */
 	private static String username;
 	private static int id;
-	private static String tipologia;
 	
-    public FrameRimuovi(String username, int id, String tipologia) {
+    public FrameRimuovi(String username, int id) {
     	FrameRimuovi.username = username;
     	FrameRimuovi.id = id;
-    	FrameRimuovi.tipologia = tipologia;
         initComponents();
     }
 
@@ -193,7 +191,7 @@ public class FrameRimuovi extends javax.swing.JFrame{
 	    	try {	
 	    		Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 		        IGestoreAnnuncio sketetonGAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
-		        sketetonGAnnuncio.deletion(id,tipologia);
+		        sketetonGAnnuncio.deletion(id);
 	    		JOptionPane.showMessageDialog(null,"Rimozione Confermata\nBiglietto non venduto!");
 	    		this.toBack();
 	            setVisible(false);
@@ -213,7 +211,7 @@ public class FrameRimuovi extends javax.swing.JFrame{
 	    	try {
 	    		Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
 		        IGestoreAnnuncio sketetonGAnnuncio = (IGestoreAnnuncio) registry.lookup("IGestoreAnnuncio");
-		        sketetonGAnnuncio.deletePerVendita(id, username, userAcq,reviewVen,ratingV,tipologia);
+		        sketetonGAnnuncio.deletePerVendita(id, username, userAcq,reviewVen,ratingV);
 		        
 		    }catch(ConnectException ce) {
 	    		JOptionPane.showMessageDialog(null,"Server non raggiungibile. ");
@@ -260,7 +258,7 @@ public class FrameRimuovi extends javax.swing.JFrame{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameRimuovi(username,id,tipologia).setVisible(true);
+                new FrameRimuovi(username,id).setVisible(true);
             }
         });
     }

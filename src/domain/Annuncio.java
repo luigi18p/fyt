@@ -2,6 +2,8 @@ package domain;
 
 import java.io.Serializable;
 
+import dataBase.AnnuncioDAO;
+
 public class Annuncio implements Serializable{
 
 	private static final long serialVersionUID = -9006105091683784824L;
@@ -52,5 +54,10 @@ public class Annuncio implements Serializable{
 
 	public void setTipoTrasporto(String tipoTrasporto) {
 		this.tipoTrasporto = tipoTrasporto;
+	}
+	
+	public static void deleteAnnuncio(int id) {
+		AnnuncioDAO annuncioDAO = new AnnuncioDAO();
+		annuncioDAO.deleteAnnuncio(id);
 	}
 }

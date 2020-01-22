@@ -6,14 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+
 import domain.Accordo;
 
 public class AccordoDAO {
 
-    private static final String CREATE_QUERY = "INSERT INTO accordo (idAnnuncio,dataAccordo,userVen,userAcq,reviewVen,reviewAcq,ratingVen,ratingAcq) VALUES (?,?,?,?,?,?,?,?)";
+    private static final String CREATE_QUERY = "INSERT INTO accordo (idAnnuncio,dataAccordo,userVen,userAcq,reviewVen,ratingVen) VALUES (?,?,?,?,?,?)";
 
 
     public void createAccordo(Accordo a) {
+    	
     	Connection conn = null;
     	PreparedStatement preparedStatement = null;
 
@@ -25,9 +28,7 @@ public class AccordoDAO {
             preparedStatement.setString(3, a.getUserVen());
             preparedStatement.setString(4, a.getUserAcq());
             preparedStatement.setString(5,  a.getReviewVen());
-            preparedStatement.setString(6,  a.getReviewAcq());
-            preparedStatement.setInt(7,  a.getRatingVen());
-            preparedStatement.setInt(8,  a.getRatingAcq());
+            preparedStatement.setInt(6,  a.getRatingVen());
             
             preparedStatement.execute();        
     	
@@ -101,9 +102,9 @@ public class AccordoDAO {
     
 */
     
-    public ArrayList<Accordo> ReadAllAccordi(String username) {
+    public List<Accordo> ReadAllAccordi(String username) {
 
-    	ArrayList<Accordo> listaAccordi = new ArrayList<Accordo>();
+    	List<Accordo> listaAccordi = new ArrayList<Accordo>();
 		Accordo a= null;
         Connection conn = null;
         PreparedStatement preparedStatement = null;

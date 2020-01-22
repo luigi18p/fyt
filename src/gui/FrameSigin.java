@@ -235,7 +235,7 @@ public class FrameSigin extends javax.swing.JFrame{
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+
         this.toBack();
         setVisible(false);
         new FrameLogin().toFront();
