@@ -7,9 +7,45 @@ import domain.Profilo;
 
 public interface IGestoreProfilo extends Remote {
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//ALTRO
+	
 	public int createProfilo(String username) throws RemoteException;
 	
-	public void UpdateRiepilogo(String username, int i) throws RemoteException;
+	public void IncrementaAnnunci(String username) throws RemoteException;
 	
 	public Profilo ReadProfilo(String username) throws RemoteException;
 

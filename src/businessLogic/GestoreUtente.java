@@ -2,24 +2,99 @@ package businessLogic;
 
 import java.sql.Date;
 
-import dataBase.ProfiloDAO;
 import dataBase.UtenteDAO;
-import domain.Profilo;
 import domain.Utente;
 import rmi.IGestoreUtente;
 
 public class GestoreUtente implements IGestoreUtente{
 	
+	private volatile static GestoreUtente single = null;
+	public GestoreUtente() {}
+	
+	public static synchronized GestoreUtente getIstance() {
+		
+		if(single == null) {
+			synchronized(GestoreUtente.class) {
+				if(single == null) {
+					single = new GestoreUtente();
+				}
+			}
+		}
+		return single;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//_______________________________________ALTRO
 	public int Registrazione(String nome, String cognome, String email, String password, 
 			Date dataNascita, double cellulare, String username) {
 		
-		if(username.length() <10 && password.length() <10) {
+		if(username != "" && password != "" && username.length() <12 && password.length() <12 ) {
 			Utente utente = new Utente(nome, cognome, email, password, dataNascita, cellulare, username);
 			UtenteDAO utenteDAO = new UtenteDAO();
 			utenteDAO.createUtente(utente);
 			
 			GestoreProfilo gestoreProfilo = new GestoreProfilo();
-			gestoreProfilo.createProfilo(username);
+
+				gestoreProfilo.createProfilo(username);
+
 
 		}
 		return 0;

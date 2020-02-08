@@ -1,9 +1,12 @@
 package domain;
 
+import java.io.Serializable;
 import java.sql.Date;
-import java.time.LocalDate;
 
-public class Utente {
+public class Utente implements Serializable{
+
+
+	private static final long serialVersionUID = 2131364514162756657L;
 
 	private String nome;
 	private String cognome;
@@ -13,6 +16,7 @@ public class Utente {
 	private double cellulare;
 	private String username;
 	
+	//controlla tutti i costruttori
 	public Utente(String nome,String cognome,String email,String password,Date dataNascita,double cellulare,String username) {
 		super();
 		this.nome=nome;
@@ -33,7 +37,6 @@ public class Utente {
 		this.cellulare=0;
 		this.username=null;
 	}
-	
 
 	public String getNome() {
 		return nome;

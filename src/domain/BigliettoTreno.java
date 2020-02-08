@@ -1,36 +1,49 @@
 package domain;
+import java.io.Serializable;
 import java.sql.Date;
 
-public class BigliettoTreno extends Biglietto{
+public class BigliettoTreno extends Biglietto implements Serializable{
 
-	private String classe_T;
-	private String fermate_T;
+	private static final long serialVersionUID = -2757140573802332518L;
+	private String classe;
+	private String fermate;
 	
-	public BigliettoTreno(int id, String userVen, String nominativo, Date dataAndata, Date dataRitorno, String tipoTrasporto,
-			Boolean tipologiaAR, float prezzoAcquisto, int numeroDiPosti, String idTicket, String partenza, String arrivo,
+	public BigliettoTreno(int id, String nominativo, Date dataAndata, Date dataRitorno, Boolean tipologiaAR, 
+			float prezzoAcquisto, int numeroDiPosti, String idTicket, String partenza, String arrivo,
 			String compagnia, String classe, String fermate) {
-		super(id, userVen, nominativo, dataAndata, dataRitorno, tipoTrasporto, tipologiaAR, prezzoAcquisto, numeroDiPosti,
+		super(id, nominativo, dataAndata, dataRitorno, tipologiaAR, prezzoAcquisto, numeroDiPosti,
 				idTicket, partenza, arrivo, compagnia);
-		this.classe_T = classe_T;
-		this.fermate_T = fermate_T;
-	}
-	public BigliettoTreno(int id) {
-		super(id);
+		this.classe = classe;
+		this.fermate = fermate;
 	}
 
-	public String getClasse_T() {
-		return classe_T;
+	public String getClasse() {
+		return classe;
 	}
 
-	public void setClasse_T(String classe_T) {
-		this.classe_T = classe_T;
+	public void setClasse_T(String classe) {
+		this.classe = classe;
 	}
 
-	public String getFermate_T() {
-		return fermate_T;
+	public String getFermate() {
+		return fermate;
 	}
 
-	public void setFermate_T(String fermate_T) {
-		this.fermate_T = fermate_T;
+	public void setFermate_T(String fermate) {
+		this.fermate = fermate;
+	}
+
+	@Override
+	public String getPartenza() {
+
+		String p = "Stazione di "+this.partenza;
+		return p;
+	}
+
+	@Override
+	public String getArrivo() {
+
+		String a = "Stazione di "+this.arrivo;
+		return a;
 	}
 }

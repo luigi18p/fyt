@@ -11,28 +11,32 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import domain.Accordo;
+import domain.ElencoAccordi;
 import rmi.IGestoreAccordo;
 
 /**
  *
  * @author gioac
  */
-public class FrameIMieiAcquisti extends javax.swing.JFrame {
+public class FrameIMieiAcquisti extends javax.swing.JFrame{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1976673200586042819L;
+	/**
      * Creates new form FrameIMieiAcquisti
      */
 	private static String username;
 	
     public FrameIMieiAcquisti(String username) {
-    	this.username=username;
+    	FrameIMieiAcquisti.username=username;
         initComponents();
         initTable();
     }
@@ -63,11 +67,17 @@ public class FrameIMieiAcquisti extends javax.swing.JFrame {
                 "Username Venditore", "Id Biglietto", "Data Accordo", "Review Venditore", "Rating Venditore", "Rating Personale"
             }
         ) {
-            Class[] types = new Class [] {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 3893158084794701141L;
+			@SuppressWarnings("rawtypes")
+			Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
-            public Class getColumnClass(int columnIndex) {
+            @SuppressWarnings("rawtypes")
+			public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
@@ -127,13 +137,14 @@ public class FrameIMieiAcquisti extends javax.swing.JFrame {
     	
     	try {
 			DefaultTableModel table = (DefaultTableModel) jTable1.getModel();
-			List<Accordo> listaAccordi = null;
-			//GestoreAccordo gestoreAccordo = new GestoreAccordo();
-			Registry registry = LocateRegistry.getRegistry("localhost",5008);
-			IGestoreAccordo igestoreAccordo = (IGestoreAccordo) registry.lookup("IGestoreAccordo");
-			listaAccordi = igestoreAccordo.ReadAllAccordi(username);
-			for(Accordo a : listaAccordi) {
-				table.addRow(new Object[] {a.getUserVen(),a.getIdBiglietto(),a.getDataAccordo(),
+
+			ElencoAccordi ea = new ElencoAccordi();
+			Registry registry = LocateRegistry.getRegistry(FrameLogin.myhost,5008);
+			IGestoreAccordo sketetonGAccordo = (IGestoreAccordo) registry.lookup("IGestoreAccordo");
+			
+			ea = sketetonGAccordo.ReadAllAccordi(username);
+			for(Accordo a : ea.getElencoAccordi()) {
+				table.addRow(new Object[] {a.getUserVen(),a.getIdAnnuncio(),a.getDataAccordo(),
 						a.getReviewVen(),a.getRatingVen(),a.getRatingAcq()});
 			}
     	}catch(ConnectException ce) {
@@ -188,6 +199,7 @@ public class FrameIMieiAcquisti extends javax.swing.JFrame {
 	        FrameRilasciaReview rilasciaReview = new FrameRilasciaReview(username,(int)idBiglietto);
 	        rilasciaReview.setVisible(true);
 	    	rilasciaReview.toFront();
+	    	this.setVisible(false);
        
 	        
     	}catch(Exception e) {

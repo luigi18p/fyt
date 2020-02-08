@@ -1,29 +1,33 @@
 package domain;
+import java.io.Serializable;
 import java.sql.Date;
 
-public class BigliettoAereo extends Biglietto{
+public class BigliettoAereo extends Biglietto implements Serializable{
 	
+	private static final long serialVersionUID = 7722072505495865642L;
+	private String postoAssegnato;
 	private boolean priority;
 	private boolean diretto;
-	private String areopScalo_A;
-	private int attesaScalo_A;
-	private boolean bagaglioStiva_A;
-	private boolean bagaglioAMano_A;
-	private boolean assicurazione_A;
+	private String areopScalo;
+	private int attesaScalo;
+	private boolean bagaglioStiva;
+	private boolean bagaglioAMano;
+	private boolean assicurazione;
 	
-	public BigliettoAereo(int id, String userVen, String nominativo, Date dataAndata, Date dataRitorno, String tipoTrasporto,
+	public BigliettoAereo(int id, String nominativo, Date dataAndata, Date dataRitorno,
 			Boolean tipologiaAR, float prezzoAcquisto, int numeroDiPosti, String idTicket, String partenza, String arrivo,
-			String compagnia, boolean priority, boolean diretto, String areopScalo_A, int attesaScalo_A,
-			boolean bagaglioStiva_A, boolean bagaglioAMano_A, boolean assicurazione_A) {
-		super(id, userVen, nominativo, dataAndata, dataRitorno, tipoTrasporto, tipologiaAR, prezzoAcquisto, numeroDiPosti, 
+			String compagnia, String postoAssegnato, boolean priority, boolean diretto, String areopScalo, int attesaScalo,
+			boolean bagaglioStiva, boolean bagaglioAMano, boolean assicurazione) {
+		super(id, nominativo, dataAndata, dataRitorno, tipologiaAR, prezzoAcquisto, numeroDiPosti, 
 				idTicket, partenza, arrivo, compagnia);
+		this.setPostoAssegnato(postoAssegnato);
 		this.priority = priority;
 		this.diretto = diretto;
-		this.areopScalo_A = areopScalo_A;
-		this.attesaScalo_A = attesaScalo_A;
-		this.bagaglioStiva_A = bagaglioStiva_A;
-		this.bagaglioAMano_A = bagaglioAMano_A;
-		this.assicurazione_A = assicurazione_A;
+		this.areopScalo = areopScalo;
+		this.attesaScalo = attesaScalo;
+		this.bagaglioStiva = bagaglioStiva;
+		this.bagaglioAMano = bagaglioAMano;
+		this.assicurazione = assicurazione;
 	}
 
 	public boolean isPriority() {
@@ -42,43 +46,66 @@ public class BigliettoAereo extends Biglietto{
 		this.diretto = diretto;
 	}
 
-	public String getAreopScalo_A() {
-		return areopScalo_A;
+	public String getAreopScalo() {
+		return areopScalo;
 	}
 
-	public void setAreopScalo_A(String areopScalo_A) {
-		this.areopScalo_A = areopScalo_A;
+	public void setAreopScalo_A(String areopScalo) {
+		this.areopScalo = areopScalo;
 	}
 
-	public int getAttesaScalo_A() {
-		return attesaScalo_A;
+	public int getAttesaScalo() {
+		return attesaScalo;
 	}
 
-	public void setAttesaScalo_A(int attesaScalo_A) {
-		this.attesaScalo_A = attesaScalo_A;
+	public void setAttesaScalo_A(int attesaScalo) {
+		this.attesaScalo = attesaScalo;
 	}
 
-	public boolean isBagaglioStiva_A() {
-		return bagaglioStiva_A;
+	public boolean isBagaglioStiva() {
+		return bagaglioStiva;
 	}
 
-	public void setBagaglioStiva_A(boolean bagaglioStiva_A) {
-		this.bagaglioStiva_A = bagaglioStiva_A;
+	public void setBagaglioStiva_A(boolean bagaglioStiva) {
+		this.bagaglioStiva = bagaglioStiva;
 	}
 
 	public boolean isBagaglioAMano_A() {
-		return bagaglioAMano_A;
+		return bagaglioAMano;
 	}
 
-	public void setBagaglioAMano_A(boolean bagaglioAMano_A) {
-		this.bagaglioAMano_A = bagaglioAMano_A;
+	public void setBagaglioAMano_A(boolean bagaglioAMano) {
+		this.bagaglioAMano = bagaglioAMano;
 	}
 
-	public boolean isAssicurazione_A() {
-		return assicurazione_A;
+	public boolean isAssicurazione() {
+		return assicurazione;
 	}
 
 	public void setAssicurazione_A(boolean assicurazione_A) {
-		this.assicurazione_A = assicurazione_A;
+		this.assicurazione = assicurazione_A;
 	}
+	
+	@Override
+	public String getPartenza() {
+
+		String p = "Aereoporto di "+this.partenza;
+		return p;
+	}
+
+	@Override
+	public String getArrivo() {
+
+		String a = "Aereoporto di "+this.arrivo;
+		return a;
+	}
+
+	public String getPostoAssegnato() {
+		return postoAssegnato;
+	}
+
+	public void setPostoAssegnato(String postoAssegnato) {
+		this.postoAssegnato = postoAssegnato;
+	}
+
 }
