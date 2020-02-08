@@ -1,30 +1,51 @@
 package domain;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.sql.Date;
 
-public class biglietto {
+public abstract class Biglietto implements Serializable{
 	
-	
+	private static final long serialVersionUID = -4675652955592640591L;
+	private int id;
 	private String nominativo;
 	private Date dataAndata;
 	private Date dataRitorno;
 	private Boolean tipologiaAR;
-	private String tipoTrasporto;
 	private float prezzoAcquisto;
 	private int numeroDiPosti;
-	private int idBiglietto;
+	private String idTicket;
+	protected String partenza;
+	protected String arrivo;
+	private String compagnia;
 
-	public biglietto(String nominativo, Date dataAndata, Date dataRitorno, Boolean tipologiaAR, String tipoTrasporto,
-			float prezzoAcquisto, int numeroDiPosti, int idBiglietto) {
+	public Biglietto(int id, String nominativo, Date dataAndata, Date dataRitorno, Boolean tipologiaAR, 
+			float prezzoAcquisto, int numeroDiPosti, String idTicket, String partenza, String arrivo,
+			String compagnia) {
 		super();
+		this.id = id;
 		this.nominativo = nominativo;
 		this.dataAndata = dataAndata;
 		this.dataRitorno = dataRitorno;
 		this.tipologiaAR = tipologiaAR;
-		this.tipoTrasporto = tipoTrasporto;
 		this.prezzoAcquisto = prezzoAcquisto;
 		this.numeroDiPosti = numeroDiPosti;
-		this.idBiglietto = idBiglietto;
+		this.idTicket = idTicket;
+		this.partenza = partenza;
+		this.arrivo = arrivo;
+		this.compagnia = compagnia;
+	}
+
+	public Biglietto(int id) {
+		super();
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNominativo() {
@@ -59,14 +80,6 @@ public class biglietto {
 		this.tipologiaAR = tipologiaAR;
 	}
 
-	public String getTipoTrasporto() {
-		return tipoTrasporto;
-	}
-
-	public void setTipoTrasporto(String tipoTrasporto) {
-		this.tipoTrasporto = tipoTrasporto;
-	}
-
 	public float getPrezzoAcquisto() {
 		return prezzoAcquisto;
 	}
@@ -83,12 +96,32 @@ public class biglietto {
 		this.numeroDiPosti = numeroDiPosti;
 	}
 
-	public int getIdBiglietto() {
-		return idBiglietto;
+	public String getIdTicket() {
+		return idTicket;
 	}
 
-	public void setIdBiglietto(int idBiglietto) {
-		this.idBiglietto = idBiglietto;
+	public void setIdTicket(String idTicket) {
+		this.idTicket = idTicket;
 	}
 
+	public String getCompagnia() {
+		return compagnia;
+	}
+
+	public void setCompagnia(String compagnia) {
+		this.compagnia = compagnia;
+	}
+
+	public void setPartenza(String partenza) {
+		this.partenza = partenza;
+	}
+
+	public void setArrivo(String arrivo) {
+		this.arrivo = arrivo;
+	}
+	
+	public abstract String getPartenza();
+
+	public abstract String getArrivo();
+	
 }

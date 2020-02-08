@@ -1,56 +1,64 @@
 package dataBase;
 
-
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.time.LocalDate;
-import java.util.List;
+
+import domain.Utente;
 
 public class UtenteDAO {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+    
+    
+    
+    
+    //_______________________________altro
+    
 
     private static final String CREATE_QUERY = "INSERT INTO utente (nome,cognome,email,password,dataNascita,cellulare,username) VALUES (?,?,?,?,?,?,?)";
-    private static final String READ_QUERY = "SELECT nome,cognome,email,password,dataNascita,cellulare,username FROM utente WHERE username = ?";
-    private static final String READ_ALL_QUERY = "SELECT * FROM utente";
+    private static final String READ_login_QUERY = "SELECT username,password FROM utente WHERE username = ? AND password = ?";
     private static final String UPDATE_QUERY = "UPDATE utente SET nome=?,cognome=?,email=?,password=?,dataNascita=?,cellulare=? WHERE username = ?";
     private static final String DELETE_QUERY = "DELETE FROM utente WHERE username = ?";
-    
-    public List getAllUtenti() {
-    	
-    	List<Utente> listaUtenti = new ArrayList<Utente>();
-    	Utente utente = null;
-    	Connection conn = null;
-    	PreparedStatement preparedStatement = null;
-    	ResultSet result = null;
-    	
-    	try {
-    		conn = DBManager.createConnection();
-    		preparedStatement = conn.prepareStatement(READ_ALL_QUERY);
-    		preparedStatement.execute();
-    		result = preparedStatement.getResultSet();
-    		while (result.next() == true) {
-    			utente = new Utente(result.getString(1),result.getString(2),result.getString(3),result.getString(4),result.getDate(5),result.getDouble(6),result.getString(7));
-    			
-    			listaUtenti.add(utente);
-    			//System.out.println(utente.getCognome());
-    		}
-    	} catch (SQLException e) {
-    		e.printStackTrace();
-    	} finally {
-    		try {
-				result.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-    	}
-    	
-		return listaUtenti;
-    	
-    }
     
     public int createUtente(Utente u) {
     	Connection conn = null;
@@ -173,23 +181,27 @@ public class UtenteDAO {
         return false;
 	}
 
-public Utente getUtente(String username) {
+    public Utente readUtenteLogin(String username, String password) {
 		
-		Utente u= null;
+		Utente uVerifica= new Utente();
+		
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         ResultSet result = null;
         try {
             conn = DBManager.createConnection();
-            preparedStatement = conn.prepareStatement(READ_QUERY);
+            preparedStatement = conn.prepareStatement(READ_login_QUERY);
             preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
             preparedStatement.execute();
             result = preparedStatement.getResultSet();
  
             if (result.next() && result != null) {
-                u = new Utente(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getDate(5),result.getDouble(6),username);
+                uVerifica.setUsername(result.getString(1));
+                uVerifica.setPassword(result.getString(2));
             } 
-        } catch (SQLException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
@@ -209,6 +221,53 @@ public Utente getUtente(String username) {
             }
         }
  
-        return u;
+        return uVerifica;
 	}
+    
+//  private static final String READ_ALL_QUERY = "SELECT * FROM utente";
+/*   public List getAllUtenti() {
+    	
+    	List<Utente> listaUtenti = new ArrayList<Utente>();
+    	Utente utente = null;
+    	Connection conn = null;
+    	PreparedStatement preparedStatement = null;
+    	ResultSet result = null;
+    	
+    	try {
+    		conn = DBManager.createConnection();
+    		preparedStatement = conn.prepareStatement(READ_ALL_QUERY);
+    		preparedStatement.execute();
+    		result = preparedStatement.getResultSet();
+    		while (result.next() == true) {
+    			utente = new Utente(result.getString(1),result.getString(2),result.getString(3),result.getString(4),result.getDate(5),result.getDouble(6),result.getString(7));
+    			
+    			listaUtenti.add(utente);
+    			//System.out.println(utente.getCognome());
+    		}
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	} finally {
+            try {
+                result.close();
+            } catch (Exception rse) {
+                rse.printStackTrace();
+            }
+            try {
+                preparedStatement.close();
+            } catch (Exception sse) {
+                sse.printStackTrace();
+            }
+            try {
+                conn.close();
+            } catch (Exception cse) {
+                cse.printStackTrace();
+            }
+        }
+    	
+		return listaUtenti;
+    	
+    }
+*/
+    
+
 }
